@@ -91,37 +91,38 @@
             <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
             <div class="mockup-bar-title">Quarterly Review · 4 participants</div>
           </div>
-          <div class="zoom-sim">
-            <div class="zoom-tile zoom-tile-bg-1">
+          <div class="zoom-sim zoom-sim-hero">
+            <div class="zoom-tile zoom-tile-bg-1 speaking" id="zt0">
               <div class="zoom-avatar">AK</div>
               <div class="zoom-speaking-ring"></div>
-              <div class="zoom-name">
-                <span class="zoom-wave"><span></span><span></span><span></span><span></span></span>
-                Alex Kim
-              </div>
+              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Alex Kim</div>
             </div>
-            <div class="zoom-tile zoom-tile-bg-2">
+            <div class="zoom-tile zoom-tile-bg-2" id="zt1">
               <div class="zoom-avatar" style="background:linear-gradient(135deg,#4F79F5,#7C5DE8)">SR</div>
-              <div class="zoom-name">Sarah R.</div>
+              <div class="zoom-speaking-ring"></div>
+              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Sarah R.</div>
             </div>
-            <div class="zoom-tile zoom-tile-bg-2">
+            <div class="zoom-tile zoom-tile-bg-2" id="zt2">
               <div class="zoom-avatar" style="background:linear-gradient(135deg,#065F46,#047857)">MC</div>
-              <div class="zoom-name">M. Chen</div>
+              <div class="zoom-speaking-ring"></div>
+              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> M. Chen</div>
             </div>
-            <div class="zoom-tile zoom-tile-bg-1">
+            <div class="zoom-tile zoom-tile-bg-1" id="zt3">
               <div class="zoom-avatar" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
               <div class="zoom-name">You (Host)</div>
             </div>
-            <div class="zoom-overlay">
-              <div class="zo-head">
-                <div class="zo-title">MEETBRIEF</div>
-                <div class="zo-live"><div class="zo-live-dot"></div>LIVE</div>
+            <!-- Live MeetBrief panel — full width, updates as speakers talk -->
+            <div class="zo-panel">
+              <div class="zo-panel-head">
+                <span class="zo-panel-flag" id="zpFlag">🇫🇷</span>
+                <div class="zo-panel-info">
+                  <div class="zo-title">MEETBRIEF</div>
+                  <div class="zo-panel-lang" id="zpLang">French · translating…</div>
+                </div>
+                <div class="zo-live" style="margin-left:auto"><div class="zo-live-dot"></div>LIVE</div>
               </div>
-              <div class="zo-body">
-                <div class="zo-heard">"...the pricing concern is still a blocker for our team."</div>
-                <div class="zo-response">Totally understand — that's common at this stage. Our enterprise tier includes a 30-day ROI guarantee.<div class="zo-cursor"></div></div>
-                <div class="zo-tag">✦ AI suggestion</div>
-              </div>
+              <div class="zo-panel-heard" id="zpHeard">"Je pense que le prix est un peu trop élevé pour notre budget actuel."</div>
+              <div class="zo-panel-suggest" id="zpSuggest"><span class="zo-cursor"></span></div>
             </div>
           </div>
           <div class="zoom-toolbar">
@@ -336,6 +337,61 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── Hero: Zoom call simulation ──────────────────────
+const zConvo = [
+  { tile: 'zt0', flag: '🇫🇷', lang: 'French',
+    heard: '"Je pense que le prix est un peu trop élevé pour notre budget actuel."',
+    suggest: "I hear you — budget is real. Most teams see payback within Q1. Want me to walk you through the ROI model?" },
+  { tile: 'zt1', flag: '🇨🇳', lang: 'Mandarin',
+    heard: '"我们需要更多时间来评估这个提案。"',
+    suggest: "Absolutely fair ask. Can we schedule a 30-min deep-dive next week so you have everything you need to decide?" },
+  { tile: 'zt2', flag: '🇩🇪', lang: 'German',
+    heard: '"Wie sieht es mit der Datensicherheit aus? Wir sind in der EU."',
+    suggest: "Everything runs locally — no audio ever leaves your device. Fully GDPR-compliant by design." },
+  { tile: 'zt0', flag: '🇪🇸', lang: 'Spanish',
+    heard: '"¿Tienen soporte en español o solo en inglés?"',
+    suggest: "Our support is bilingual — Spanish available during business hours. Enterprise plans include a dedicated CSM." },
+  { tile: 'zt1', flag: '🇯🇵', lang: 'Japanese',
+    heard: '"導入にはどのくらいの時間がかかりますか？"',
+    suggest: "Most teams are live in under 15 minutes — install, add your API key, start a session. No IT ticket needed." },
+];
+
+let zIdx = 0, zTypeTimer = null;
+
+function zTypewrite(el, text, speed) {
+  clearTimeout(zTypeTimer);
+  let i = 0;
+  const cursor = '<span class="zo-cursor"></span>';
+  function tick() {
+    el.innerHTML = text.slice(0, i) + cursor;
+    i++;
+    if (i <= text.length) zTypeTimer = setTimeout(tick, speed);
+  }
+  tick();
+}
+
+function showZConvo(idx) {
+  const d = zConvo[idx];
+  // Move speaking highlight to active tile
+  document.querySelectorAll('.zoom-sim-hero .zoom-tile').forEach(t => t.classList.remove('speaking'));
+  const tile = document.getElementById(d.tile);
+  if (tile) tile.classList.add('speaking');
+  // Reset panel to "translating" state
+  document.getElementById('zpFlag').textContent = d.flag;
+  document.getElementById('zpLang').textContent = d.lang + ' · translating…';
+  document.getElementById('zpHeard').textContent = d.heard;
+  const suggest = document.getElementById('zpSuggest');
+  suggest.innerHTML = '<span class="zo-cursor"></span>';
+  // After brief pause, show translated label and typewrite suggestion
+  setTimeout(() => {
+    document.getElementById('zpLang').textContent = d.lang + ' → English';
+    zTypewrite(suggest, d.suggest, 28);
+  }, 900);
+}
+
+showZConvo(0);
+setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 5000);
 
 // Multilingual demo
 const langs = [
