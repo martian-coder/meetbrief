@@ -361,7 +361,7 @@ nav {
 
 /* ── Hero zoom-sim ── */
 .zoom-sim-hero { min-height: 0; }
-.zoom-sim-hero .zoom-tile { min-height: 130px; }
+.zoom-sim-hero .zoom-tile { min-height: 160px; }
 .zoom-sim-hero .zoom-speaking-ring { display: none; }
 .zoom-sim-hero .zoom-tile.speaking .zoom-speaking-ring { display: block; }
 .zoom-sim-hero .zoom-wave { display: none; }
@@ -375,7 +375,7 @@ nav {
   position: absolute;
   bottom: 10px; left: 10px; right: 10px;
   z-index: 20;
-  height: 148px;
+  height: 220px;
   background: rgba(6, 6, 20, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
@@ -404,17 +404,24 @@ nav {
 }
 .mb-hd-lang { font-size: 9px; color: rgba(255,255,255,0.6); font-weight: 500; }
 .mb-glass-body {
-  overflow-y: auto; flex: 1;
+  overflow-y: scroll; flex: 1;
   padding: 8px 12px 10px;
-  display: flex; flex-direction: column; gap: 8px;
+  display: flex; flex-direction: column; gap: 10px;
   scroll-behavior: smooth;
+  overscroll-behavior: contain;
 }
-.mb-glass-body::-webkit-scrollbar { width: 3px; }
-.mb-glass-body::-webkit-scrollbar-thumb { background: rgba(79,121,245,0.4); border-radius: 2px; }
-.mb-entry { display: flex; flex-direction: column; gap: 3px; }
+.mb-glass-body::-webkit-scrollbar { width: 4px; }
+.mb-glass-body::-webkit-scrollbar-thumb { background: rgba(79,121,245,0.45); border-radius: 2px; }
+.mb-entry { display: flex; flex-direction: column; gap: 4px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mb-entry:last-child { border-bottom: none; }
 .mb-heard {
-  font-size: 10.5px; color: rgba(255,255,255,0.62); font-style: italic;
-  border-left: 2px solid rgba(255,255,255,0.2); padding-left: 6px; line-height: 1.5;
+  font-size: 11px; color: rgba(255,255,255,0.62); font-style: italic;
+  border-left: 2px solid rgba(255,255,255,0.22); padding-left: 7px; line-height: 1.55;
+}
+.mb-trans {
+  font-size: 11px; color: rgba(110,170,255,0.9);
+  border-left: 2px solid rgba(79,121,245,0.55); padding-left: 7px; line-height: 1.55;
+  font-style: normal;
 }
 .mb-suggest-label {
   font-size: 8px; font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase;
@@ -684,7 +691,7 @@ footer { border-top: 1px solid var(--border); background: var(--surface); paddin
   .zoom-sim { grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px 6px 0; }
   .zoom-sim-hero .zoom-tile { min-height: 90px; }
   .zoom-avatar { width: 36px; height: 36px; font-size: 12px; }
-  .mb-glass { height: 136px; bottom: 8px; left: 8px; right: 8px; }
+  .mb-glass { height: 200px; bottom: 8px; left: 8px; right: 8px; }
   .mb-suggest { font-size: 10.5px; }
   .zoom-toolbar { padding: 8px; gap: 4px; }
   .zoom-tb-btn { font-size: 10px; padding: 5px 7px; }
