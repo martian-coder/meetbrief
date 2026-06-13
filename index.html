@@ -351,18 +351,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 const zConvo = [
   { tile: 'zt0', flag: '🇫🇷', lang: 'French',
     heard: '"Je pense que le prix est un peu trop élevé pour notre budget actuel."',
+    trans:  '"I think the price is a bit too high for our current budget."',
     suggest: "I hear you — budget is real. Most teams see payback within Q1. Want me to walk you through the ROI model?" },
   { tile: 'zt1', flag: '🇨🇳', lang: 'Mandarin',
     heard: '"我们需要更多时间来评估这个提案。"',
+    trans:  '"We need more time to evaluate this proposal."',
     suggest: "Absolutely fair ask. Can we schedule a 30-min deep-dive next week so you have everything you need to decide?" },
   { tile: 'zt2', flag: '🇩🇪', lang: 'German',
     heard: '"Wie sieht es mit der Datensicherheit aus? Wir sind in der EU."',
+    trans:  '"What about data security? We are in the EU."',
     suggest: "Everything runs locally — no audio ever leaves your device. Fully GDPR-compliant by design." },
   { tile: 'zt0', flag: '🇪🇸', lang: 'Spanish',
     heard: '"¿Tienen soporte en español o solo en inglés?"',
+    trans:  '"Do you have support in Spanish or only in English?"',
     suggest: "Our support is bilingual — Spanish available during business hours. Enterprise plans include a dedicated CSM." },
   { tile: 'zt1', flag: '🇯🇵', lang: 'Japanese',
     heard: '"導入にはどのくらいの時間がかかりますか？"',
+    trans:  '"How long does implementation take?"',
     suggest: "Most teams are live in under 15 minutes — install, add your API key, start a session. No IT ticket needed." },
 ];
 
@@ -400,19 +405,25 @@ function showZConvo(idx) {
   entry.className = 'mb-entry';
   entry.innerHTML =
     '<div class="mb-heard">' + d.heard + '</div>' +
+    '<div class="mb-trans"></div>' +
     '<div class="mb-suggest-label">AI SUGGESTION</div>' +
     '<div class="mb-suggest"><span class="mb-cursor"></span></div>';
   body.appendChild(entry);
 
-  // Trim old entries
-  while (body.children.length > MAX_LOG) body.removeChild(body.firstChild);
+  // Trim old entries (keep last 3 so overlay isn't too long)
+  while (body.children.length > 3) body.removeChild(body.firstChild);
 
   // Scroll to bottom
   body.scrollTop = body.scrollHeight;
 
-  // After brief pause, typewrite the suggestion
+  // After short delay: show translation, then typewrite AI suggestion
   setTimeout(() => {
     langEl.textContent = d.flag + ' ' + d.lang + ' → English';
+    entry.querySelector('.mb-trans').textContent = d.trans;
+    body.scrollTop = body.scrollHeight;
+  }, 500);
+
+  setTimeout(() => {
     const suggestEl = entry.querySelector('.mb-suggest');
     zTypewrite(suggestEl, d.suggest, 26, () => { body.scrollTop = body.scrollHeight; });
   }, 800);
