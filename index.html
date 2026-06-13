@@ -15,6 +15,41 @@
 </head>
 <body>
 
+<!-- Language picker — shown on first visit -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo">
+      <div class="nav-logo-mark">MB</div>
+      <span>MeetBrief</span>
+    </div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')">
+        <span class="lp-flag">🇺🇸</span>
+        <span class="lp-name">English</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('ja')">
+        <span class="lp-flag">🇯🇵</span>
+        <span class="lp-name">日本語</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('zh')">
+        <span class="lp-flag">🇨🇳</span>
+        <span class="lp-name">中文</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('fr')">
+        <span class="lp-flag">🇫🇷</span>
+        <span class="lp-name">Français</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('de')">
+        <span class="lp-flag">🇩🇪</span>
+        <span class="lp-name">Deutsch</span>
+      </button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -25,6 +60,7 @@
       <li><a href="features.html">Features</a></li>
       <li><a href="how-it-works.html">How it works</a></li>
       <li><a href="install.html">Setup</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
@@ -35,6 +71,7 @@
       </a>
       <a href="install.html" class="btn btn-primary">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -44,6 +81,7 @@
   <a href="features.html">Features</a>
   <a href="how-it-works.html">How it works</a>
   <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
   <a href="privacy.html">Privacy</a>
   <a href="faq.html">FAQ</a>
   <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
@@ -58,14 +96,14 @@
       <div class="hero-text">
         <div class="hero-badge fade-up">
           <div class="hero-badge-dot"></div>
-          Real-time AI assistance · 99 languages
+          <span data-i18n="hero.badge">Real-time AI assistance · 99 languages</span>
         </div>
-        <h1 class="hero-title fade-up fade-up-delay-1">
+        <h1 class="hero-title fade-up fade-up-delay-1" data-i18n-html="hero.title">
           The AI that<br>
           <em class="grad-text">briefs you live,</em><br>
           in every meeting
         </h1>
-        <p class="hero-sub fade-up fade-up-delay-2">
+        <p class="hero-sub fade-up fade-up-delay-2" data-i18n="hero.sub">
           MeetBrief listens to the conversation, transcribes speech in real time — in any language —
           and streams AI-suggested replies to a floating overlay so you stay sharp and present
           while the model has your back.
@@ -216,8 +254,8 @@
 <!-- FEATURES TEASER -->
 <section id="features">
   <div class="container">
-    <div class="section-eyebrow fade-up">Capabilities</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Everything you need to<br>never be caught off guard</h2>
+    <div class="section-eyebrow fade-up" data-i18n="features.eyebrow">Capabilities</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="features.headline">Everything you need to<br>never be caught off guard</h2>
     <p class="section-sub fade-up fade-up-delay-2">Built for people who want to stay fully present in conversations while having an AI quietly ready with the right words.</p>
 
     <div class="bento">
@@ -258,8 +296,8 @@
   <div class="container">
     <div class="multilang-inner">
       <div class="multilang-text">
-        <div class="section-eyebrow fade-up">Global-ready</div>
-        <h2 class="section-headline fade-up fade-up-delay-1">Speak any language.<br>Reply in yours.</h2>
+        <div class="section-eyebrow fade-up" data-i18n="multilang.eyebrow">Global-ready</div>
+        <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="multilang.headline">Speak any language.<br>Reply in yours.</h2>
         <p class="fade-up fade-up-delay-2" style="font-size:1.02rem; line-height:1.8; color:var(--text2); margin-bottom:0;">
           Powered by OpenAI Whisper's multilingual model, MeetBrief transcribes and translates
           99 languages on-device — no cloud, no delay. Hear French, Mandarin, Spanish — the AI
@@ -306,8 +344,8 @@
 <section class="hiw-section" id="how-it-works">
   <div class="container">
     <div style="text-align:center; margin-bottom:0;">
-      <div class="section-eyebrow fade-up">Workflow</div>
-      <h2 class="section-headline fade-up fade-up-delay-1">Three steps from context to<br>confident reply</h2>
+      <div class="section-eyebrow fade-up" data-i18n="hiw.eyebrow">Workflow</div>
+      <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="hiw.headline">Three steps from context to<br>confident reply</h2>
     </div>
   </div>
   <div class="container" style="padding-top:56px;">
@@ -341,8 +379,8 @@
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">Ready to try it?</h2>
-    <p class="fade-up fade-up-delay-1">25 days free. No account. No signup. Just clone, configure, and go.</p>
+    <h2 class="fade-up" data-i18n="cta.headline">Ready to try it?</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="cta.sub">25 days free. No account. No signup. Just clone, configure, and go.</p>
     <div class="cta-actions">
       <a href="install.html" class="btn btn-primary fade-up fade-up-delay-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
@@ -364,12 +402,13 @@
         <li><a href="features.html">Features</a></li>
         <li><a href="how-it-works.html">How it works</a></li>
         <li><a href="install.html">Setup</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
         <li><a href="privacy.html">Privacy</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank">GitHub</a></li>
         <li><a href="mailto:martian.coders.x@gmail.com">Contact</a></li>
       </ul>
-      <div class="footer-right">Built with Electron · Anthropic Claude · Whisper</div>
+      <div class="footer-right">Built by <strong>Martian Coders</strong> &nbsp;·&nbsp; <a href="mailto:martian.coders.x@gmail.com" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,0.2);">martian.coders.x@gmail.com</a></div>
     </div>
   </div>
 </footer>
@@ -638,6 +677,109 @@ badges.forEach(b => {
 
 showLang(0, true);
 startRotation();
+
+// ── Multilingual i18n ──
+const i18n = {
+  en: {
+    'hero.badge': 'Real-time AI assistance · 99 languages',
+    'hero.title': 'The AI that<br><em class="grad-text">briefs you live,</em><br>in every meeting',
+    'hero.sub': 'MeetBrief listens to the conversation, transcribes speech in real time — in any language — and streams AI-suggested replies to a floating overlay so you stay sharp and present while the model has your back.',
+    'features.eyebrow': 'Capabilities',
+    'features.headline': 'Everything you need to<br>never be caught off guard',
+    'multilang.eyebrow': 'Global-ready',
+    'multilang.headline': 'Speak any language.<br>Reply in yours.',
+    'hiw.eyebrow': 'Workflow',
+    'hiw.headline': 'Three steps from context to<br>confident reply',
+    'cta.headline': 'Ready to try it?',
+    'cta.sub': '25 days free. No account. No signup. Just clone, configure, and go.',
+  },
+  ja: {
+    'hero.badge': 'リアルタイムAIアシスタント · 99言語対応',
+    'hero.title': 'すべての会議で<br><em class="grad-text">リアルタイムにサポート</em><br>するAI',
+    'hero.sub': 'MeetBriefは会話を聞き取り、どんな言語でもリアルタイムで音声を文字に変換し、AIが提案する返答を浮動オーバーレイにストリーミングします。集中しながら、AIがあなたをサポートします。',
+    'features.eyebrow': '機能',
+    'features.headline': '油断なく会議に臨むための<br>すべてが揃っています',
+    'multilang.eyebrow': 'グローバル対応',
+    'multilang.headline': 'どの言語でも話せる。<br>自分の言語で返答できる。',
+    'hiw.eyebrow': 'ワークフロー',
+    'hiw.headline': 'コンテキストから自信ある返答まで<br>3ステップ',
+    'cta.headline': '試してみませんか？',
+    'cta.sub': '25日間無料。アカウント不要。サインアップ不要。クローン、設定、実行するだけ。',
+  },
+  zh: {
+    'hero.badge': '实时AI助手 · 99种语言',
+    'hero.title': '在每次会议中<br><em class="grad-text">实时为您简报</em><br>的AI',
+    'hero.sub': 'MeetBrief聆听对话，实时转录任何语言的语音，并将AI建议的回复流式传输到浮动叠加层，让您保持专注，同时AI为您提供支持。',
+    'features.eyebrow': '功能特性',
+    'features.headline': '让您永不措手不及的<br>一切功能',
+    'multilang.eyebrow': '全球就绪',
+    'multilang.headline': '说任何语言。<br>用您的语言回复。',
+    'hiw.eyebrow': '工作流程',
+    'hiw.headline': '从上下文到自信回复<br>三个步骤',
+    'cta.headline': '准备好试试了吗？',
+    'cta.sub': '25天免费。无需账号。无需注册。只需克隆、配置、启动。',
+  },
+  fr: {
+    'hero.badge': 'Assistance IA en temps réel · 99 langues',
+    'hero.title': "L'IA qui<br><em class=\"grad-text\">vous informe en direct,</em><br>dans chaque réunion",
+    'hero.sub': "MeetBrief écoute la conversation, transcrit la parole en temps réel — dans n'importe quelle langue — et diffuse des réponses IA dans une fenêtre flottante pour que vous restiez concentré.",
+    'features.eyebrow': 'Capacités',
+    'features.headline': "Tout ce qu'il faut pour<br>ne jamais être pris au dépourvu",
+    'multilang.eyebrow': 'Prêt pour le monde entier',
+    'multilang.headline': "Parlez n'importe quelle langue.<br>Répondez dans la vôtre.",
+    'hiw.eyebrow': 'Flux de travail',
+    'hiw.headline': 'Trois étapes du contexte<br>à la réponse confiante',
+    'cta.headline': 'Prêt à essayer ?',
+    'cta.sub': "25 jours gratuits. Sans compte. Sans inscription. Clonez, configurez, lancez.",
+  },
+  de: {
+    'hero.badge': 'KI-Echtzeithilfe · 99 Sprachen',
+    'hero.title': 'Die KI, die Sie<br><em class="grad-text">live brieft,</em><br>in jedem Meeting',
+    'hero.sub': 'MeetBrief hört dem Gespräch zu, transkribiert Sprache in Echtzeit — in jeder Sprache — und streamt KI-Antworten in ein schwebendes Overlay, damit Sie konzentriert bleiben.',
+    'features.eyebrow': 'Funktionen',
+    'features.headline': 'Alles, was Sie brauchen, um<br>nie unvorbereitet zu sein',
+    'multilang.eyebrow': 'Global einsetzbar',
+    'multilang.headline': 'Sprechen Sie jede Sprache.<br>Antworten Sie in Ihrer.',
+    'hiw.eyebrow': 'Arbeitsablauf',
+    'hiw.headline': 'Drei Schritte vom Kontext zur<br>selbstbewussten Antwort',
+    'cta.headline': 'Bereit zum Ausprobieren?',
+    'cta.sub': '25 Tage kostenlos. Kein Konto. Keine Anmeldung. Einfach klonen, konfigurieren und starten.',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.classList.add('hidden');
+  applyTranslations(lang);
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.classList.remove('hidden');
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.classList.add('hidden');
+    applyTranslations(saved);
+  }
+})();
 </script>
 </body>
 </html>
