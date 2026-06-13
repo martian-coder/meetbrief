@@ -85,6 +85,7 @@
   <a href="privacy.html">Privacy</a>
   <a href="faq.html">FAQ</a>
   <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
 </div>
 
 <!-- HERO -->
@@ -760,24 +761,38 @@ function applyTranslations(lang) {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
 }
 
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+
 function selectLang(lang) {
   localStorage.setItem('mb_lang', lang);
   const overlay = document.getElementById('lpOverlay');
-  if (overlay) overlay.classList.add('hidden');
+  if (overlay) overlay.style.display = 'none';
   applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
 }
 
 function showLangPicker() {
   const overlay = document.getElementById('lpOverlay');
-  if (overlay) overlay.classList.remove('hidden');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  // Re-trigger the slide-up animation on the card
+  const card = overlay.querySelector('.lp-card');
+  if (card) {
+    card.style.animation = 'none';
+    card.offsetHeight; // force reflow
+    card.style.animation = '';
+  }
 }
 
 (function initLang() {
   const saved = localStorage.getItem('mb_lang');
   if (saved) {
     const overlay = document.getElementById('lpOverlay');
-    if (overlay) overlay.classList.add('hidden');
+    if (overlay) overlay.style.display = 'none';
     applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
   }
 })();
 </script>
