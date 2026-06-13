@@ -47,7 +47,7 @@
       <div class="hero-text">
         <div class="hero-badge fade-up">
           <div class="hero-badge-dot"></div>
-          Real-time AI assistance
+          Real-time AI assistance · 99 languages
         </div>
         <h1 class="hero-title fade-up fade-up-delay-1">
           The AI that<br>
@@ -55,9 +55,9 @@
           in every meeting
         </h1>
         <p class="hero-sub fade-up fade-up-delay-2">
-          MeetBrief listens to the conversation, transcribes speech in real time, and streams
-          AI-suggested replies to a floating overlay — so you stay sharp and present while
-          the model has your back.
+          MeetBrief listens to the conversation, transcribes speech in real time — in any language —
+          and streams AI-suggested replies to a floating overlay so you stay sharp and present
+          while the model has your back.
         </p>
         <div class="hero-actions fade-up fade-up-delay-3">
           <a href="install.html" class="btn btn-primary">
@@ -140,6 +140,8 @@
     <div class="strip-sep"></div>
     <div class="strip-item"><span>⚡</span> Silero VAD</div>
     <div class="strip-sep"></div>
+    <div class="strip-item"><span>🌐</span> 99 languages</div>
+    <div class="strip-sep"></div>
     <div class="strip-item"><span>🔒</span> Zero cloud dependency</div>
     <div class="strip-sep"></div>
     <div class="strip-item"><span>🖥️</span> Electron · macOS · Windows · Linux</div>
@@ -182,6 +184,55 @@
         View all features
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- MULTILINGUAL -->
+<section class="multilang-section" id="multilingual">
+  <div class="container">
+    <div class="multilang-inner">
+      <div class="multilang-text">
+        <div class="section-eyebrow fade-up">Global-ready</div>
+        <h2 class="section-headline fade-up fade-up-delay-1">Speak any language.<br>Reply in yours.</h2>
+        <p class="fade-up fade-up-delay-2" style="font-size:1.02rem; line-height:1.8; color:var(--text2); margin-bottom:0;">
+          Powered by OpenAI Whisper's multilingual model, MeetBrief transcribes and translates
+          99 languages on-device — no cloud, no delay. Hear French, Mandarin, Spanish — the AI
+          always replies in English so you can respond with confidence.
+        </p>
+        <div class="lang-badges fade-up fade-up-delay-3" id="langBadges">
+          <button class="lang-badge active" data-idx="0">🇫🇷 French</button>
+          <button class="lang-badge" data-idx="1">🇨🇳 Mandarin</button>
+          <button class="lang-badge" data-idx="2">🇪🇸 Spanish</button>
+          <button class="lang-badge" data-idx="3">🇩🇪 German</button>
+          <button class="lang-badge" data-idx="4">🇯🇵 Japanese</button>
+        </div>
+        <div class="fade-up fade-up-delay-4" style="margin-top:28px; display:flex; align-items:center; gap:10px; font-size:12px; color:var(--text3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Auto-advances every 6 seconds
+        </div>
+      </div>
+      <div class="ml-card fade-up fade-up-delay-2" id="mlCard">
+        <div class="ml-card-header">
+          <span class="ml-flag" id="mlFlag">🇫🇷</span>
+          <div>
+            <div class="ml-lang-label" id="mlLangLabel">French → English</div>
+            <div class="ml-arrow" id="mlTime">translated in 1.4s</div>
+          </div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label heard-lbl">Heard</div>
+          <div class="ml-block-text heard-text" id="mlHeard">"Je pense que le prix est un peu trop élevé pour notre budget actuel."</div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label trans-lbl">Transcribed &amp; translated</div>
+          <div class="ml-block-text trans-text" id="mlTrans">"I think the price is a bit too high for our current budget."</div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label suggest-lbl">AI suggestion</div>
+          <div class="ml-block-text suggest-text" id="mlSuggest"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -259,11 +310,114 @@
 </footer>
 
 <script>
+// Intersection observer for fade-up animations
 const observer = new IntersectionObserver(
   entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
   { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Multilingual demo
+const langs = [
+  {
+    flag: '🇫🇷', lang: 'French', time: '1.4s',
+    heard: '"Je pense que le prix est un peu trop élevé pour notre budget actuel."',
+    trans: '"I think the price is a bit too high for our current budget."',
+    suggest: "I hear you — budget constraints are real. Let me walk you through the ROI breakdown. Most teams see payback within the first quarter."
+  },
+  {
+    flag: '🇨🇳', lang: 'Mandarin', time: '1.1s',
+    heard: '"我们需要更多时间来评估这个提案。"',
+    trans: '"We need more time to evaluate this proposal."',
+    suggest: "Absolutely — that's a fair ask. Can we schedule a 30-minute deep-dive next week so you have everything you need to decide?"
+  },
+  {
+    flag: '🇪🇸', lang: 'Spanish', time: '1.2s',
+    heard: '"¿Tienen soporte en español o solo en inglés?"',
+    trans: '"Do you have support in Spanish or only in English?"',
+    suggest: "Great question — our support team is bilingual and available in Spanish during business hours. Enterprise plans also include a dedicated CSM."
+  },
+  {
+    flag: '🇩🇪', lang: 'German', time: '1.3s',
+    heard: '"Wie sieht es mit der Datensicherheit aus? Wir sind in der EU."',
+    trans: '"What about data security? We are in the EU."',
+    suggest: "Data residency matters — everything runs locally on your machine, so no audio or transcripts ever leave your network. Fully GDPR-compliant by design."
+  },
+  {
+    flag: '🇯🇵', lang: 'Japanese', time: '1.5s',
+    heard: '"導入にはどのくらいの時間がかかりますか？"',
+    trans: '"How long does implementation take?"',
+    suggest: "Most teams are up and running in under 15 minutes — just install, add your API key, and start a session. No IT ticket required."
+  }
+];
+
+let currentIdx = 0;
+let typeTimer = null;
+let rotateTimer = null;
+
+const mlFlag = document.getElementById('mlFlag');
+const mlLangLabel = document.getElementById('mlLangLabel');
+const mlTime = document.getElementById('mlTime');
+const mlHeard = document.getElementById('mlHeard');
+const mlTrans = document.getElementById('mlTrans');
+const mlSuggest = document.getElementById('mlSuggest');
+const badges = document.querySelectorAll('.lang-badge');
+
+function typewrite(el, text, speed, done) {
+  clearTimeout(typeTimer);
+  el.innerHTML = '';
+  const cursor = '<span class="ml-cursor"></span>';
+  let i = 0;
+  function tick() {
+    el.innerHTML = text.slice(0, i) + cursor;
+    i++;
+    if (i <= text.length) {
+      typeTimer = setTimeout(tick, speed);
+    } else {
+      el.innerHTML = text + cursor;
+      if (done) done();
+    }
+  }
+  tick();
+}
+
+function showLang(idx, animate) {
+  const d = langs[idx];
+  mlFlag.textContent = d.flag;
+  mlLangLabel.textContent = d.lang + ' → English';
+  mlTime.textContent = 'translated in ' + d.time;
+  mlHeard.textContent = d.heard;
+  mlTrans.textContent = d.trans;
+
+  badges.forEach((b, i) => b.classList.toggle('active', i === idx));
+
+  if (animate) {
+    mlSuggest.innerHTML = '<span class="ml-cursor"></span>';
+    typewrite(mlSuggest, d.suggest, 28, null);
+  } else {
+    mlSuggest.innerHTML = d.suggest + '<span class="ml-cursor"></span>';
+  }
+}
+
+function startRotation() {
+  clearInterval(rotateTimer);
+  rotateTimer = setInterval(() => {
+    currentIdx = (currentIdx + 1) % langs.length;
+    showLang(currentIdx, true);
+  }, 6000);
+}
+
+badges.forEach(b => {
+  b.addEventListener('click', () => {
+    const idx = parseInt(b.dataset.idx, 10);
+    currentIdx = idx;
+    showLang(idx, true);
+    startRotation();
+  });
+});
+
+showLang(0, true);
+startRotation();
 </script>
 </body>
 </html>
