@@ -102,38 +102,36 @@
             <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
             <div class="mockup-bar-title">Quarterly Review · 4 participants</div>
           </div>
-          <div class="zoom-sim zoom-sim-hero">
-            <div class="zoom-tile zoom-tile-bg-1 speaking" id="zt0">
-              <div class="zoom-avatar">AK</div>
-              <div class="zoom-speaking-ring"></div>
-              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Alex Kim</div>
+          <!-- zc-wrap is a plain positioned div — the grid cannot be the anchor for abs overlay -->
+          <div class="zc-wrap">
+            <div class="zoom-sim zoom-sim-hero">
+              <div class="zoom-tile zoom-tile-bg-1 speaking" id="zt0">
+                <div class="zoom-avatar">AK</div>
+                <div class="zoom-speaking-ring"></div>
+                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Alex Kim</div>
+              </div>
+              <div class="zoom-tile zoom-tile-bg-2" id="zt1">
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#4F79F5,#7C5DE8)">SR</div>
+                <div class="zoom-speaking-ring"></div>
+                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Sarah R.</div>
+              </div>
+              <div class="zoom-tile zoom-tile-bg-2" id="zt2">
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#065F46,#047857)">MC</div>
+                <div class="zoom-speaking-ring"></div>
+                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> M. Chen</div>
+              </div>
+              <div class="zoom-tile zoom-tile-bg-1" id="zt3">
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
+                <div class="zoom-name">You (Host)</div>
+              </div>
             </div>
-            <div class="zoom-tile zoom-tile-bg-2" id="zt1">
-              <div class="zoom-avatar" style="background:linear-gradient(135deg,#4F79F5,#7C5DE8)">SR</div>
-              <div class="zoom-speaking-ring"></div>
-              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Sarah R.</div>
-            </div>
-            <div class="zoom-tile zoom-tile-bg-2" id="zt2">
-              <div class="zoom-avatar" style="background:linear-gradient(135deg,#065F46,#047857)">MC</div>
-              <div class="zoom-speaking-ring"></div>
-              <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> M. Chen</div>
-            </div>
-            <div class="zoom-tile zoom-tile-bg-1" id="zt3">
-              <div class="zoom-avatar" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
-              <div class="zoom-name">You (Host)</div>
-            </div>
-            <!-- MeetBrief glass overlay — floats on top of the call -->
+            <!-- Glass overlay: sibling of zoom-sim, anchored to zc-wrap -->
             <div class="mb-glass" id="mbGlass">
               <div class="mb-glass-hd">
-                <div class="mb-hd-left">
-                  <div class="mb-live-dot"></div>
-                  <span>MEETBRIEF</span>
-                </div>
+                <div class="mb-hd-left"><div class="mb-live-dot"></div>MEETBRIEF</div>
                 <span class="mb-hd-lang" id="zpLang">🇫🇷 French → English</span>
               </div>
-              <div class="mb-glass-body" id="mbBody">
-                <!-- Conversation log appended here by JS -->
-              </div>
+              <div class="mb-glass-body" id="mbBody"></div>
             </div>
           </div>
           <div class="zoom-toolbar">
