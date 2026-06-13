@@ -35,8 +35,19 @@
       </a>
       <a href="install.html" class="btn btn-primary">Get Started</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -111,18 +122,18 @@
               <div class="zoom-avatar" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
               <div class="zoom-name">You (Host)</div>
             </div>
-            <!-- Live MeetBrief panel — full width, updates as speakers talk -->
-            <div class="zo-panel">
-              <div class="zo-panel-head">
-                <span class="zo-panel-flag" id="zpFlag">🇫🇷</span>
-                <div class="zo-panel-info">
-                  <div class="zo-title">MEETBRIEF</div>
-                  <div class="zo-panel-lang" id="zpLang">French · translating…</div>
+            <!-- MeetBrief glass overlay — floats on top of the call -->
+            <div class="mb-glass" id="mbGlass">
+              <div class="mb-glass-hd">
+                <div class="mb-hd-left">
+                  <div class="mb-live-dot"></div>
+                  <span>MEETBRIEF</span>
                 </div>
-                <div class="zo-live" style="margin-left:auto"><div class="zo-live-dot"></div>LIVE</div>
+                <span class="mb-hd-lang" id="zpLang">🇫🇷 French → English</span>
               </div>
-              <div class="zo-panel-heard" id="zpHeard">"Je pense que le prix est un peu trop élevé pour notre budget actuel."</div>
-              <div class="zo-panel-suggest" id="zpSuggest"><span class="zo-cursor"></span></div>
+              <div class="mb-glass-body" id="mbBody">
+                <!-- Conversation log appended here by JS -->
+              </div>
             </div>
           </div>
           <div class="zoom-toolbar">
@@ -358,40 +369,75 @@ const zConvo = [
 ];
 
 let zIdx = 0, zTypeTimer = null;
+const MAX_LOG = 4;
 
-function zTypewrite(el, text, speed) {
+function zTypewrite(el, text, speed, onTick) {
   clearTimeout(zTypeTimer);
   let i = 0;
-  const cursor = '<span class="zo-cursor"></span>';
+  const cursor = '<span class="mb-cursor"></span>';
   function tick() {
     el.innerHTML = text.slice(0, i) + cursor;
     i++;
+    if (onTick) onTick();
     if (i <= text.length) zTypeTimer = setTimeout(tick, speed);
+    else el.innerHTML = text + cursor;
   }
   tick();
 }
 
 function showZConvo(idx) {
   const d = zConvo[idx];
-  // Move speaking highlight to active tile
+  // Move speaking ring to active tile
   document.querySelectorAll('.zoom-sim-hero .zoom-tile').forEach(t => t.classList.remove('speaking'));
   const tile = document.getElementById(d.tile);
   if (tile) tile.classList.add('speaking');
-  // Reset panel to "translating" state
-  document.getElementById('zpFlag').textContent = d.flag;
-  document.getElementById('zpLang').textContent = d.lang + ' · translating…';
-  document.getElementById('zpHeard').textContent = d.heard;
-  const suggest = document.getElementById('zpSuggest');
-  suggest.innerHTML = '<span class="zo-cursor"></span>';
-  // After brief pause, show translated label and typewrite suggestion
+
+  // Update header lang badge
+  const langEl = document.getElementById('zpLang');
+  langEl.textContent = d.flag + ' ' + d.lang + ' · translating…';
+
+  // Append new log entry (heard line first)
+  const body = document.getElementById('mbBody');
+  const entry = document.createElement('div');
+  entry.className = 'mb-entry';
+  entry.innerHTML =
+    '<div class="mb-heard">' + d.heard + '</div>' +
+    '<div class="mb-suggest-label">AI SUGGESTION</div>' +
+    '<div class="mb-suggest"><span class="mb-cursor"></span></div>';
+  body.appendChild(entry);
+
+  // Trim old entries
+  while (body.children.length > MAX_LOG) body.removeChild(body.firstChild);
+
+  // Scroll to bottom
+  body.scrollTop = body.scrollHeight;
+
+  // After brief pause, typewrite the suggestion
   setTimeout(() => {
-    document.getElementById('zpLang').textContent = d.lang + ' → English';
-    zTypewrite(suggest, d.suggest, 28);
-  }, 900);
+    langEl.textContent = d.flag + ' ' + d.lang + ' → English';
+    const suggestEl = entry.querySelector('.mb-suggest');
+    zTypewrite(suggestEl, d.suggest, 26, () => { body.scrollTop = body.scrollHeight; });
+  }, 800);
 }
 
 showZConvo(0);
-setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 5000);
+setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 5200);
+
+// ── Hamburger nav ────────────────────────────────────
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
 
 // Multilingual demo
 const langs = [
