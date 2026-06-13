@@ -372,9 +372,8 @@ const zConvo = [
 ];
 
 let zIdx = 0, zTypeTimer = null;
-const MAX_LOG = 4;
 
-function zTypewrite(el, text, speed, onTick) {
+function zTypewrite(el, text, onTick) {
   clearTimeout(zTypeTimer);
   let i = 0;
   const cursor = '<span class="mb-cursor"></span>';
@@ -382,10 +381,28 @@ function zTypewrite(el, text, speed, onTick) {
     el.innerHTML = text.slice(0, i) + cursor;
     i++;
     if (onTick) onTick();
-    if (i <= text.length) zTypeTimer = setTimeout(tick, speed);
+    if (i <= text.length) zTypeTimer = setTimeout(tick, 48); // 48ms per char — readable pace
     else el.innerHTML = text + cursor;
   }
   tick();
+}
+
+// Track whether user has manually scrolled up so we don't fight them
+let mbUserScrolled = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.getElementById('mbBody');
+  if (body) {
+    body.addEventListener('scroll', () => {
+      const distFromBottom = body.scrollHeight - body.scrollTop - body.clientHeight;
+      mbUserScrolled = distFromBottom > 40;
+    });
+  }
+});
+
+function mbAutoScroll() {
+  if (mbUserScrolled) return;
+  const body = document.getElementById('mbBody');
+  if (body) body.scrollTop = body.scrollHeight;
 }
 
 function showZConvo(idx) {
@@ -395,11 +412,11 @@ function showZConvo(idx) {
   const tile = document.getElementById(d.tile);
   if (tile) tile.classList.add('speaking');
 
-  // Update header lang badge
+  // Update header
   const langEl = document.getElementById('zpLang');
   langEl.textContent = d.flag + ' ' + d.lang + ' · translating…';
 
-  // Append new log entry (heard line first)
+  // Append entry
   const body = document.getElementById('mbBody');
   const entry = document.createElement('div');
   entry.className = 'mb-entry';
@@ -410,27 +427,26 @@ function showZConvo(idx) {
     '<div class="mb-suggest"><span class="mb-cursor"></span></div>';
   body.appendChild(entry);
 
-  // Trim old entries (keep last 3 so overlay isn't too long)
+  // Keep last 3 entries
   while (body.children.length > 3) body.removeChild(body.firstChild);
+  mbAutoScroll();
 
-  // Scroll to bottom
-  body.scrollTop = body.scrollHeight;
-
-  // After short delay: show translation, then typewrite AI suggestion
+  // 600ms: show English translation
   setTimeout(() => {
     langEl.textContent = d.flag + ' ' + d.lang + ' → English';
     entry.querySelector('.mb-trans').textContent = d.trans;
-    body.scrollTop = body.scrollHeight;
-  }, 500);
+    mbAutoScroll();
+  }, 600);
 
+  // 1100ms: typewrite AI suggestion
   setTimeout(() => {
     const suggestEl = entry.querySelector('.mb-suggest');
-    zTypewrite(suggestEl, d.suggest, 26, () => { body.scrollTop = body.scrollHeight; });
-  }, 800);
+    zTypewrite(suggestEl, d.suggest, mbAutoScroll);
+  }, 1100);
 }
 
 showZConvo(0);
-setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 5200);
+setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 6500);
 
 // ── Hamburger nav ────────────────────────────────────
 const hamburger = document.getElementById('navHamburger');
