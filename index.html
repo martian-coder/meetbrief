@@ -106,19 +106,22 @@
           <div class="zc-wrap">
             <div class="zoom-sim zoom-sim-hero">
               <div class="zoom-tile zoom-tile-bg-1 speaking" id="zt0">
-                <div class="zoom-avatar">AK</div>
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#1e3a5f,#2a5a8c)">KH</div>
                 <div class="zoom-speaking-ring"></div>
-                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Alex Kim</div>
+                <div class="zt-bars"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="zoom-name">K. Hayashi</div>
               </div>
               <div class="zoom-tile zoom-tile-bg-2" id="zt1">
-                <div class="zoom-avatar" style="background:linear-gradient(135deg,#4F79F5,#7C5DE8)">SR</div>
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#4F79F5,#7C5DE8)">MD</div>
                 <div class="zoom-speaking-ring"></div>
-                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> Sarah R.</div>
+                <div class="zt-bars"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="zoom-name">M. Dubois</div>
               </div>
               <div class="zoom-tile zoom-tile-bg-2" id="zt2">
-                <div class="zoom-avatar" style="background:linear-gradient(135deg,#065F46,#047857)">MC</div>
+                <div class="zoom-avatar" style="background:linear-gradient(135deg,#065F46,#047857)">LC</div>
                 <div class="zoom-speaking-ring"></div>
-                <div class="zoom-name"><span class="zoom-wave"><span></span><span></span><span></span><span></span></span> M. Chen</div>
+                <div class="zt-bars"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="zoom-name">L. Chen</div>
               </div>
               <div class="zoom-tile zoom-tile-bg-1" id="zt3">
                 <div class="zoom-avatar" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
@@ -129,9 +132,22 @@
             <div class="mb-glass" id="mbGlass">
               <div class="mb-glass-hd">
                 <div class="mb-hd-left"><div class="mb-live-dot"></div>MEETBRIEF</div>
-                <span class="mb-hd-lang" id="zpLang">🇫🇷 French → English</span>
+                <span class="mb-hd-lang" id="zpLang">🇯🇵 Japanese · hearing…</span>
               </div>
-              <div class="mb-glass-body" id="mbBody"></div>
+              <div class="mb-sect">
+                <div class="mb-sect-lbl">🎙 Hearing</div>
+                <div class="mb-heard-live" id="mbHeard"><span class="mb-cursor"></span></div>
+              </div>
+              <div class="mb-divider"></div>
+              <div class="mb-sect" id="mbTransSect" style="display:none">
+                <div class="mb-sect-lbl">🔤 English</div>
+                <div class="mb-trans-live" id="mbTransLive"></div>
+              </div>
+              <div class="mb-divider" id="mbDiv2" style="display:none"></div>
+              <div class="mb-sect" id="mbAiSect" style="display:none">
+                <div class="mb-sect-lbl">✦ AI Suggestion</div>
+                <div class="mb-ai-live" id="mbAiLive"></div>
+              </div>
             </div>
           </div>
           <div class="zoom-toolbar">
@@ -347,106 +363,101 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ── Hero: Zoom call simulation ──────────────────────
+// ── Hero: Zoom call simulation — word-by-word transcription ──
 const zConvo = [
-  { tile: 'zt0', flag: '🇫🇷', lang: 'French',
-    heard: '"Je pense que le prix est un peu trop élevé pour notre budget actuel."',
-    trans:  '"I think the price is a bit too high for our current budget."',
-    suggest: "I hear you — budget is real. Most teams see payback within Q1. Want me to walk you through the ROI model?" },
-  { tile: 'zt1', flag: '🇨🇳', lang: 'Mandarin',
-    heard: '"我们需要更多时间来评估这个提案。"',
+  { tile: 'zt0', flag: '🇯🇵', lang: 'Japanese',
+    heard: '"導入は どのくらい 時間が かかりますか？"',
+    trans:  '"How long does the setup take?"',
+    suggest: "Most teams are live in under 15 minutes — install, add your API key, start a session. No IT ticket needed." },
+  { tile: 'zt1', flag: '🇫🇷', lang: 'French',
+    heard: '"Le prix est un peu trop élevé pour notre budget."',
+    trans:  '"The price is a bit too high for our budget."',
+    suggest: "Totally fair — most teams see full ROI within the first quarter. Want me to walk you through the numbers?" },
+  { tile: 'zt2', flag: '🇨🇳', lang: 'Mandarin',
+    heard: '"我们需要 更多时间 来评估 这个提案。"',
     trans:  '"We need more time to evaluate this proposal."',
-    suggest: "Absolutely fair ask. Can we schedule a 30-min deep-dive next week so you have everything you need to decide?" },
-  { tile: 'zt2', flag: '🇩🇪', lang: 'German',
-    heard: '"Wie sieht es mit der Datensicherheit aus? Wir sind in der EU."',
-    trans:  '"What about data security? We are in the EU."',
+    suggest: "Absolutely — can we schedule a 30-min deep-dive next week so you have everything you need to decide?" },
+  { tile: 'zt1', flag: '🇩🇪', lang: 'German',
+    heard: '"Wie sieht es mit der Datensicherheit aus?"',
+    trans:  '"What about data security?"',
     suggest: "Everything runs locally — no audio ever leaves your device. Fully GDPR-compliant by design." },
   { tile: 'zt0', flag: '🇪🇸', lang: 'Spanish',
     heard: '"¿Tienen soporte en español o solo en inglés?"',
-    trans:  '"Do you have support in Spanish or only in English?"',
-    suggest: "Our support is bilingual — Spanish available during business hours. Enterprise plans include a dedicated CSM." },
-  { tile: 'zt1', flag: '🇯🇵', lang: 'Japanese',
-    heard: '"導入にはどのくらいの時間がかかりますか？"',
-    trans:  '"How long does implementation take?"',
-    suggest: "Most teams are live in under 15 minutes — install, add your API key, start a session. No IT ticket needed." },
+    trans:  '"Do you have Spanish support?"',
+    suggest: "Yes — our team is bilingual. Spanish support available during business hours for all plans." },
 ];
 
-let zIdx = 0, zTypeTimer = null;
+let zIdx = 0, zWordTimer = null, zTypeTimer = null;
 
-function zTypewrite(el, text, onTick) {
+function zTypewrite(el, text, msPerChar) {
   clearTimeout(zTypeTimer);
   let i = 0;
   const cursor = '<span class="mb-cursor"></span>';
   function tick() {
     el.innerHTML = text.slice(0, i) + cursor;
     i++;
-    if (onTick) onTick();
-    if (i <= text.length) zTypeTimer = setTimeout(tick, 48); // 48ms per char — readable pace
+    if (i <= text.length) zTypeTimer = setTimeout(tick, msPerChar);
     else el.innerHTML = text + cursor;
   }
   tick();
 }
 
-// Track whether user has manually scrolled up so we don't fight them
-// Script is at bottom of body — DOM is already ready, no DOMContentLoaded needed
-let mbUserScrolled = false;
-const mbBody = document.getElementById('mbBody');
-if (mbBody) {
-  mbBody.addEventListener('scroll', () => {
-    const dist = mbBody.scrollHeight - mbBody.scrollTop - mbBody.clientHeight;
-    mbUserScrolled = dist > 40;
-  }, { passive: true });
-}
-
-function mbAutoScroll() {
-  if (mbUserScrolled) return;
-  const body = document.getElementById('mbBody');
-  if (body) body.scrollTop = body.scrollHeight;
-}
-
 function showZConvo(idx) {
+  clearTimeout(zWordTimer); clearTimeout(zTypeTimer);
   const d = zConvo[idx];
-  // Move speaking ring to active tile
+
+  // Move speaking ring + bars to active tile
   document.querySelectorAll('.zoom-sim-hero .zoom-tile').forEach(t => t.classList.remove('speaking'));
   const tile = document.getElementById(d.tile);
   if (tile) tile.classList.add('speaking');
 
-  // Update header
-  const langEl = document.getElementById('zpLang');
-  langEl.textContent = d.flag + ' ' + d.lang + ' · translating…';
+  // Reset overlay header
+  document.getElementById('zpLang').textContent = d.flag + ' ' + d.lang + ' · hearing…';
 
-  // Append entry
-  const body = document.getElementById('mbBody');
-  const entry = document.createElement('div');
-  entry.className = 'mb-entry';
-  entry.innerHTML =
-    '<div class="mb-heard">' + d.heard + '</div>' +
-    '<div class="mb-trans"></div>' +
-    '<div class="mb-suggest-label">AI SUGGESTION</div>' +
-    '<div class="mb-suggest"><span class="mb-cursor"></span></div>';
-  body.appendChild(entry);
+  // Reset sections
+  const heardEl = document.getElementById('mbHeard');
+  const transLive = document.getElementById('mbTransLive');
+  const aiLive    = document.getElementById('mbAiLive');
+  const transSect = document.getElementById('mbTransSect');
+  const aiSect    = document.getElementById('mbAiSect');
+  const div2      = document.getElementById('mbDiv2');
+  heardEl.innerHTML = '<span class="mb-cursor"></span>';
+  transLive.textContent = '';
+  aiLive.innerHTML = '';
+  transSect.style.display = 'none';
+  div2.style.display = 'none';
+  aiSect.style.display = 'none';
 
-  // Keep last 3 entries
-  while (body.children.length > 3) body.removeChild(body.firstChild);
-  mbAutoScroll();
-
-  // 600ms: show English translation
-  setTimeout(() => {
-    langEl.textContent = d.flag + ' ' + d.lang + ' → English';
-    const transEl = entry.querySelector('.mb-trans');
-    if (transEl) transEl.textContent = d.trans;
-    mbAutoScroll();
-  }, 600);
-
-  // 1100ms: typewrite AI suggestion
-  setTimeout(() => {
-    const suggestEl = entry.querySelector('.mb-suggest');
-    zTypewrite(suggestEl, d.suggest, mbAutoScroll);
-  }, 1100);
+  // Step 1: word-by-word transcription
+  const tokens = d.heard.split(' ');
+  let wi = 0;
+  const cursor = '<span class="mb-cursor"></span>';
+  function nextWord() {
+    wi++;
+    heardEl.innerHTML = tokens.slice(0, wi).join(' ') + cursor;
+    if (wi < tokens.length) {
+      zWordTimer = setTimeout(nextWord, 175);
+    } else {
+      heardEl.innerHTML = d.heard;
+      // Step 2: show translation 450ms after last word
+      setTimeout(() => {
+        document.getElementById('zpLang').textContent = d.flag + ' ' + d.lang + ' → English';
+        transSect.style.display = '';
+        div2.style.display = '';
+        transLive.textContent = d.trans;
+        // Step 3: AI suggestion 550ms later
+        setTimeout(() => {
+          aiSect.style.display = '';
+          zTypewrite(aiLive, d.suggest, 38);
+        }, 550);
+      }, 450);
+    }
+  }
+  zWordTimer = setTimeout(nextWord, 200);
 }
 
 showZConvo(0);
-setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 6500);
+setInterval(() => { zIdx = (zIdx + 1) % zConvo.length; showZConvo(zIdx); }, 9500);
 
 // ── Hamburger nav ────────────────────────────────────
 const hamburger = document.getElementById('navHamburger');
