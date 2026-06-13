@@ -356,94 +356,186 @@ nav {
 .zo-tag { display: inline-block; background: rgba(79,121,245,0.18); color: #7C9FF8; border-radius: 4px; font-size: 9px; font-weight: 600; padding: 2px 6px; margin-top: 8px; }
 .zo-cursor { display: inline-block; width: 2px; height: 11px; background: #4F79F5; vertical-align: middle; animation: blink 1s step-end infinite; }
 
-/* ── zc-wrap: plain positioned div so .mb-glass anchors here, NOT to the CSS grid ── */
-.zc-wrap { position: relative; }
+/* ── zc-wrap: positioned anchor ── */
+.zc-wrap { position: relative; display: flex; flex-direction: column; }
 
-/* ── Hero zoom-sim ── */
-.zoom-sim-hero { min-height: 0; }
-.zoom-sim-hero .zoom-tile { min-height: 164px; }
-.zoom-sim-hero .zoom-speaking-ring { display: none; }
-.zoom-sim-hero .zoom-tile.speaking .zoom-speaking-ring { display: block; }
-.zoom-sim-hero .zoom-wave { display: none; }
-.zoom-sim-hero .zoom-tile.speaking .zoom-wave { display: inline-flex; }
-.zoom-sim-hero .zoom-tile.speaking { box-shadow: 0 0 0 2px rgba(200,104,20,0.55); }
-
-/* ── In-tile audio bars (shown only on active speaker) ── */
-.zt-bars {
-  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-  display: none; align-items: flex-end; gap: 2.5px; height: 18px;
+/* ── Mini Zoom topbar ── */
+.zc-topbar {
+  height: 34px; background: #242424; border-bottom: 1px solid #3a3a3a;
+  display: flex; align-items: center; padding: 0 12px; gap: 10px;
+  font-size: 11px; color: #d0d0d0; flex-shrink: 0;
 }
-.zoom-tile.speaking .zt-bars { display: flex; }
-.zt-bars span {
-  width: 3px; background: rgba(200,104,20,0.85); border-radius: 2px;
-  animation: wave 1.1s ease infinite;
+.zc-logo { display: flex; align-items: center; gap: 5px; font-weight: 700; font-size: 12px; color: #eee; }
+.zc-logo-icon {
+  width: 20px; height: 20px; background: #0E71EB;
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
 }
-.zt-bars span:nth-child(1) { animation-delay: 0s; }
-.zt-bars span:nth-child(2) { animation-delay: 0.09s; }
-.zt-bars span:nth-child(3) { animation-delay: 0.18s; }
-.zt-bars span:nth-child(4) { animation-delay: 0.27s; }
-.zt-bars span:nth-child(5) { animation-delay: 0.36s; }
+.zc-logo-icon svg { width: 12px; height: 12px; fill: #fff; }
+.zc-mtg { font-size: 10.5px; font-weight: 500; color: #bbb; }
+.zc-timer { font-variant-numeric: tabular-nums; color: #888; font-size: 10.5px; }
+.zc-secure { margin-left: auto; font-size: 10px; color: #22C55E; }
 
-/* ═══════════════════════════════════════════════════
-   MEETBRIEF GLASS OVERLAY
-   Anchored to .zc-wrap, floats over video tiles
-═══════════════════════════════════════════════════ */
+/* ── Video tiles area ── */
+.zc-tiles-area {
+  position: relative; display: flex; gap: 2px;
+  padding: 6px; background: #1C1C1C; height: 312px;
+}
+
+/* ── Main large tile ── */
+.zc-main-tile {
+  flex: 1; border-radius: 8px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid transparent; transition: border-color 0.3s;
+}
+.zc-main-tile.speaking { border-color: #22C55E; }
+
+/* ── Side panel ── */
+.zc-side-panel { width: 108px; display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+.zc-side-tile {
+  flex: 1; border-radius: 6px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid transparent; transition: border-color 0.3s; min-height: 0;
+}
+.zc-side-tile.speaking { border-color: #22C55E; }
+
+/* ── Tile background / avatar / name ── */
+.zc-tile-bg { position: absolute; inset: 0; }
+.zc-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff;
+  position: relative; z-index: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.zc-avatar-sm { width: 34px; height: 34px; font-size: 12px; }
+.zc-tile-name {
+  position: absolute; bottom: 8px; left: 8px;
+  background: rgba(0,0,0,0.6); color: #fff;
+  font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px;
+  display: flex; align-items: center; gap: 4px; z-index: 1;
+}
+.zc-tile-name-sm { font-size: 9px; padding: 1px 5px; bottom: 5px; left: 5px; }
+.zc-tile-badge {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  background: rgba(0,0,0,0.5); color: #aaa;
+  font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 10px;
+}
+
+/* ─── MeetBrief copilot overlay — white frosted glass ─── */
 .mb-glass {
-  position: absolute;
-  bottom: 10px; left: 10px; right: 10px;
-  z-index: 20;
-  height: 230px;
-  background: rgba(4, 4, 16, 0.56);
+  position: absolute; top: 6px; bottom: 6px; right: 6px;
+  width: 218px; z-index: 20;
+  background: rgba(255,255,255,0.94);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(79, 121, 245, 0.45);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07) inset;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.2);
+  display: flex; flex-direction: column; overflow: hidden;
   animation: overlay-appear 0.5s ease 0.4s both;
 }
 .mb-glass-hd {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  padding: 7px 12px;
-  background: rgba(79,121,245,0.12);
-  border-bottom: 1px solid rgba(79,121,245,0.22);
+  height: 40px; display: flex; align-items: center;
+  padding: 0 10px; gap: 7px;
+  background: rgba(255,255,255,0.6);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   flex-shrink: 0;
 }
-.mb-hd-left {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 9px; font-weight: 800; color: #b4ccff; letter-spacing: 0.8px;
+.mb-hd-left { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; }
+.mb-logo-icon {
+  width: 20px; height: 20px; background: #2563EB; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.mb-live-dot {
-  width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
-  background: #34D399; animation: pulse 1.5s ease infinite;
+.mb-logo-icon svg { width: 11px; height: 11px; }
+.mb-title { font-size: 11.5px; font-weight: 700; color: #0D1117; white-space: nowrap; }
+.mb-live-badge {
+  display: flex; align-items: center; gap: 3px;
+  background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 20px;
+  padding: 1px 6px; font-size: 9px; font-weight: 700; color: #15803D; flex-shrink: 0;
 }
-.mb-hd-lang { font-size: 9px; color: rgba(255,255,255,0.6); font-weight: 500; }
-/* Three-section overlay layout */
-.mb-sect { padding: 7px 12px 8px; }
-.mb-sect-lbl {
-  font-size: 8.5px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-  color: rgba(255,255,255,0.36); margin-bottom: 4px;
+.mb-live-dot { width: 5px; height: 5px; border-radius: 50%; background: #22C55E; animation: pulse 1.5s ease infinite; }
+
+/* Scrollable history */
+.mb-glass-body {
+  flex: 1; overflow-y: auto; padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 10px; min-height: 0;
+  scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.12) transparent;
 }
-.mb-heard-live {
-  font-size: 12.5px; color: rgba(255,255,255,0.82); font-style: italic;
-  line-height: 1.5; min-height: 20px;
+.mb-glass-body::-webkit-scrollbar { width: 3px; }
+.mb-glass-body::-webkit-scrollbar-track { background: transparent; }
+.mb-glass-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+
+.mb-empty {
+  color: rgba(0,0,0,0.25); font-style: italic; font-size: 11px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 20px 0; flex-direction: column; text-align: center;
 }
-.mb-trans-live {
-  font-size: 12.5px; color: #deeeff; line-height: 1.5;
-  border-left: 2px solid rgba(100,160,255,0.65); padding-left: 7px;
-  background: rgba(79,121,245,0.1); border-radius: 0 5px 5px 0; padding-top: 1px; padding-bottom: 1px;
+.mb-empty svg { opacity: 0.3; }
+
+/* Footer */
+.mb-glass-footer {
+  padding: 6px 8px; border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex; gap: 5px; background: rgba(255,255,255,0.4); flex-shrink: 0;
 }
-.mb-ai-live {
-  font-size: 12.5px; color: #f2f2f2; line-height: 1.65;
-  border-left: 2px solid #C86814; padding-left: 7px; min-height: 18px;
+.mb-input {
+  flex: 1; height: 24px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 6px;
+  padding: 0 7px; font-size: 10px; color: #555; background: rgba(255,255,255,0.8);
+  outline: none; font-family: inherit;
 }
-.mb-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0 10px; }
+.mb-send-btn {
+  width: 24px; height: 24px; background: #2563EB; border: none; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+
+/* History entry types */
+.mb-heard-block { display: flex; flex-direction: column; gap: 2px; }
+.mb-heard-meta {
+  display: flex; align-items: center; gap: 4px; padding-left: 1px;
+  font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: rgba(0,0,0,0.3);
+}
+.mb-lang-pill {
+  background: rgba(0,0,0,0.07); padding: 1px 5px; border-radius: 8px; font-size: 7.5px;
+}
+.mb-heard-orig {
+  font-size: 11px; color: #6B7280; font-style: italic; line-height: 1.5;
+  background: rgba(0,0,0,0.04); border-left: 2px solid rgba(0,0,0,0.1);
+  border-radius: 0 5px 5px 0; padding: 4px 7px;
+}
+.mb-heard-trans {
+  display: flex; align-items: flex-start; gap: 4px;
+  font-size: 10.5px; color: #374151; padding: 2px 7px 0;
+}
+.mb-trans-label {
+  font-size: 8px; font-weight: 700; color: rgba(0,0,0,0.25);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  flex-shrink: 0; padding-top: 2px;
+}
+.mb-sug-block { display: flex; flex-direction: column; gap: 2px; margin-top: 1px; }
+.mb-sug-label {
+  font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: rgba(37,99,235,0.7); padding-left: 1px;
+  display: flex; align-items: center; gap: 3px;
+}
+.mb-sug-text {
+  font-size: 11px; color: #0D1117; line-height: 1.6;
+  background: #EFF4FF; border-left: 2.5px solid #2563EB;
+  border-radius: 0 6px 6px 0; padding: 5px 8px;
+}
+.mb-sug-text strong { color: #2563EB; font-weight: 600; }
+.mb-typing {
+  display: flex; align-items: center; gap: 3px; padding: 3px 0;
+}
+.mb-typing span {
+  width: 5px; height: 5px; border-radius: 50%; background: #2563EB; opacity: 0.5;
+  animation: mbBounce 0.9s ease-in-out infinite;
+}
+.mb-typing span:nth-child(2) { animation-delay: 0.15s; }
+.mb-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes mbBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-4px)} }
 .mb-cursor {
-  display: inline-block; width: 2px; height: 12px;
-  background: #E07820; vertical-align: middle;
-  animation: blink 1s step-end infinite;
+  display: inline-block; width: 2px; height: 11px; background: #2563EB;
+  margin-left: 1px; vertical-align: text-bottom;
+  animation: blink 0.65s step-end infinite;
 }
 
 /* ── Zoom toolbar ── */
@@ -696,11 +788,12 @@ footer { border-top: 1px solid var(--border); background: var(--surface); paddin
 
   /* Mockup */
   .mockup-wrap { max-width: 100%; }
-  .zoom-sim { grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px 6px 0; }
-  .zoom-sim-hero .zoom-tile { min-height: 90px; }
-  .zoom-avatar { width: 36px; height: 36px; font-size: 12px; }
-  .mb-glass { height: 210px; bottom: 8px; left: 8px; right: 8px; }
-  .mb-suggest { font-size: 10.5px; }
+  .zc-tiles-area { height: 240px; }
+  .zc-side-panel { width: 80px; }
+  .zc-avatar { width: 44px; height: 44px; font-size: 15px; }
+  .zc-avatar-sm { width: 26px; height: 26px; font-size: 10px; }
+  .mb-glass { width: 170px; }
+  .mb-title { font-size: 10px; }
   .zoom-toolbar { padding: 8px; gap: 4px; }
   .zoom-tb-btn { font-size: 10px; padding: 5px 7px; }
 
