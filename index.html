@@ -15,6 +15,41 @@
 </head>
 <body>
 
+<!-- Language picker — shown on first visit -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo">
+      <div class="nav-logo-mark">MB</div>
+      <span>MeetBrief</span>
+    </div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')">
+        <span class="lp-flag">🇺🇸</span>
+        <span class="lp-name">English</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('ja')">
+        <span class="lp-flag">🇯🇵</span>
+        <span class="lp-name">日本語</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('zh')">
+        <span class="lp-flag">🇨🇳</span>
+        <span class="lp-name">中文</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('fr')">
+        <span class="lp-flag">🇫🇷</span>
+        <span class="lp-name">Français</span>
+      </button>
+      <button class="lp-opt" onclick="selectLang('de')">
+        <span class="lp-flag">🇩🇪</span>
+        <span class="lp-name">Deutsch</span>
+      </button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -25,6 +60,7 @@
       <li><a href="features.html">Features</a></li>
       <li><a href="how-it-works.html">How it works</a></li>
       <li><a href="install.html">Setup</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
@@ -35,8 +71,22 @@
       </a>
       <a href="install.html" class="btn btn-primary">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -47,40 +97,40 @@
       <div class="hero-text">
         <div class="hero-badge fade-up">
           <div class="hero-badge-dot"></div>
-          Real-time AI assistance
+          <span data-i18n="hero.badge">Real-time AI assistance · 99 languages</span>
         </div>
-        <h1 class="hero-title fade-up fade-up-delay-1">
+        <h1 class="hero-title fade-up fade-up-delay-1" data-i18n-html="hero.title">
           The AI that<br>
           <em class="grad-text">briefs you live,</em><br>
           in every meeting
         </h1>
-        <p class="hero-sub fade-up fade-up-delay-2">
-          MeetBrief listens to the conversation, transcribes speech in real time, and streams
-          AI-suggested replies to a floating overlay — so you stay sharp and present while
-          the model has your back.
+        <p class="hero-sub fade-up fade-up-delay-2" data-i18n="hero.sub">
+          MeetBrief listens to the conversation, transcribes speech in real time — in any language —
+          and streams AI-suggested replies to a floating overlay so you stay sharp and present
+          while the model has your back.
         </p>
         <div class="hero-actions fade-up fade-up-delay-3">
           <a href="install.html" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
-            Download & Install
+            <span data-i18n="hero.cta1">Download &amp; Install</span>
           </a>
           <a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            View Source
+            <span data-i18n="hero.cta2">View Source</span>
           </a>
         </div>
         <div class="hero-meta fade-up fade-up-delay-4">
           <div class="hero-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            100% local
+            <span data-i18n="hero.meta1">100% local</span>
           </div>
           <div class="hero-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            25-day free trial
+            <span data-i18n="hero.meta2">25-day free trial</span>
           </div>
           <div class="hero-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            macOS · Windows · Linux
+            <span data-i18n="hero.meta3">macOS · Windows · Linux</span>
           </div>
         </div>
       </div>
@@ -89,37 +139,91 @@
         <div class="mockup">
           <div class="mockup-bar">
             <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-            <div class="mockup-bar-title">MeetBrief</div>
+            <div class="mockup-bar-title">Global Product Sync — Q3 · 4 participants</div>
           </div>
-          <div class="mockup-body" style="position:relative;">
-            <div class="m-sidebar">
-              <div class="m-brand">MeetBrief</div>
-              <div class="m-nav-item active"><div class="m-nav-dot"></div> Home</div>
-              <div class="m-nav-item"><div class="m-nav-dot"></div> AI Settings</div>
-              <div class="m-nav-item"><div class="m-nav-dot"></div> History</div>
-              <div class="m-nav-item"><div class="m-nav-dot"></div> Settings</div>
+          <div class="zc-wrap">
+            <!-- Mini Zoom-style topbar -->
+            <div class="zc-topbar">
+              <div class="zc-logo">
+                <div class="zc-logo-icon">
+                  <svg viewBox="0 0 24 24"><path d="M15 10l4.5-3v10L15 14v-4zm-11 7h9a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"/></svg>
+                </div>
+                <span>Zoom</span>
+              </div>
+              <span class="zc-mtg">Global Product Sync — Q3</span>
+              <span class="zc-timer" id="zcTimer">00:00</span>
+              <span class="zc-secure">🔒 Secure</span>
             </div>
-            <div class="m-content">
-              <div>
-                <div class="m-label">Meeting context</div>
-                <div class="m-textarea">
-                  <div class="m-textarea-text">Q3 pipeline review. My role: account exec.<br>Goal: get commitment on enterprise tier.</div>
+            <!-- Video tiles area — position:relative so copilot anchors here -->
+            <div class="zc-tiles-area">
+              <!-- Main large tile -->
+              <div class="zc-main-tile speaking" id="ztMain">
+                <div class="zc-tile-bg" style="background:linear-gradient(135deg,#1a1a2e,#2a1530)"></div>
+                <div class="zc-avatar" style="background:linear-gradient(135deg,#DC2626,#B91C1C)">KH</div>
+                <div class="zc-tile-name"><span>🇯🇵</span> K. Hayashi</div>
+                <div class="zc-tile-badge">JA</div>
+              </div>
+              <!-- Side panel: 3 smaller tiles -->
+              <div class="zc-side-panel">
+                <div class="zc-side-tile" id="ztS1">
+                  <div class="zc-tile-bg" style="background:linear-gradient(135deg,#1e1e3a,#0d1b2e)"></div>
+                  <div class="zc-avatar zc-avatar-sm" style="background:linear-gradient(135deg,#2563EB,#7C3AED)">MD</div>
+                  <div class="zc-tile-name zc-tile-name-sm"><span>🇫🇷</span> M. Dubois</div>
+                </div>
+                <div class="zc-side-tile" id="ztS2">
+                  <div class="zc-tile-bg" style="background:linear-gradient(135deg,#162020,#0d2414)"></div>
+                  <div class="zc-avatar zc-avatar-sm" style="background:linear-gradient(135deg,#059669,#0EA5E9)">LC</div>
+                  <div class="zc-tile-name zc-tile-name-sm"><span>🇨🇳</span> L. Chen</div>
+                </div>
+                <div class="zc-side-tile" id="ztS3">
+                  <div class="zc-tile-bg" style="background:linear-gradient(135deg,#1e2a1e,#0d200d)"></div>
+                  <div class="zc-avatar zc-avatar-sm" style="background:linear-gradient(135deg,#7C3AED,#9F5DE8)">You</div>
+                  <div class="zc-tile-name zc-tile-name-sm"><span>🇺🇸</span> You</div>
                 </div>
               </div>
-              <div>
-                <div class="m-label">AI Provider</div>
-                <div class="m-select"><span>Claude (Anthropic)</span><span style="color:var(--text3)">▾</span></div>
+              <!-- MeetBrief copilot overlay — white frosted glass, scrollable -->
+              <div class="mb-glass" id="mbGlass">
+                <div class="mb-glass-hd">
+                  <div class="mb-hd-left">
+                    <div class="mb-logo-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <span class="mb-title">MeetBrief</span>
+                  </div>
+                  <div class="mb-live-badge"><div class="mb-live-dot"></div>LIVE</div>
+                </div>
+                <div class="mb-glass-body" id="mbBody">
+                  <div class="mb-empty" id="mbEmpty">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Live suggestions appear here<br/>across all languages
+                  </div>
+                </div>
+                <div class="mb-glass-footer">
+                  <input class="mb-input" placeholder="Ask manually…" readonly />
+                  <button class="mb-send-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  </button>
+                </div>
               </div>
-              <div class="m-start">▶ Start Session</div>
             </div>
-            <div class="m-overlay">
-              <div class="m-overlay-head">
-                <div class="m-overlay-title">MEETBRIEF</div>
-                <div class="m-overlay-status"><div class="m-overlay-status-dot"></div>LIVE</div>
+            <!-- Bottom toolbar -->
+            <div class="zoom-toolbar">
+              <div class="zoom-tb-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+                Mute
               </div>
-              <div class="m-overlay-body">
-                <div class="m-heard">"...the pricing concern is still a blocker for the team."</div>
-                <div class="m-suggestion">Totally understand — that's common at this stage. Our enterprise tier comes with a dedicated CSM and a 30-day ROI guarantee.<div class="m-cursor"></div></div>
+              <div class="zoom-tb-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="2" y="7" width="15" height="10" rx="2"/><path d="M17 9l5-2v10l-5-2"/></svg>
+                Stop Video
+              </div>
+              <div class="zoom-tb-btn zoom-tb-end">End</div>
+              <div class="zoom-tb-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Share
+              </div>
+              <div class="zoom-tb-btn zoom-tb-mb-active">
+                <div class="zoom-tb-mb-dot"></div>
+                MeetBrief
               </div>
             </div>
           </div>
@@ -140,6 +244,8 @@
     <div class="strip-sep"></div>
     <div class="strip-item"><span>⚡</span> Silero VAD</div>
     <div class="strip-sep"></div>
+    <div class="strip-item"><span>🌐</span> 99 languages</div>
+    <div class="strip-sep"></div>
     <div class="strip-item"><span>🔒</span> Zero cloud dependency</div>
     <div class="strip-sep"></div>
     <div class="strip-item"><span>🖥️</span> Electron · macOS · Windows · Linux</div>
@@ -149,39 +255,86 @@
 <!-- FEATURES TEASER -->
 <section id="features">
   <div class="container">
-    <div class="section-eyebrow fade-up">Capabilities</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Everything you need to<br>never be caught off guard</h2>
-    <p class="section-sub fade-up fade-up-delay-2">Built for people who want to stay fully present in conversations while having an AI quietly ready with the right words.</p>
+    <div class="section-eyebrow fade-up" data-i18n="features.eyebrow">Capabilities</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="features.headline">Everything you need to<br>never be caught off guard</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="features.sub">Built for people who want to stay fully present in conversations while having an AI quietly ready with the right words.</p>
 
     <div class="bento">
       <div class="bento-card wide fade-up fade-up-delay-1">
         <div class="bento-icon blue">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </div>
-        <h3>Real-time transcription — hands free</h3>
-        <p>Whisper runs locally, capturing system audio and transcribing each turn with no cloud API call. A rolling 30-second window is maintained automatically.</p>
+        <h3 data-i18n="features.card1.h">Real-time transcription — hands free</h3>
+        <p data-i18n="features.card1.p">Whisper runs locally, capturing system audio and transcribing each turn with no cloud API call. A rolling 30-second window is maintained automatically.</p>
       </div>
       <div class="bento-card fade-up fade-up-delay-2">
         <div class="bento-icon violet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>AI replies streamed instantly</h3>
-        <p>When the speaker pauses, the LLM fires. Responses stream token-by-token so the first words appear in under a second. No waiting — just glancing.</p>
+        <h3 data-i18n="features.card2.h">AI replies streamed instantly</h3>
+        <p data-i18n="features.card2.p">When the speaker pauses, the LLM fires. Responses stream token-by-token so the first words appear in under a second. No waiting — just glancing.</p>
       </div>
       <div class="bento-card fade-up fade-up-delay-3">
         <div class="bento-icon green">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <h3>Transparent always-on-top overlay</h3>
-        <p>A frameless, click-through window floats above every app. Toggle visibility or click-through mode with a hotkey while you speak.</p>
+        <h3 data-i18n="features.card3.h">Transparent always-on-top overlay</h3>
+        <p data-i18n="features.card3.p">A frameless, click-through window floats above every app. Toggle visibility or click-through mode with a hotkey while you speak.</p>
       </div>
     </div>
 
     <div style="margin-top:32px; text-align:center;" class="fade-up fade-up-delay-3">
       <a href="features.html" class="btn btn-ghost">
-        View all features
+        <span data-i18n="features.viewall">View all features</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- MULTILINGUAL -->
+<section class="multilang-section" id="multilingual">
+  <div class="container">
+    <div class="multilang-inner">
+      <div class="multilang-text">
+        <div class="section-eyebrow fade-up" data-i18n="multilang.eyebrow">Global-ready</div>
+        <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="multilang.headline">Speak any language.<br>Reply in yours.</h2>
+        <p class="fade-up fade-up-delay-2" style="font-size:1.02rem; line-height:1.8; color:var(--text2); margin-bottom:0;">
+          <span data-i18n="multilang.body">Powered by OpenAI Whisper's multilingual model, MeetBrief transcribes and translates 99 languages on-device — no cloud, no delay. Hear French, Mandarin, Spanish — the AI always replies in English so you can respond with confidence.</span>
+        </p>
+        <div class="lang-badges fade-up fade-up-delay-3" id="langBadges">
+          <button class="lang-badge active" data-idx="0">🇫🇷 French</button>
+          <button class="lang-badge" data-idx="1">🇨🇳 Mandarin</button>
+          <button class="lang-badge" data-idx="2">🇪🇸 Spanish</button>
+          <button class="lang-badge" data-idx="3">🇩🇪 German</button>
+          <button class="lang-badge" data-idx="4">🇯🇵 Japanese</button>
+        </div>
+        <div class="fade-up fade-up-delay-4" style="margin-top:28px; display:flex; align-items:center; gap:10px; font-size:12px; color:var(--text3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-i18n="multilang.auto">Auto-advances every 6 seconds</span>
+        </div>
+      </div>
+      <div class="ml-card fade-up fade-up-delay-2" id="mlCard">
+        <div class="ml-card-header">
+          <span class="ml-flag" id="mlFlag">🇫🇷</span>
+          <div>
+            <div class="ml-lang-label" id="mlLangLabel">French → English</div>
+            <div class="ml-arrow" id="mlTime">translated in 1.4s</div>
+          </div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label heard-lbl">Heard</div>
+          <div class="ml-block-text heard-text" id="mlHeard">"Je pense que le prix est un peu trop élevé pour notre budget actuel."</div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label trans-lbl">Transcribed &amp; translated</div>
+          <div class="ml-block-text trans-text" id="mlTrans">"I think the price is a bit too high for our current budget."</div>
+        </div>
+        <div class="ml-block">
+          <div class="ml-block-label suggest-lbl">AI suggestion</div>
+          <div class="ml-block-text suggest-text" id="mlSuggest"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -190,31 +343,31 @@
 <section class="hiw-section" id="how-it-works">
   <div class="container">
     <div style="text-align:center; margin-bottom:0;">
-      <div class="section-eyebrow fade-up">Workflow</div>
-      <h2 class="section-headline fade-up fade-up-delay-1">Three steps from context to<br>confident reply</h2>
+      <div class="section-eyebrow fade-up" data-i18n="hiw.eyebrow">Workflow</div>
+      <h2 class="section-headline fade-up fade-up-delay-1" data-i18n-html="hiw.headline">Three steps from context to<br>confident reply</h2>
     </div>
   </div>
   <div class="container" style="padding-top:56px;">
     <div class="steps">
       <div class="step fade-up fade-up-delay-1">
         <div class="step-num active">1</div>
-        <h3>Load your context</h3>
-        <p>Paste your agenda, role, and objectives before the meeting. This becomes the cached system prompt — the AI knows the full picture before anyone speaks.</p>
+        <h3 data-i18n="hiw.step1.h">Load your context</h3>
+        <p data-i18n="hiw.step1.p">Paste your agenda, role, and objectives before the meeting. This becomes the cached system prompt — the AI knows the full picture before anyone speaks.</p>
       </div>
       <div class="step fade-up fade-up-delay-2">
         <div class="step-num">2</div>
-        <h3>Start listening</h3>
-        <p>Click Start. MeetBrief captures system audio, runs Silero VAD to detect speech boundaries, and transcribes each turn locally with Whisper.</p>
+        <h3 data-i18n="hiw.step2.h">Start listening</h3>
+        <p data-i18n="hiw.step2.p">Click Start. MeetBrief captures system audio, runs Silero VAD to detect speech boundaries, and transcribes each turn locally with Whisper.</p>
       </div>
       <div class="step fade-up fade-up-delay-3">
         <div class="step-num">3</div>
-        <h3>Reply with confidence</h3>
-        <p>When they pause, the LLM fires. A suggested reply streams to the overlay in under two seconds. Glance, adapt, and say it. Or use the hotkey for on-demand generation.</p>
+        <h3 data-i18n="hiw.step3.h">Reply with confidence</h3>
+        <p data-i18n="hiw.step3.p">When they pause, the LLM fires. A suggested reply streams to the overlay in under two seconds. Glance, adapt, and say it. Or use the hotkey for on-demand generation.</p>
       </div>
     </div>
     <div style="margin-top:32px; text-align:center;" class="fade-up fade-up-delay-3">
       <a href="how-it-works.html" class="btn btn-ghost">
-        Learn how it works technically
+        <span data-i18n="hiw.learn">Learn how it works technically</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -225,16 +378,16 @@
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">Ready to try it?</h2>
-    <p class="fade-up fade-up-delay-1">25 days free. No account. No signup. Just clone, configure, and go.</p>
+    <h2 class="fade-up" data-i18n="cta.headline">Ready to try it?</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="cta.sub">25 days free. No account. No signup. Just clone, configure, and go.</p>
     <div class="cta-actions">
       <a href="install.html" class="btn btn-primary fade-up fade-up-delay-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
-        Install MeetBrief
+        <span data-i18n="cta.btn1">Install MeetBrief</span>
       </a>
       <a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank" class="btn btn-ghost fade-up fade-up-delay-3">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        View on GitHub
+        <span data-i18n="cta.btn2">View on GitHub</span>
       </a>
     </div>
   </div>
@@ -248,22 +401,518 @@
         <li><a href="features.html">Features</a></li>
         <li><a href="how-it-works.html">How it works</a></li>
         <li><a href="install.html">Setup</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
         <li><a href="privacy.html">Privacy</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank">GitHub</a></li>
         <li><a href="mailto:martian.coders.x@gmail.com">Contact</a></li>
       </ul>
-      <div class="footer-right">Built with Electron · Anthropic Claude · Whisper</div>
+      <div class="footer-right">Built by <strong>Martian Coders</strong> &nbsp;·&nbsp; <a href="mailto:martian.coders.x@gmail.com" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,0.2);">martian.coders.x@gmail.com</a></div>
     </div>
   </div>
 </footer>
 
 <script>
+// Intersection observer for fade-up animations
 const observer = new IntersectionObserver(
   entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
   { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── Hero: Meeting copilot simulation ──
+let zcSec = 0;
+setInterval(() => {
+  zcSec++;
+  const m = String(Math.floor(zcSec / 60)).padStart(2, '0');
+  const s = String(zcSec % 60).padStart(2, '0');
+  const timerEl = document.getElementById('zcTimer');
+  if (timerEl) timerEl.textContent = m + ':' + s;
+}, 1000);
+
+const zcTurns = [
+  { tile: 'ztMain', name: 'K. Hayashi', flag: '🇯🇵', langFull: 'Japanese',
+    heard:  '「導入はどのくらい時間がかかりますか？」',
+    trans:  '"How long does the setup take?"',
+    suggest: 'Most teams are live in **under 15 minutes** — install, add your API key, start a session. No IT ticket needed.' },
+  { tile: 'ztS1', name: 'M. Dubois', flag: '🇫🇷', langFull: 'French',
+    heard:  '"Le prix est un peu trop élevé pour notre budget."',
+    trans:  '"The price is a bit too high for our budget."',
+    suggest: 'Totally fair — most teams see **full ROI within the first quarter**. Want me to walk through the numbers?' },
+  { tile: 'ztS2', name: 'L. Chen', flag: '🇨🇳', langFull: 'Mandarin',
+    heard:  '「我们需要更多时间来评估这个提案。」',
+    trans:  '"We need more time to evaluate this proposal."',
+    suggest: 'Absolutely — can we schedule a **30-min deep-dive** next week so you have everything you need to decide?' },
+  { tile: 'ztMain', name: 'K. Hayashi', flag: '🇯🇵', langFull: 'Japanese',
+    heard:  '「データのセキュリティについて教えていただけますか？」',
+    trans:  '"Could you tell us about data security?"',
+    suggest: 'Everything runs **locally on your device** — no audio ever leaves your machine. Fully GDPR-compliant by design.' },
+  { tile: 'ztS1', name: 'M. Dubois', flag: '🇫🇷', langFull: 'French',
+    heard:  '"Parfait. Et pour les équipes en Europe, avez-vous un support localisé?"',
+    trans:  '"Perfect. For European teams, do you have localised support?"',
+    suggest: 'Yes — our support team covers **EU time zones** with French, German, and Spanish coverage on all plans.' },
+];
+
+let zcIdx = 0;
+
+function zcScrollBody(body) {
+  const dist = body.scrollHeight - body.scrollTop - body.clientHeight;
+  if (dist < 60) body.scrollTop = body.scrollHeight;
+}
+
+function zcMd(t) {
+  return t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
+function zcPlayTurn(idx) {
+  const turn = zcTurns[idx % zcTurns.length];
+  const body = document.getElementById('mbBody');
+  if (!body) return;
+
+  const emptyEl = document.getElementById('mbEmpty');
+  if (emptyEl) emptyEl.remove();
+
+  document.querySelectorAll('.zc-main-tile,.zc-side-tile').forEach(t => t.classList.remove('speaking'));
+  const tileEl = document.getElementById(turn.tile);
+  if (tileEl) tileEl.classList.add('speaking');
+
+  const heardId = 'hd-' + idx + '-' + Date.now();
+  const transId = 'tr-' + idx + '-' + Date.now();
+  const heardDiv = document.createElement('div');
+  heardDiv.className = 'mb-heard-block';
+  heardDiv.innerHTML =
+    '<div class="mb-heard-meta">' +
+      '<span>' + turn.flag + '</span>' +
+      '<span>' + turn.name + '</span>' +
+      '<span class="mb-lang-pill">' + turn.langFull + '</span>' +
+    '</div>' +
+    '<div class="mb-heard-orig" id="' + heardId + '"></div>' +
+    '<div class="mb-heard-trans" id="' + transId + '" style="display:none">' +
+      '<span class="mb-trans-label">EN→</span>' +
+      '<span>' + turn.trans + '</span>' +
+    '</div>';
+  body.appendChild(heardDiv);
+  zcScrollBody(body);
+
+  const origEl = document.getElementById(heardId);
+  const transEl = document.getElementById(transId);
+  let ci = 0;
+  const text = turn.heard;
+  const msPerChar = Math.max(30, Math.min(65, 3200 / text.length));
+
+  const speechIv = setInterval(() => {
+    ci = Math.min(ci + 2, text.length);
+    origEl.textContent = text.slice(0, ci) + (ci < text.length ? '▎' : '');
+    zcScrollBody(body);
+    if (ci >= text.length) {
+      clearInterval(speechIv);
+      origEl.textContent = text;
+
+      setTimeout(() => {
+        if (transEl) {
+          transEl.style.display = 'flex';
+          transEl.style.opacity = '0';
+          transEl.style.transition = 'opacity 0.4s';
+          requestAnimationFrame(() => { transEl.style.opacity = '1'; });
+          zcScrollBody(body);
+        }
+        setTimeout(() => {
+          const sugId = 'sg-' + idx + '-' + Date.now();
+          const sugDiv = document.createElement('div');
+          sugDiv.className = 'mb-sug-block';
+          sugDiv.innerHTML =
+            '<div class="mb-sug-label">' +
+              '<svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>' +
+              'Suggested response' +
+            '</div>' +
+            '<div class="mb-sug-text" id="' + sugId + '">' +
+              '<span class="mb-typing">' +
+                '<span></span><span></span><span></span>' +
+              '</span>' +
+            '</div>';
+          body.appendChild(sugDiv);
+          zcScrollBody(body);
+
+          setTimeout(() => {
+            const sugEl = document.getElementById(sugId);
+            if (!sugEl) return;
+            sugEl.innerHTML = '';
+            let si = 0;
+            const sugText = turn.suggest;
+            const sugIv = setInterval(() => {
+              si = Math.min(si + 5, sugText.length);
+              sugEl.innerHTML = zcMd(sugText.slice(0, si)) + '<span class="mb-cursor"></span>';
+              zcScrollBody(body);
+              if (si >= sugText.length) {
+                clearInterval(sugIv);
+                sugEl.innerHTML = zcMd(sugText);
+                zcIdx++;
+                setTimeout(() => zcPlayTurn(zcIdx), 9000 + Math.random() * 2000);
+              }
+            }, 18);
+          }, 900);
+        }, 600);
+      }, 400);
+    }
+  }, msPerChar);
+}
+
+setTimeout(() => zcPlayTurn(0), 1500);
+
+// ── Hamburger nav ────────────────────────────────────
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+
+// Multilingual demo
+const langs = [
+  {
+    flag: '🇫🇷', lang: 'French', time: '1.4s',
+    heard: '"Je pense que le prix est un peu trop élevé pour notre budget actuel."',
+    trans: '"I think the price is a bit too high for our current budget."',
+    suggest: "I hear you — budget constraints are real. Let me walk you through the ROI breakdown. Most teams see payback within the first quarter."
+  },
+  {
+    flag: '🇨🇳', lang: 'Mandarin', time: '1.1s',
+    heard: '"我们需要更多时间来评估这个提案。"',
+    trans: '"We need more time to evaluate this proposal."',
+    suggest: "Absolutely — that's a fair ask. Can we schedule a 30-minute deep-dive next week so you have everything you need to decide?"
+  },
+  {
+    flag: '🇪🇸', lang: 'Spanish', time: '1.2s',
+    heard: '"¿Tienen soporte en español o solo en inglés?"',
+    trans: '"Do you have support in Spanish or only in English?"',
+    suggest: "Great question — our support team is bilingual and available in Spanish during business hours. Enterprise plans also include a dedicated CSM."
+  },
+  {
+    flag: '🇩🇪', lang: 'German', time: '1.3s',
+    heard: '"Wie sieht es mit der Datensicherheit aus? Wir sind in der EU."',
+    trans: '"What about data security? We are in the EU."',
+    suggest: "Data residency matters — everything runs locally on your machine, so no audio or transcripts ever leave your network. Fully GDPR-compliant by design."
+  },
+  {
+    flag: '🇯🇵', lang: 'Japanese', time: '1.5s',
+    heard: '"導入にはどのくらいの時間がかかりますか？"',
+    trans: '"How long does implementation take?"',
+    suggest: "Most teams are up and running in under 15 minutes — just install, add your API key, and start a session. No IT ticket required."
+  }
+];
+
+let currentIdx = 0;
+let typeTimer = null;
+let rotateTimer = null;
+
+const mlFlag = document.getElementById('mlFlag');
+const mlLangLabel = document.getElementById('mlLangLabel');
+const mlTime = document.getElementById('mlTime');
+const mlHeard = document.getElementById('mlHeard');
+const mlTrans = document.getElementById('mlTrans');
+const mlSuggest = document.getElementById('mlSuggest');
+const badges = document.querySelectorAll('.lang-badge');
+
+function typewrite(el, text, speed, done) {
+  clearTimeout(typeTimer);
+  el.innerHTML = '';
+  const cursor = '<span class="ml-cursor"></span>';
+  let i = 0;
+  function tick() {
+    el.innerHTML = text.slice(0, i) + cursor;
+    i++;
+    if (i <= text.length) {
+      typeTimer = setTimeout(tick, speed);
+    } else {
+      el.innerHTML = text + cursor;
+      if (done) done();
+    }
+  }
+  tick();
+}
+
+function showLang(idx, animate) {
+  const d = langs[idx];
+  mlFlag.textContent = d.flag;
+  mlLangLabel.textContent = d.lang + ' → English';
+  mlTime.textContent = 'translated in ' + d.time;
+  mlHeard.textContent = d.heard;
+  mlTrans.textContent = d.trans;
+
+  badges.forEach((b, i) => b.classList.toggle('active', i === idx));
+
+  if (animate) {
+    mlSuggest.innerHTML = '<span class="ml-cursor"></span>';
+    typewrite(mlSuggest, d.suggest, 28, null);
+  } else {
+    mlSuggest.innerHTML = d.suggest + '<span class="ml-cursor"></span>';
+  }
+}
+
+function startRotation() {
+  clearInterval(rotateTimer);
+  rotateTimer = setInterval(() => {
+    currentIdx = (currentIdx + 1) % langs.length;
+    showLang(currentIdx, true);
+  }, 6000);
+}
+
+badges.forEach(b => {
+  b.addEventListener('click', () => {
+    const idx = parseInt(b.dataset.idx, 10);
+    currentIdx = idx;
+    showLang(idx, true);
+    startRotation();
+  });
+});
+
+showLang(0, true);
+startRotation();
+
+// ── Multilingual i18n ──
+const i18n = {
+  en: {
+    'hero.badge': 'Real-time AI assistance · 99 languages',
+    'hero.title': 'The AI that<br><em class="grad-text">briefs you live,</em><br>in every meeting',
+    'hero.sub': 'MeetBrief listens to the conversation, transcribes speech in real time — in any language — and streams AI-suggested replies to a floating overlay so you stay sharp and present while the model has your back.',
+    'hero.cta1': 'Download & Install',
+    'hero.cta2': 'View Source',
+    'hero.meta1': '100% local',
+    'hero.meta2': '25-day free trial',
+    'hero.meta3': 'macOS · Windows · Linux',
+    'features.eyebrow': 'Capabilities',
+    'features.headline': 'Everything you need to<br>never be caught off guard',
+    'features.sub': 'Built for people who want to stay fully present in conversations while having an AI quietly ready with the right words.',
+    'features.card1.h': 'Real-time transcription — hands free',
+    'features.card1.p': 'Whisper runs locally, capturing system audio and transcribing each turn with no cloud API call. A rolling 30-second window is maintained automatically.',
+    'features.card2.h': 'AI replies streamed instantly',
+    'features.card2.p': 'When the speaker pauses, the LLM fires. Responses stream token-by-token so the first words appear in under a second. No waiting — just glancing.',
+    'features.card3.h': 'Transparent always-on-top overlay',
+    'features.card3.p': 'A frameless, click-through window floats above every app. Toggle visibility or click-through mode with a hotkey while you speak.',
+    'features.viewall': 'View all features',
+    'multilang.eyebrow': 'Global-ready',
+    'multilang.headline': 'Speak any language.<br>Reply in yours.',
+    'multilang.body': "Powered by OpenAI Whisper's multilingual model, MeetBrief transcribes and translates 99 languages on-device — no cloud, no delay. Hear French, Mandarin, Spanish — the AI always replies in English so you can respond with confidence.",
+    'multilang.auto': 'Auto-advances every 6 seconds',
+    'hiw.eyebrow': 'Workflow',
+    'hiw.headline': 'Three steps from context to<br>confident reply',
+    'hiw.step1.h': 'Load your context',
+    'hiw.step1.p': 'Paste your agenda, role, and objectives before the meeting. This becomes the cached system prompt — the AI knows the full picture before anyone speaks.',
+    'hiw.step2.h': 'Start listening',
+    'hiw.step2.p': 'Click Start. MeetBrief captures system audio, runs Silero VAD to detect speech boundaries, and transcribes each turn locally with Whisper.',
+    'hiw.step3.h': 'Reply with confidence',
+    'hiw.step3.p': 'When they pause, the LLM fires. A suggested reply streams to the overlay in under two seconds. Glance, adapt, and say it. Or use the hotkey for on-demand generation.',
+    'hiw.learn': 'Learn how it works technically',
+    'cta.headline': 'Ready to try it?',
+    'cta.sub': '25 days free. No account. No signup. Just clone, configure, and go.',
+    'cta.btn1': 'Install MeetBrief',
+    'cta.btn2': 'View on GitHub',
+  },
+  ja: {
+    'hero.badge': 'リアルタイムAIアシスタント · 99言語対応',
+    'hero.title': 'すべての会議で<br><em class="grad-text">リアルタイムにサポート</em><br>するAI',
+    'hero.sub': 'MeetBriefは会話を聞き取り、どんな言語でもリアルタイムで音声を文字に変換し、AIが提案する返答を浮動オーバーレイにストリーミングします。集中しながら、AIがあなたをサポートします。',
+    'hero.cta1': 'ダウンロード＆インストール',
+    'hero.cta2': 'ソースを見る',
+    'hero.meta1': '100%ローカル',
+    'hero.meta2': '25日間無料トライアル',
+    'hero.meta3': 'macOS · Windows · Linux',
+    'features.eyebrow': '機能',
+    'features.headline': '油断なく会議に臨むための<br>すべてが揃っています',
+    'features.sub': '会議中に完全に存在感を保ちながら、AIが適切な言葉をそっと用意してくれることを望む方のために作られました。',
+    'features.card1.h': 'リアルタイム文字起こし — ハンズフリー',
+    'features.card1.p': 'Whisperがローカルで動作し、クラウドAPIなしでシステムオーディオをキャプチャして各ターンを文字起こし。30秒のローリングウィンドウが自動で維持されます。',
+    'features.card2.h': 'AIの返答が即座にストリーミング',
+    'features.card2.p': '話者が一時停止するとLLMが起動します。応答はトークンごとにストリーミングされるため、最初の言葉が1秒未満で表示されます。待たずに、ちらっと見るだけ。',
+    'features.card3.h': '透明な常時最前面オーバーレイ',
+    'features.card3.p': 'フレームレスのクリックスルーウィンドウがすべてのアプリの上に浮かびます。ホットキーで表示やクリックスルーモードを切り替えられます。',
+    'features.viewall': 'すべての機能を見る',
+    'multilang.eyebrow': 'グローバル対応',
+    'multilang.headline': 'どの言語でも話せる。<br>自分の言語で返答できる。',
+    'multilang.body': 'OpenAI Whisperの多言語モデルを搭載し、MeetBriefはデバイス上で99言語を文字起こし・翻訳します — クラウド不要、遅延なし。フランス語、中国語、スペイン語を聞いても、AIは常に日本語で返答するので自信を持って応答できます。',
+    'multilang.auto': '6秒ごとに自動切替',
+    'hiw.eyebrow': 'ワークフロー',
+    'hiw.headline': 'コンテキストから自信ある返答まで<br>3ステップ',
+    'hiw.step1.h': 'コンテキストを読み込む',
+    'hiw.step1.p': '会議前にアジェンダ、役割、目的を貼り付けます。これがキャッシュされたシステムプロンプトになり、誰かが話す前にAIが全体像を把握します。',
+    'hiw.step2.h': '聴き始める',
+    'hiw.step2.p': 'スタートをクリック。MeetBriefがシステムオーディオをキャプチャし、Silero VADで発話境界を検出し、Whisperでローカルに各ターンを文字起こしします。',
+    'hiw.step3.h': '自信を持って返答する',
+    'hiw.step3.p': '相手が一時停止すると、LLMが起動します。提案された返答が2秒以内にオーバーレイにストリーミングされます。ちらっと見て、適応し、言う。ホットキーでオンデマンド生成も可能です。',
+    'hiw.learn': '技術的な仕組みを学ぶ',
+    'cta.headline': '試してみませんか？',
+    'cta.sub': '25日間無料。アカウント不要。サインアップ不要。クローン、設定、実行するだけ。',
+    'cta.btn1': 'MeetBriefをインストール',
+    'cta.btn2': 'GitHubで見る',
+  },
+  zh: {
+    'hero.badge': '实时AI助手 · 99种语言',
+    'hero.title': '在每次会议中<br><em class="grad-text">实时为您简报</em><br>的AI',
+    'hero.sub': 'MeetBrief聆听对话，实时转录任何语言的语音，并将AI建议的回复流式传输到浮动叠加层，让您保持专注，同时AI为您提供支持。',
+    'hero.cta1': '下载并安装',
+    'hero.cta2': '查看源码',
+    'hero.meta1': '100%本地运行',
+    'hero.meta2': '25天免费试用',
+    'hero.meta3': 'macOS · Windows · Linux',
+    'features.eyebrow': '功能特性',
+    'features.headline': '让您永不措手不及的<br>一切功能',
+    'features.sub': '专为希望在对话中保持完全专注、同时让AI随时准备好合适话语的人而设计。',
+    'features.card1.h': '实时转录 — 解放双手',
+    'features.card1.p': 'Whisper在本地运行，无需云API即可捕获系统音频并转录每次发言。自动维护30秒滚动窗口。',
+    'features.card2.h': 'AI回复即时流式传输',
+    'features.card2.p': '当说话者停顿时，LLM立即启动。响应逐词流式传输，第一个词在不到一秒内出现。无需等待，只需一瞥。',
+    'features.card3.h': '透明的始终置顶叠加层',
+    'features.card3.p': '无框架的可穿透点击窗口悬浮在所有应用之上。说话时用热键切换可见性或穿透点击模式。',
+    'features.viewall': '查看所有功能',
+    'multilang.eyebrow': '全球就绪',
+    'multilang.headline': '说任何语言。<br>用您的语言回复。',
+    'multilang.body': '由OpenAI Whisper多语言模型驱动，MeetBrief在设备上转录和翻译99种语言——无需云端，无延迟。听到法语、普通话、西班牙语——AI始终用中文回复，让您自信回应。',
+    'multilang.auto': '每6秒自动切换',
+    'hiw.eyebrow': '工作流程',
+    'hiw.headline': '从上下文到自信回复<br>三个步骤',
+    'hiw.step1.h': '加载您的上下文',
+    'hiw.step1.p': '会议前粘贴您的议程、角色和目标。这成为缓存的系统提示——AI在任何人发言之前就了解全貌。',
+    'hiw.step2.h': '开始聆听',
+    'hiw.step2.p': '点击开始。MeetBrief捕获系统音频，运行Silero VAD检测语音边界，并用Whisper在本地转录每次发言。',
+    'hiw.step3.h': '自信地回复',
+    'hiw.step3.p': '当他们停顿时，LLM启动。建议的回复在两秒内流式传输到叠加层。看一眼，调整，说出来。或使用热键按需生成。',
+    'hiw.learn': '了解技术工作原理',
+    'cta.headline': '准备好试试了吗？',
+    'cta.sub': '25天免费。无需账号。无需注册。只需克隆、配置、启动。',
+    'cta.btn1': '安装MeetBrief',
+    'cta.btn2': '在GitHub上查看',
+  },
+  fr: {
+    'hero.badge': 'Assistance IA en temps réel · 99 langues',
+    'hero.title': "L'IA qui<br><em class=\"grad-text\">vous informe en direct,</em><br>dans chaque réunion",
+    'hero.sub': "MeetBrief écoute la conversation, transcrit la parole en temps réel — dans n'importe quelle langue — et diffuse des réponses IA dans une fenêtre flottante pour que vous restiez concentré.",
+    'hero.cta1': 'Télécharger et installer',
+    'hero.cta2': 'Voir le code source',
+    'hero.meta1': '100% local',
+    'hero.meta2': "25 jours d'essai gratuit",
+    'hero.meta3': 'macOS · Windows · Linux',
+    'features.eyebrow': 'Capacités',
+    'features.headline': "Tout ce qu'il faut pour<br>ne jamais être pris au dépourvu",
+    'features.sub': "Conçu pour les personnes qui veulent rester pleinement présentes dans les conversations tout en ayant une IA discrètement prête avec les bons mots.",
+    'features.card1.h': 'Transcription en temps réel — mains libres',
+    'features.card1.p': "Whisper fonctionne localement, capturant l'audio système et transcrivant chaque tour sans appel API cloud. Une fenêtre glissante de 30 secondes est maintenue automatiquement.",
+    'features.card2.h': 'Réponses IA diffusées instantanément',
+    'features.card2.p': "Quand l'orateur fait une pause, le LLM s'active. Les réponses se diffusent mot par mot, les premiers mots apparaissant en moins d'une seconde. Pas d'attente — juste un coup d'œil.",
+    'features.card3.h': 'Overlay transparent toujours au premier plan',
+    'features.card3.p': "Une fenêtre sans cadre et cliquable flotte au-dessus de toutes les apps. Basculez la visibilité ou le mode click-through avec un raccourci clavier pendant que vous parlez.",
+    'features.viewall': 'Voir toutes les fonctionnalités',
+    'multilang.eyebrow': 'Prêt pour le monde entier',
+    'multilang.headline': "Parlez n'importe quelle langue.<br>Répondez dans la vôtre.",
+    'multilang.body': "Propulsé par le modèle multilingue d'OpenAI Whisper, MeetBrief transcrit et traduit 99 langues sur l'appareil — sans cloud, sans délai. Entendez du français, du mandarin, de l'espagnol — l'IA répond toujours en français pour que vous puissiez répondre avec confiance.",
+    'multilang.auto': 'Avance automatiquement toutes les 6 secondes',
+    'hiw.eyebrow': 'Flux de travail',
+    'hiw.headline': 'Trois étapes du contexte<br>à la réponse confiante',
+    'hiw.step1.h': 'Chargez votre contexte',
+    'hiw.step1.p': "Collez votre ordre du jour, votre rôle et vos objectifs avant la réunion. Cela devient le prompt système mis en cache — l'IA connaît tout le tableau avant que quiconque parle.",
+    'hiw.step2.h': 'Commencer à écouter',
+    'hiw.step2.p': "Cliquez sur Démarrer. MeetBrief capture l'audio système, exécute Silero VAD pour détecter les limites de la parole et transcrit chaque tour localement avec Whisper.",
+    'hiw.step3.h': 'Répondre avec confiance',
+    'hiw.step3.p': "Quand ils font une pause, le LLM s'active. Une réponse suggérée se diffuse dans l'overlay en moins de deux secondes. Jetez un coup d'œil, adaptez, et dites-le. Ou utilisez le raccourci clavier pour la génération à la demande.",
+    'hiw.learn': 'Apprenez comment ça fonctionne techniquement',
+    'cta.headline': 'Prêt à essayer ?',
+    'cta.sub': "25 jours gratuits. Sans compte. Sans inscription. Clonez, configurez, lancez.",
+    'cta.btn1': 'Installer MeetBrief',
+    'cta.btn2': 'Voir sur GitHub',
+  },
+  de: {
+    'hero.badge': 'KI-Echtzeithilfe · 99 Sprachen',
+    'hero.title': 'Die KI, die Sie<br><em class="grad-text">live brieft,</em><br>in jedem Meeting',
+    'hero.sub': 'MeetBrief hört dem Gespräch zu, transkribiert Sprache in Echtzeit — in jeder Sprache — und streamt KI-Antworten in ein schwebendes Overlay, damit Sie konzentriert bleiben.',
+    'hero.cta1': 'Herunterladen & Installieren',
+    'hero.cta2': 'Quellcode ansehen',
+    'hero.meta1': '100% lokal',
+    'hero.meta2': '25 Tage kostenlose Testversion',
+    'hero.meta3': 'macOS · Windows · Linux',
+    'features.eyebrow': 'Funktionen',
+    'features.headline': 'Alles, was Sie brauchen, um<br>nie unvorbereitet zu sein',
+    'features.sub': 'Entwickelt für Menschen, die in Gesprächen vollständig präsent bleiben wollen, während eine KI still und bereit ist, die richtigen Worte zu liefern.',
+    'features.card1.h': 'Echtzeit-Transkription — Freihändig',
+    'features.card1.p': 'Whisper läuft lokal, erfasst Systemaudio und transkribiert jede Runde ohne Cloud-API-Aufruf. Ein rollierendes 30-Sekunden-Fenster wird automatisch beibehalten.',
+    'features.card2.h': 'KI-Antworten sofort gestreamt',
+    'features.card2.p': 'Wenn der Sprecher pausiert, feuert das LLM. Antworten werden Token für Token gestreamt, sodass die ersten Wörter in unter einer Sekunde erscheinen. Kein Warten — nur kurz schauen.',
+    'features.card3.h': 'Transparentes immer-im-Vordergrund-Overlay',
+    'features.card3.p': 'Ein rahmenloses, klickdurchlässiges Fenster schwebt über jeder App. Schalten Sie Sichtbarkeit oder Klickdurchmodus mit einem Hotkey um, während Sie sprechen.',
+    'features.viewall': 'Alle Funktionen anzeigen',
+    'multilang.eyebrow': 'Global einsetzbar',
+    'multilang.headline': 'Sprechen Sie jede Sprache.<br>Antworten Sie in Ihrer.',
+    'multilang.body': 'Betrieben vom mehrsprachigen OpenAI Whisper-Modell, transkribiert und übersetzt MeetBrief 99 Sprachen auf dem Gerät — keine Cloud, keine Verzögerung. Hören Sie Französisch, Mandarin, Spanisch — die KI antwortet immer auf Deutsch, damit Sie mit Zuversicht antworten können.',
+    'multilang.auto': 'Wechselt automatisch alle 6 Sekunden',
+    'hiw.eyebrow': 'Arbeitsablauf',
+    'hiw.headline': 'Drei Schritte vom Kontext zur<br>selbstbewussten Antwort',
+    'hiw.step1.h': 'Laden Sie Ihren Kontext',
+    'hiw.step1.p': 'Fügen Sie Ihre Agenda, Rolle und Ziele vor dem Meeting ein. Dies wird zum zwischengespeicherten System-Prompt — die KI kennt das Gesamtbild, bevor jemand spricht.',
+    'hiw.step2.h': 'Zuhören beginnen',
+    'hiw.step2.p': 'Klicken Sie auf Start. MeetBrief erfasst Systemaudio, führt Silero VAD zur Erkennung von Sprachgrenzen aus und transkribiert jede Runde lokal mit Whisper.',
+    'hiw.step3.h': 'Mit Zuversicht antworten',
+    'hiw.step3.p': 'Wenn sie pausieren, feuert das LLM. Eine vorgeschlagene Antwort streamt in unter zwei Sekunden in das Overlay. Einen Blick werfen, anpassen und sagen. Oder verwenden Sie den Hotkey für die Bedarfsgenerierung.',
+    'hiw.learn': 'Erfahren Sie, wie es technisch funktioniert',
+    'cta.headline': 'Bereit zum Ausprobieren?',
+    'cta.sub': '25 Tage kostenlos. Kein Konto. Keine Anmeldung. Einfach klonen, konfigurieren und starten.',
+    'cta.btn1': 'MeetBrief installieren',
+    'cta.btn2': 'Auf GitHub ansehen',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  // Re-trigger the slide-up animation on the card
+  const card = overlay.querySelector('.lp-card');
+  if (card) {
+    card.style.animation = 'none';
+    card.offsetHeight; // force reflow
+    card.style.animation = '';
+  }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>
