@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeetBrief — Pricing</title>
+<meta name="description" content="Simple, honest pricing for MeetBrief. Start free for 25 days. No credit card. Bring your own API key.">
+<meta property="og:title" content="MeetBrief — Pricing">
+<meta property="og:description" content="Free 25-day trial, Personal license at $7/month, Enterprise for teams.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Pricing page specific styles ── */
+.pricing-hero {
+  text-align: center;
+  padding: 80px 0 16px;
+}
+.pricing-hero .section-eyebrow { margin-bottom: 16px; }
+.pricing-hero .section-headline { margin-bottom: 16px; font-size: clamp(2rem, 5vw, 3rem); }
+.pricing-hero .pricing-sub {
+  font-size: 1.05rem; color: var(--text2); max-width: 540px;
+  margin: 0 auto 56px; line-height: 1.75;
+}
+
+/* ── Pricing cards grid ── */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 8px; align-items: start;
+}
+.pricing-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 0;
+  box-shadow: var(--shadow-xs);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.pricing-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.pricing-card.featured {
+  border-color: var(--orange); box-shadow: 0 0 0 1px rgba(200,104,20,0.15), var(--shadow);
+  position: relative;
+}
+.pricing-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--grad); color: #fff; font-size: 11px; font-weight: 700;
+  padding: 3px 14px; border-radius: 99px; white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.pricing-tier {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text3); margin-bottom: 12px;
+}
+.pricing-tier.orange { color: var(--orange); }
+.pricing-price-row {
+  display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px;
+}
+.pricing-price {
+  font-size: 48px; font-weight: 800; color: var(--text1); line-height: 1;
+}
+.pricing-price-unit {
+  font-size: 14px; color: var(--text2); font-weight: 500; margin-bottom: 8px;
+}
+.pricing-price-alt {
+  font-size: 12px; color: var(--text3); margin-bottom: 16px;
+}
+.pricing-no-card {
+  display: inline-block; font-size: 11px; color: var(--text3);
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 99px; padding: 2px 10px; margin-bottom: 16px;
+}
+.pricing-desc {
+  font-size: 13.5px; color: var(--text2); line-height: 1.65;
+  margin-bottom: 24px; min-height: 56px;
+}
+.pricing-divider {
+  height: 1px; background: var(--border); margin-bottom: 24px;
+}
+.pricing-features {
+  list-style: none; display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 32px; flex: 1;
+}
+.pricing-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: var(--text2); line-height: 1.45;
+}
+.pf-check {
+  width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pf-check.green { background: rgba(22,163,74,0.12); color: #16A34A; }
+.pf-check svg { width: 9px; height: 9px; stroke: currentColor; stroke-width: 3; fill: none; }
+
+/* ── FAQ ── */
+.pricing-faq { margin-top: 88px; }
+.pricing-faq .section-eyebrow { text-align: center; margin-bottom: 12px; }
+.pricing-faq-headline {
+  font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; text-align: center;
+  color: var(--text1); margin-bottom: 48px;
+}
+.faq-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.faq-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px; box-shadow: var(--shadow-xs);
+}
+.faq-q {
+  font-size: 14px; font-weight: 600; color: var(--text1); margin-bottom: 10px;
+}
+.faq-a {
+  font-size: 13.5px; color: var(--text2); line-height: 1.7;
+}
+
+/* ── CTA strip ── */
+.pricing-cta-strip {
+  margin-top: 72px;
+  background: var(--surface); border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 0; text-align: center;
+}
+.pricing-cta-strip h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700;
+  color: var(--text1); margin-bottom: 12px;
+}
+.pricing-cta-strip p { font-size: 1rem; color: var(--text2); margin-bottom: 28px; }
+
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 8px auto 0; }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .pricing-hero { padding: 64px 0 8px; }
+  .pricing-hero .pricing-sub { margin-bottom: 36px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">MB</div>
+      MeetBrief
+    </a>
+    <ul class="nav-links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="how-it-works.html">How it works</a></li>
+      <li><a href="install.html">Setup</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://github.com/martian-coder/TinyTools" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a href="install.html" class="btn btn-primary">Get Started</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+</div>
+
+<section class="pricing-hero">
+  <div class="container">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-headline">Simple, honest pricing</h2>
+    <p class="pricing-sub">Start free for 25 days. No credit card. Bring your own API key — you control AI costs directly, billed by Anthropic or Ollama, not us.</p>
+  </div>
+</section>
+
+<section style="padding-top:0; padding-bottom:88px;">
+  <div class="container">
+    <div class="pricing-grid">
+
+      <!-- Free Trial -->
+      <div class="pricing-card fade-up fade-up-delay-1">
+        <div class="pricing-tier">Free Trial</div>
+        <div class="pricing-price-row">
+          <div class="pricing-price">$0</div>
+        </div>
+        <div class="pricing-price-alt">25 days, full access</div>
+        <span class="pricing-no-card">No card required</span>
+        <p class="pricing-desc">Experience the full power of MeetBrief — no limits, no strings, no signup. Just clone and run.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All features unlocked</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All AI models (Claude, Ollama)</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Local Whisper transcription</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>99 languages supported</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Overlay &amp; hotkeys</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+        </ul>
+        <a href="install.html" class="btn btn-ghost" style="width:100%;justify-content:center;">Start Free Trial →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">No credit card required</p>
+      </div>
+
+      <!-- Personal (featured) -->
+      <div class="pricing-card featured fade-up fade-up-delay-2">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier orange">Personal</div>
+        <div class="pricing-price-row">
+          <div class="pricing-price">$7</div>
+          <div class="pricing-price-unit">/ month</div>
+        </div>
+        <div class="pricing-price-alt">or $59 / year — save 30%</div>
+        <span class="pricing-no-card" style="background:rgba(200,104,20,0.06);border-color:rgba(200,104,20,0.2);color:var(--orange);">Cancel anytime</span>
+        <p class="pricing-desc">For professionals who rely on MeetBrief daily. Unlimited use after your trial, with premium support and auto-updates.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Free Trial</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited use beyond trial</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Auto-updates included</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Priority email support</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Meeting export (Markdown / PDF)</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom system prompt templates</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Early access to new features</li>
+        </ul>
+        <a href="install.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get Personal License →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">Cancel anytime · instant access</p>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card fade-up fade-up-delay-3">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price-row">
+          <div class="pricing-price" style="font-size:36px;line-height:1.1;">Custom</div>
+        </div>
+        <div class="pricing-price-alt">Starting at 10 seats</div>
+        <span class="pricing-no-card">Volume discounts available</span>
+        <p class="pricing-desc">For teams that need centralised deployment, administration, compliance, and dedicated support.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Personal</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Team seat management</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SSO / SAML</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Admin usage dashboard</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated Slack support channel</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom data-retention policy</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>On-premise deployment option</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SLA guarantee</li>
+        </ul>
+        <a href="mailto:martian.coders.x@gmail.com" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact us →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">Starting at 10 seats</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="pricing-faq fade-up">
+      <div class="section-eyebrow">FAQ</div>
+      <h3 class="pricing-faq-headline">Frequently asked questions</h3>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">Do I need to pay for the AI?</div>
+          <div class="faq-a">No — MeetBrief uses your own API key (Anthropic Claude or Ollama). The license fee is for the app only. AI costs are billed directly to you by the provider, typically a few cents per meeting.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What happens after the 25-day trial?</div>
+          <div class="faq-a">The app stops processing new transcriptions until you enter a license key. Your data and settings are preserved. Purchase a Personal license at any time to continue without interruption.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is the source code available?</div>
+          <div class="faq-a">Yes — the core is open source on GitHub. The Personal and Enterprise licenses cover the compiled Electron app with auto-updates, support, and premium features not in the public repo.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I switch plans?</div>
+          <div class="faq-a">Yes — upgrade, downgrade, or cancel any time. Unused days are prorated on annual plans. Switching from monthly to annual saves 30% and takes effect on your next billing date.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pricing-cta-strip">
+  <div class="container">
+    <h2>Still have questions?</h2>
+    <p>Email us at <strong>martian.coders.x@gmail.com</strong> — we reply within one business day.</p>
+    <a href="mailto:martian.coders.x@gmail.com" class="btn btn-primary">Get in touch</a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo"><div class="footer-logo-mark">MB</div>MeetBrief</a>
+      <ul class="footer-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="install.html">Setup</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank">GitHub</a></li>
+        <li><a href="mailto:martian.coders.x@gmail.com">Contact</a></li>
+      </ul>
+      <div class="footer-right">Built by <strong>Martian Coders</strong> &nbsp;·&nbsp; <a href="mailto:martian.coders.x@gmail.com" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,0.2);">martian.coders.x@gmail.com</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+);
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+</script>
+</body>
+</html>
