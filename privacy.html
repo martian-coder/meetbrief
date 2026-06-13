@@ -68,6 +68,23 @@
 </head>
 <body>
 
+<!-- Language picker -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo"><div class="nav-logo-mark">MB</div><span>MeetBrief</span></div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')"><span class="lp-flag">🇺🇸</span><span class="lp-name">English</span></button>
+      <button class="lp-opt" onclick="selectLang('ja')"><span class="lp-flag">🇯🇵</span><span class="lp-name">日本語</span></button>
+      <button class="lp-opt" onclick="selectLang('zh')"><span class="lp-flag">🇨🇳</span><span class="lp-name">中文</span></button>
+      <button class="lp-opt" onclick="selectLang('fr')"><span class="lp-flag">🇫🇷</span><span class="lp-name">Français</span></button>
+      <button class="lp-opt" onclick="selectLang('de')"><span class="lp-flag">🇩🇪</span><span class="lp-name">Deutsch</span></button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -87,21 +104,35 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         GitHub
       </a>
-      <a href="install.html" class="btn btn-primary">Get Started</a>
+      <a href="install.html" class="btn btn-primary" data-i18n="priv.nav.getStarted">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
+</div>
 
 <section class="page-hero">
   <div class="container">
-    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / Privacy</div>
-    <h1 class="fade-up">Built for people who<br><span class="grad-text">take privacy seriously</span></h1>
-    <p class="page-sub fade-up fade-up-delay-1">MeetBrief was designed with one rule: your data never touches our infrastructure. There is no MeetBrief infrastructure. Audio stays on your machine, API keys go directly to your provider, and there's no backend to receive anything.</p>
+    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / <span data-i18n="priv.breadcrumb">Privacy</span></div>
+    <h1 class="fade-up" data-i18n-html="priv.hero.h1">Built for people who<br><span class="grad-text">take privacy seriously</span></h1>
+    <p class="page-sub fade-up fade-up-delay-1" data-i18n="priv.hero.sub">MeetBrief was designed with one rule: your data never touches our infrastructure. There is no MeetBrief infrastructure. Audio stays on your machine, API keys go directly to your provider, and there's no backend to receive anything.</p>
     <div class="trust-pills fade-up fade-up-delay-2">
-      <span class="trust-pill green">✓ No MeetBrief servers</span>
-      <span class="trust-pill green">✓ Audio stays on-device</span>
-      <span class="trust-pill blue">✓ Your API key, your billing</span>
-      <span class="trust-pill amber">✓ Open source — inspect the code</span>
+      <span class="trust-pill green" data-i18n="priv.pill1">✓ No MeetBrief servers</span>
+      <span class="trust-pill green" data-i18n="priv.pill2">✓ Audio stays on-device</span>
+      <span class="trust-pill blue" data-i18n="priv.pill3">✓ Your API key, your billing</span>
+      <span class="trust-pill amber" data-i18n="priv.pill4">✓ Open source — inspect the code</span>
     </div>
   </div>
 </section>
@@ -112,18 +143,18 @@
     <div class="privacy-grid fade-up fade-up-delay-1">
       <div class="privacy-card">
         <div class="privacy-icon">🔑</div>
-        <h3>Your API key, forever yours</h3>
-        <p>You bring your own Anthropic or other provider API key. It is stored locally in your app's config directory and sent <strong>directly from your machine to the provider</strong>. MeetBrief reads it, uses it, and never sends it anywhere else.</p>
+        <h3 data-i18n="priv.card1.h3">Your API key, forever yours</h3>
+        <p data-i18n="priv.card1.p">You bring your own Anthropic or other provider API key. It is stored locally in your app's config directory and sent directly from your machine to the provider. MeetBrief reads it, uses it, and never sends it anywhere else.</p>
       </div>
       <div class="privacy-card">
         <div class="privacy-icon">🖥️</div>
-        <h3>Audio processed on-device</h3>
-        <p>All audio capture and transcription runs on your machine via local Whisper. Your microphone and speaker audio <strong>never leaves your computer</strong> — not even to a relay server. The only network call is your prompt going to your chosen LLM API.</p>
+        <h3 data-i18n="priv.card2.h3">Audio processed on-device</h3>
+        <p data-i18n="priv.card2.p">All audio capture and transcription runs on your machine via local Whisper. Your microphone and speaker audio never leaves your computer — not even to a relay server. The only network call is your prompt going to your chosen LLM API.</p>
       </div>
       <div class="privacy-card">
         <div class="privacy-icon">🚫</div>
-        <h3>Zero recording by us</h3>
-        <p>MeetBrief has no backend, no analytics, no telemetry. <strong>There is no server to receive data.</strong> The app is fully self-contained. You can verify this by inspecting the source code on GitHub — every network call is visible.</p>
+        <h3 data-i18n="priv.card3.h3">Zero recording by us</h3>
+        <p data-i18n="priv.card3.p">MeetBrief has no backend, no analytics, no telemetry. There is no server to receive data. The app is fully self-contained. You can verify this by inspecting the source code on GitHub — every network call is visible.</p>
       </div>
     </div>
   </div>
@@ -132,50 +163,50 @@
 <!-- DATA FLOW -->
 <section style="padding-top:48px; padding-bottom:64px;">
   <div class="container">
-    <div class="section-eyebrow fade-up">Data flow</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Exactly what goes where</h2>
-    <p class="section-sub fade-up fade-up-delay-2">A complete picture of every piece of data MeetBrief handles and where it travels.</p>
+    <div class="section-eyebrow fade-up" data-i18n="priv.flow.eyebrow">Data flow</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="priv.flow.headline">Exactly what goes where</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="priv.flow.sub">A complete picture of every piece of data MeetBrief handles and where it travels.</p>
 
     <div class="data-flow fade-up fade-up-delay-2">
-      <h3>What MeetBrief sends — and doesn't send</h3>
+      <h3 data-i18n="priv.flow.h3">What MeetBrief sends — and doesn't send</h3>
 
       <div class="data-flow-row">
         <div class="df-icon green">✓</div>
         <div class="df-content">
-          <strong>Meeting transcript → your chosen LLM (Claude API or local Ollama)</strong>
-          <span>The live transcript of what was said in your meeting is sent to your LLM provider for processing. For Claude: this goes directly from your machine to api.anthropic.com over HTTPS, authenticated with your own API key, billed to your own account. For Ollama: this goes to localhost — it never leaves your machine at all.</span>
+          <strong data-i18n="priv.flow.row1.title">Meeting transcript → your chosen LLM (Claude API or local Ollama)</strong>
+          <span data-i18n="priv.flow.row1.desc">The live transcript of what was said in your meeting is sent to your LLM provider for processing. For Claude: this goes directly from your machine to api.anthropic.com over HTTPS, authenticated with your own API key. For Ollama: this goes to localhost — it never leaves your machine at all.</span>
         </div>
       </div>
 
       <div class="data-flow-row">
         <div class="df-icon green">✓</div>
         <div class="df-content">
-          <strong>Whisper model downloaded once from Hugging Face CDN</strong>
-          <span>On first launch, MeetBrief downloads the Whisper model weights (~250MB) from Hugging Face's CDN. This is a standard model weights download over HTTPS. After download, the model runs entirely locally — no further network calls for transcription.</span>
+          <strong data-i18n="priv.flow.row2.title">Whisper model downloaded once from Hugging Face CDN</strong>
+          <span data-i18n="priv.flow.row2.desc">On first launch, MeetBrief downloads the Whisper model weights (~250MB) from Hugging Face's CDN. This is a standard model weights download over HTTPS. After download, the model runs entirely locally — no further network calls for transcription.</span>
         </div>
       </div>
 
       <div class="data-flow-row">
         <div class="df-icon red">✗</div>
         <div class="df-content">
-          <strong>Audio data → MeetBrief servers (does not happen)</strong>
-          <span>Audio captured from your speakers or microphone is processed entirely on-device by Whisper. It is never sent to any server — not Anthropic's, not MeetBrief's (there are none). The raw audio never leaves your machine.</span>
+          <strong data-i18n="priv.flow.row3.title">Audio data → MeetBrief servers (does not happen)</strong>
+          <span data-i18n="priv.flow.row3.desc">Audio captured from your speakers or microphone is processed entirely on-device by Whisper. It is never sent to any server — not Anthropic's, not MeetBrief's (there are none). The raw audio never leaves your machine.</span>
         </div>
       </div>
 
       <div class="data-flow-row">
         <div class="df-icon red">✗</div>
         <div class="df-content">
-          <strong>API key → MeetBrief servers (does not happen)</strong>
-          <span>Your Anthropic API key is stored in your local app data directory. It is read by MeetBrief only to authenticate requests to api.anthropic.com on your behalf. It is never included in any outbound request to a MeetBrief endpoint.</span>
+          <strong data-i18n="priv.flow.row4.title">API key → MeetBrief servers (does not happen)</strong>
+          <span data-i18n="priv.flow.row4.desc">Your Anthropic API key is stored in your local app data directory. It is read by MeetBrief only to authenticate requests to api.anthropic.com on your behalf. It is never included in any outbound request to a MeetBrief endpoint.</span>
         </div>
       </div>
 
       <div class="data-flow-row">
         <div class="df-icon red">✗</div>
         <div class="df-content">
-          <strong>Analytics or telemetry → any server (does not happen)</strong>
-          <span>MeetBrief contains no analytics SDK, no crash reporter, no usage telemetry. There are no background pings, version checks, or heartbeats. The app makes no network calls except the ones you explicitly trigger (LLM API calls and the one-time Whisper download).</span>
+          <strong data-i18n="priv.flow.row5.title">Analytics or telemetry → any server (does not happen)</strong>
+          <span data-i18n="priv.flow.row5.desc">MeetBrief contains no analytics SDK, no crash reporter, no usage telemetry. There are no background pings, version checks, or heartbeats. The app makes no network calls except the ones you explicitly trigger.</span>
         </div>
       </div>
     </div>
@@ -185,47 +216,47 @@
 <!-- TECHNICAL DETAIL -->
 <section style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="container">
-    <div class="section-eyebrow fade-up">Technical details</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">How the isolation is enforced</h2>
+    <div class="section-eyebrow fade-up" data-i18n="priv.tech.eyebrow">Technical details</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="priv.tech.headline">How the isolation is enforced</h2>
 
     <div class="privacy-detail-grid">
       <div class="privacy-detail-card fade-up fade-up-delay-1">
-        <h3>API key storage</h3>
-        <p>Your API key is stored in Electron's <code>userData</code> directory on your local filesystem — the same location as app preferences and session history. It is read from disk at startup and used directly for API calls. It is never written to any cloud sync location.</p>
+        <h3 data-i18n="priv.tech.card1.h3">API key storage</h3>
+        <p data-i18n="priv.tech.card1.p">Your API key is stored in Electron's userData directory on your local filesystem. It is read from disk at startup and used directly for API calls. It is never written to any cloud sync location.</p>
         <ul>
-          <li>Stored in local <code>userData</code> config</li>
-          <li>Never included in any request to meetbrief.io or any third-party</li>
-          <li>Only sent to <code>api.anthropic.com</code> (or <code>localhost:11434</code> for Ollama)</li>
+          <li data-i18n="priv.tech.card1.li1">Stored in local userData config</li>
+          <li data-i18n="priv.tech.card1.li2">Never included in any request to meetbrief.io or any third-party</li>
+          <li data-i18n="priv.tech.card1.li3">Only sent to api.anthropic.com (or localhost:11434 for Ollama)</li>
         </ul>
       </div>
 
       <div class="privacy-detail-card fade-up fade-up-delay-2">
-        <h3>Audio pipeline</h3>
-        <p>System audio is captured as raw PCM via a native subprocess (macOS) or OS loopback API. It is downsampled, chunked to 100ms frames, and processed entirely in-process by Silero VAD and Whisper. The raw audio buffers are kept in memory and discarded after transcription.</p>
+        <h3 data-i18n="priv.tech.card2.h3">Audio pipeline</h3>
+        <p data-i18n="priv.tech.card2.p">System audio is captured as raw PCM via a native subprocess (macOS) or OS loopback API. It is downsampled, chunked to 100ms frames, and processed entirely in-process by Silero VAD and Whisper. The raw audio buffers are kept in memory and discarded after transcription.</p>
         <ul>
-          <li>No audio written to disk during sessions</li>
-          <li>No audio sent over any network socket</li>
-          <li>Whisper runs via <code>@huggingface/transformers</code> in-process</li>
+          <li data-i18n="priv.tech.card2.li1">No audio written to disk during sessions</li>
+          <li data-i18n="priv.tech.card2.li2">No audio sent over any network socket</li>
+          <li data-i18n="priv.tech.card2.li3">Whisper runs via @huggingface/transformers in-process</li>
         </ul>
       </div>
 
       <div class="privacy-detail-card fade-up fade-up-delay-1">
-        <h3>LLM API calls</h3>
-        <p>Each API call contains your system prompt (meeting context) and the current transcript window — no device identifiers, no IP addresses beyond what's implicit in the HTTPS connection. Anthropic's API privacy policy applies to that data.</p>
+        <h3 data-i18n="priv.tech.card3.h3">LLM API calls</h3>
+        <p data-i18n="priv.tech.card3.p">Each API call contains your system prompt (meeting context) and the current transcript window — no device identifiers, no IP addresses beyond what's implicit in the HTTPS connection. Anthropic's API privacy policy applies to that data.</p>
         <ul>
-          <li>Calls go directly machine → api.anthropic.com</li>
-          <li>No proxy, no relay, no MeetBrief server in the path</li>
-          <li>Standard HTTPS — TLS encrypted in transit</li>
+          <li data-i18n="priv.tech.card3.li1">Calls go directly machine → api.anthropic.com</li>
+          <li data-i18n="priv.tech.card3.li2">No proxy, no relay, no MeetBrief server in the path</li>
+          <li data-i18n="priv.tech.card3.li3">Standard HTTPS — TLS encrypted in transit</li>
         </ul>
       </div>
 
       <div class="privacy-detail-card fade-up fade-up-delay-2">
-        <h3>Session history</h3>
-        <p>If you enable session saving, transcripts and AI responses are written to your local <code>userData</code> directory. They are never uploaded anywhere. You can delete sessions from the History panel, or wipe all data from Settings → Clear All Data.</p>
+        <h3 data-i18n="priv.tech.card4.h3">Session history</h3>
+        <p data-i18n="priv.tech.card4.p">If you enable session saving, transcripts and AI responses are written to your local userData directory. They are never uploaded anywhere. You can delete sessions from the History panel, or wipe all data from Settings → Clear All Data.</p>
         <ul>
-          <li>Saved locally in <code>userData/sessions/</code></li>
-          <li>Never synced or uploaded</li>
-          <li>Fully deletable at any time from within the app</li>
+          <li data-i18n="priv.tech.card4.li1">Saved locally in userData/sessions/</li>
+          <li data-i18n="priv.tech.card4.li2">Never synced or uploaded</li>
+          <li data-i18n="priv.tech.card4.li3">Fully deletable at any time from within the app</li>
         </ul>
       </div>
     </div>
@@ -235,20 +266,20 @@
 <!-- VERIFY YOURSELF -->
 <section>
   <div class="container">
-    <div class="section-eyebrow fade-up">Open source</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Don't take our word for it</h2>
-    <p class="section-sub fade-up fade-up-delay-2">Every line of MeetBrief is available on GitHub. The network calls are in <code>src/utils/gemini.js</code> and <code>src/utils/cloud.js</code>. The audio pipeline is in <code>src/audio/</code>. The storage layer is in <code>src/storage.js</code>.</p>
+    <div class="section-eyebrow fade-up" data-i18n="priv.verify.eyebrow">Open source</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="priv.verify.headline">Don't take our word for it</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="priv.verify.sub">Every line of MeetBrief is available on GitHub. The network calls are in src/utils/gemini.js and src/utils/cloud.js. The audio pipeline is in src/audio/. The storage layer is in src/storage.js.</p>
 
-    <div class="callout fade-up fade-up-delay-2">
-      <strong>Grep for <code>fetch(</code>, <code>axios(</code>, <code>https.request(</code>, or <code>ws://</code></strong> in the source to see every outbound network call. You'll find exactly three categories: the Anthropic API call (optional, uses your key), the Ollama localhost call (optional, stays local), and the Hugging Face model download (one-time, public weights only).
+    <div class="callout fade-up fade-up-delay-2" data-i18n="priv.verify.callout">
+      Grep for fetch(, axios(, https.request(, or ws:// in the source to see every outbound network call. You'll find exactly three categories: the Anthropic API call (optional, uses your key), the Ollama localhost call (optional, stays local), and the Hugging Face model download (one-time, public weights only).
     </div>
 
     <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap;" class="fade-up fade-up-delay-2">
       <a href="https://github.com/martian-coder/TinyTools/tree/main/MeetingCopilot" target="_blank" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        Inspect source on GitHub
+        <span data-i18n="priv.verify.btn1">Inspect source on GitHub</span>
       </a>
-      <a href="faq.html#privacy" class="btn btn-ghost">Privacy FAQ →</a>
+      <a href="faq.html#privacy" class="btn btn-ghost" data-i18n="priv.verify.btn2">Privacy FAQ →</a>
     </div>
   </div>
 </section>
@@ -257,14 +288,14 @@
 <section class="cta-section" style="border-top:1px solid var(--border);">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">Ready to start privately?</h2>
-    <p class="fade-up fade-up-delay-1">25-day free trial. No account. No servers. No surprises.</p>
+    <h2 class="fade-up" data-i18n="priv.cta.h2">Ready to start privately?</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="priv.cta.p">25-day free trial. No account. No servers. No surprises.</p>
     <div class="cta-actions">
       <a href="install.html" class="btn btn-primary fade-up fade-up-delay-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
-        Install MeetBrief
+        <span data-i18n="priv.cta.btn1">Install MeetBrief</span>
       </a>
-      <a href="faq.html" class="btn btn-ghost fade-up fade-up-delay-3">Read the FAQ →</a>
+      <a href="faq.html" class="btn btn-ghost fade-up fade-up-delay-3" data-i18n="priv.cta.btn2">Read the FAQ →</a>
     </div>
   </div>
 </section>
@@ -294,6 +325,378 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Hamburger
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+
+// i18n
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+const i18n = {
+  en: {
+    'priv.nav.getStarted': 'Get Started',
+    'priv.breadcrumb': 'Privacy',
+    'priv.hero.h1': 'Built for people who<br><span class="grad-text">take privacy seriously</span>',
+    'priv.hero.sub': 'MeetBrief was designed with one rule: your data never touches our infrastructure. There is no MeetBrief infrastructure. Audio stays on your machine, API keys go directly to your provider, and there\'s no backend to receive anything.',
+    'priv.pill1': '✓ No MeetBrief servers',
+    'priv.pill2': '✓ Audio stays on-device',
+    'priv.pill3': '✓ Your API key, your billing',
+    'priv.pill4': '✓ Open source — inspect the code',
+    'priv.card1.h3': 'Your API key, forever yours',
+    'priv.card1.p': 'You bring your own Anthropic or other provider API key. It is stored locally in your app\'s config directory and sent directly from your machine to the provider. MeetBrief reads it, uses it, and never sends it anywhere else.',
+    'priv.card2.h3': 'Audio processed on-device',
+    'priv.card2.p': 'All audio capture and transcription runs on your machine via local Whisper. Your microphone and speaker audio never leaves your computer — not even to a relay server. The only network call is your prompt going to your chosen LLM API.',
+    'priv.card3.h3': 'Zero recording by us',
+    'priv.card3.p': 'MeetBrief has no backend, no analytics, no telemetry. There is no server to receive data. The app is fully self-contained. You can verify this by inspecting the source code on GitHub.',
+    'priv.flow.eyebrow': 'Data flow',
+    'priv.flow.headline': 'Exactly what goes where',
+    'priv.flow.sub': 'A complete picture of every piece of data MeetBrief handles and where it travels.',
+    'priv.flow.h3': 'What MeetBrief sends — and doesn\'t send',
+    'priv.flow.row1.title': 'Meeting transcript → your chosen LLM (Claude API or local Ollama)',
+    'priv.flow.row1.desc': 'The live transcript of what was said in your meeting is sent to your LLM provider for processing. For Claude: directly from your machine to api.anthropic.com over HTTPS. For Ollama: to localhost — it never leaves your machine at all.',
+    'priv.flow.row2.title': 'Whisper model downloaded once from Hugging Face CDN',
+    'priv.flow.row2.desc': 'On first launch, MeetBrief downloads the Whisper model weights (~250MB) from Hugging Face\'s CDN. After download, the model runs entirely locally — no further network calls for transcription.',
+    'priv.flow.row3.title': 'Audio data → MeetBrief servers (does not happen)',
+    'priv.flow.row3.desc': 'Audio captured from your speakers or microphone is processed entirely on-device by Whisper. It is never sent to any server — not Anthropic\'s, not MeetBrief\'s (there are none). The raw audio never leaves your machine.',
+    'priv.flow.row4.title': 'API key → MeetBrief servers (does not happen)',
+    'priv.flow.row4.desc': 'Your Anthropic API key is stored in your local app data directory. It is read by MeetBrief only to authenticate requests to api.anthropic.com on your behalf. It is never included in any outbound request to a MeetBrief endpoint.',
+    'priv.flow.row5.title': 'Analytics or telemetry → any server (does not happen)',
+    'priv.flow.row5.desc': 'MeetBrief contains no analytics SDK, no crash reporter, no usage telemetry. There are no background pings, version checks, or heartbeats. The app makes no network calls except the ones you explicitly trigger.',
+    'priv.tech.eyebrow': 'Technical details',
+    'priv.tech.headline': 'How the isolation is enforced',
+    'priv.tech.card1.h3': 'API key storage',
+    'priv.tech.card1.p': 'Your API key is stored in Electron\'s userData directory on your local filesystem. It is read from disk at startup and used directly for API calls. It is never written to any cloud sync location.',
+    'priv.tech.card1.li1': 'Stored in local userData config',
+    'priv.tech.card1.li2': 'Never included in any request to meetbrief.io or any third-party',
+    'priv.tech.card1.li3': 'Only sent to api.anthropic.com (or localhost:11434 for Ollama)',
+    'priv.tech.card2.h3': 'Audio pipeline',
+    'priv.tech.card2.p': 'System audio is captured as raw PCM via a native subprocess (macOS) or OS loopback API. It is downsampled, chunked to 100ms frames, and processed entirely in-process by Silero VAD and Whisper. Raw audio buffers are discarded after transcription.',
+    'priv.tech.card2.li1': 'No audio written to disk during sessions',
+    'priv.tech.card2.li2': 'No audio sent over any network socket',
+    'priv.tech.card2.li3': 'Whisper runs via @huggingface/transformers in-process',
+    'priv.tech.card3.h3': 'LLM API calls',
+    'priv.tech.card3.p': 'Each API call contains your system prompt (meeting context) and the current transcript window — no device identifiers beyond what\'s implicit in the HTTPS connection. Anthropic\'s API privacy policy applies.',
+    'priv.tech.card3.li1': 'Calls go directly machine → api.anthropic.com',
+    'priv.tech.card3.li2': 'No proxy, no relay, no MeetBrief server in the path',
+    'priv.tech.card3.li3': 'Standard HTTPS — TLS encrypted in transit',
+    'priv.tech.card4.h3': 'Session history',
+    'priv.tech.card4.p': 'If you enable session saving, transcripts and AI responses are written to your local userData directory. They are never uploaded anywhere. You can delete sessions from the History panel or wipe all data from Settings.',
+    'priv.tech.card4.li1': 'Saved locally in userData/sessions/',
+    'priv.tech.card4.li2': 'Never synced or uploaded',
+    'priv.tech.card4.li3': 'Fully deletable at any time from within the app',
+    'priv.verify.eyebrow': 'Open source',
+    'priv.verify.headline': 'Don\'t take our word for it',
+    'priv.verify.sub': 'Every line of MeetBrief is available on GitHub. The network calls are in src/utils/gemini.js and src/utils/cloud.js. The audio pipeline is in src/audio/. The storage layer is in src/storage.js.',
+    'priv.verify.callout': 'Grep for fetch(, axios(, https.request(, or ws:// in the source to see every outbound network call. You\'ll find exactly three categories: the Anthropic API call (optional, uses your key), the Ollama localhost call (optional, stays local), and the Hugging Face model download (one-time, public weights only).',
+    'priv.verify.btn1': 'Inspect source on GitHub',
+    'priv.verify.btn2': 'Privacy FAQ →',
+    'priv.cta.h2': 'Ready to start privately?',
+    'priv.cta.p': '25-day free trial. No account. No servers. No surprises.',
+    'priv.cta.btn1': 'Install MeetBrief',
+    'priv.cta.btn2': 'Read the FAQ →',
+  },
+  ja: {
+    'priv.nav.getStarted': '今すぐ始める',
+    'priv.breadcrumb': 'プライバシー',
+    'priv.hero.h1': 'プライバシーを<br><span class="grad-text">真剣に考える方のために</span>',
+    'priv.hero.sub': 'MeetBriefは1つのルールで設計されています：あなたのデータは私たちのインフラに触れることはありません。MeetBriefのインフラは存在しません。音声はあなたのマシンに留まり、APIキーはプロバイダーに直接送信されます。',
+    'priv.pill1': '✓ MeetBriefサーバーなし',
+    'priv.pill2': '✓ 音声はデバイス上に留まる',
+    'priv.pill3': '✓ あなたのAPIキー、あなたの請求',
+    'priv.pill4': '✓ オープンソース — コードを検査可能',
+    'priv.card1.h3': 'あなたのAPIキーは永遠にあなたのもの',
+    'priv.card1.p': 'AnthropicまたはOllamaのAPIキーをご自身でご用意ください。キーはアプリのconfig ディレクトリにローカル保存され、あなたのマシンからプロバイダーに直接送信されます。MeetBriefはキーを読み取り、使用するだけで、他のどこにも送信しません。',
+    'priv.card2.h3': '音声はデバイス上で処理',
+    'priv.card2.p': 'すべての音声キャプチャと文字起こしはローカルWhisper経由でマシン上で実行されます。マイクとスピーカーの音声はコンピューターを離れることはありません。ネットワーク呼び出しはプロンプトを選択したLLM APIに送信する際のみです。',
+    'priv.card3.h3': '私たちによる録音はゼロ',
+    'priv.card3.p': 'MeetBriefにはバックエンド、分析、テレメトリーはありません。データを受け取るサーバーは存在しません。アプリは完全に自己完結しています。GitHubのソースコードで確認できます。',
+    'priv.flow.eyebrow': 'データフロー',
+    'priv.flow.headline': '何がどこに行くか正確に',
+    'priv.flow.sub': 'MeetBriefが扱うすべてのデータとその移動先を完全に説明します。',
+    'priv.flow.h3': 'MeetBriefが送信するもの — しないもの',
+    'priv.flow.row1.title': '会議トランスクリプト → 選択したLLM（Claude APIまたはローカルOllama）',
+    'priv.flow.row1.desc': '会議での発言のライブトランスクリプトがLLMプロバイダーに送信されます。Claudeの場合：あなたのマシンからapi.anthropic.comにHTTPS経由で直接送信されます。Ollamaの場合：localhostに送信され、マシンを離れることはありません。',
+    'priv.flow.row2.title': 'Whisperモデルは一度だけHugging Face CDNからダウンロード',
+    'priv.flow.row2.desc': '初回起動時、MeetBriefはHugging FaceのCDNからWhisperモデルの重み（約250MB）をダウンロードします。ダウンロード後はモデルが完全にローカルで実行され、文字起こしのための追加ネットワーク呼び出しはありません。',
+    'priv.flow.row3.title': '音声データ → MeetBriefサーバー（発生しません）',
+    'priv.flow.row3.desc': 'スピーカーやマイクからキャプチャされた音声はWhisperによってデバイス上で完全に処理されます。どのサーバーにも送信されません。生の音声はマシンを離れることはありません。',
+    'priv.flow.row4.title': 'APIキー → MeetBriefサーバー（発生しません）',
+    'priv.flow.row4.desc': 'AnthropicのAPIキーはローカルのアプリデータディレクトリに保存されます。MeetBriefはapi.anthropic.comへのリクエストを認証するためにのみ読み取ります。MeetBriefエンドポイントへのリクエストには含まれません。',
+    'priv.flow.row5.title': '分析またはテレメトリー → あらゆるサーバー（発生しません）',
+    'priv.flow.row5.desc': 'MeetBriefには分析SDK、クラッシュレポーター、使用状況テレメトリーが含まれていません。バックグラウンドのping、バージョンチェック、ハートビートはありません。',
+    'priv.tech.eyebrow': '技術的な詳細',
+    'priv.tech.headline': '分離の実装方法',
+    'priv.tech.card1.h3': 'APIキーの保存',
+    'priv.tech.card1.p': 'APIキーはローカルファイルシステム上のElectronのuserDataディレクトリに保存されます。起動時にディスクから読み取られ、API呼び出しに直接使用されます。クラウド同期場所には書き込まれません。',
+    'priv.tech.card1.li1': 'ローカルuserData設定に保存',
+    'priv.tech.card1.li2': 'meetbrief.ioやサードパーティへのリクエストには含まれない',
+    'priv.tech.card1.li3': 'api.anthropic.com（またはOllamaのlocalhost:11434）のみに送信',
+    'priv.tech.card2.h3': '音声パイプライン',
+    'priv.tech.card2.p': 'システム音声はネイティブサブプロセス（macOS）またはOSループバックAPIを介して生PCMとしてキャプチャされます。ダウンサンプリングされ、100msフレームに分割され、Silero VADとWhisperによってプロセス内で完全に処理されます。',
+    'priv.tech.card2.li1': 'セッション中に音声はディスクに書き込まれない',
+    'priv.tech.card2.li2': 'ネットワークソケットを介して音声が送信されない',
+    'priv.tech.card2.li3': 'Whisperは@huggingface/transformers経由でプロセス内で実行',
+    'priv.tech.card3.h3': 'LLM API呼び出し',
+    'priv.tech.card3.p': '各API呼び出しにはシステムプロンプト（会議コンテキスト）と現在のトランスクリプトウィンドウが含まれます。デバイス識別子は含まれません。AnthropicのAPIプライバシーポリシーが適用されます。',
+    'priv.tech.card3.li1': '呼び出しはマシンからapi.anthropic.comに直接',
+    'priv.tech.card3.li2': 'プロキシ、リレー、MeetBriefサーバーなし',
+    'priv.tech.card3.li3': '標準HTTPS — 転送中はTLS暗号化',
+    'priv.tech.card4.h3': 'セッション履歴',
+    'priv.tech.card4.p': 'セッション保存を有効にすると、トランスクリプトとAI応答がローカルのuserDataディレクトリに書き込まれます。どこにもアップロードされません。履歴パネルからセッションを削除したり、設定からすべてのデータを消去できます。',
+    'priv.tech.card4.li1': 'userData/sessions/にローカル保存',
+    'priv.tech.card4.li2': '同期またはアップロードされない',
+    'priv.tech.card4.li3': 'アプリ内からいつでも完全に削除可能',
+    'priv.verify.eyebrow': 'オープンソース',
+    'priv.verify.headline': '私たちの言葉を信じないでください',
+    'priv.verify.sub': 'MeetBriefのすべてのコードはGitHubで公開されています。ネットワーク呼び出しはsrc/utils/gemini.jsとsrc/utils/cloud.jsにあります。音声パイプラインはsrc/audio/に、ストレージレイヤーはsrc/storage.jsにあります。',
+    'priv.verify.callout': 'ソース内でfetch(、axios(、https.request(、またはws://を検索してすべてのアウトバウンドネットワーク呼び出しを確認できます。3つのカテゴリのみが見つかります：Anthropic API呼び出し（オプション）、Ollamaローカルホスト呼び出し（オプション）、Hugging Faceモデルダウンロード（一回限り）。',
+    'priv.verify.btn1': 'GitHubでソースを検査',
+    'priv.verify.btn2': 'プライバシーFAQ →',
+    'priv.cta.h2': 'プライベートに始める準備はできていますか？',
+    'priv.cta.p': '25日間無料トライアル。アカウント不要。サーバーなし。サプライズなし。',
+    'priv.cta.btn1': 'MeetBriefをインストール',
+    'priv.cta.btn2': 'FAQを読む →',
+  },
+  zh: {
+    'priv.nav.getStarted': '立即开始',
+    'priv.breadcrumb': '隐私',
+    'priv.hero.h1': '为重视隐私的人<br><span class="grad-text">精心设计</span>',
+    'priv.hero.sub': 'MeetBrief遵循一条原则：您的数据永远不会触及我们的基础设施。MeetBrief没有基础设施。音频留在您的机器上，API密钥直接发送给您的提供商，没有后端来接收任何内容。',
+    'priv.pill1': '✓ 无MeetBrief服务器',
+    'priv.pill2': '✓ 音频留在设备上',
+    'priv.pill3': '✓ 您的API密钥，您的账单',
+    'priv.pill4': '✓ 开源——自行检查代码',
+    'priv.card1.h3': '您的API密钥，永远属于您',
+    'priv.card1.p': '您带来自己的Anthropic或其他提供商API密钥。它存储在您应用的本地配置目录中，直接从您的机器发送给提供商。MeetBrief只是读取并使用它，永远不会发送到其他任何地方。',
+    'priv.card2.h3': '音频在设备上处理',
+    'priv.card2.p': '所有音频捕获和转录都通过本地Whisper在您的机器上运行。您的麦克风和扬声器音频永远不会离开您的计算机——甚至不会到达中继服务器。唯一的网络调用是将提示词发送给您选择的LLM API。',
+    'priv.card3.h3': '我们零录制',
+    'priv.card3.p': 'MeetBrief没有后端、没有分析、没有遥测。没有服务器来接收数据。应用完全自包含。您可以通过检查GitHub上的源代码来验证——每个网络调用都是可见的。',
+    'priv.flow.eyebrow': '数据流向',
+    'priv.flow.headline': '确切地了解数据去向',
+    'priv.flow.sub': 'MeetBrief处理的每条数据及其流向的完整图景。',
+    'priv.flow.h3': 'MeetBrief发送什么——以及不发送什么',
+    'priv.flow.row1.title': '会议转录 → 您选择的LLM（Claude API或本地Ollama）',
+    'priv.flow.row1.desc': '会议中所说内容的实时转录被发送给您的LLM提供商处理。Claude：直接从您的机器通过HTTPS发送到api.anthropic.com，使用您自己的API密钥认证。Ollama：发送到localhost——永远不会离开您的机器。',
+    'priv.flow.row2.title': 'Whisper模型从Hugging Face CDN一次性下载',
+    'priv.flow.row2.desc': '首次启动时，MeetBrief从Hugging Face的CDN下载Whisper模型权重（约250MB）。下载后，模型完全在本地运行——转录不再有任何网络调用。',
+    'priv.flow.row3.title': '音频数据 → MeetBrief服务器（不会发生）',
+    'priv.flow.row3.desc': '从扬声器或麦克风捕获的音频完全由Whisper在设备上处理。它永远不会发送到任何服务器——无论是Anthropic的还是MeetBrief的（根本没有）。原始音频永远不会离开您的机器。',
+    'priv.flow.row4.title': 'API密钥 → MeetBrief服务器（不会发生）',
+    'priv.flow.row4.desc': '您的Anthropic API密钥存储在本地应用数据目录中。MeetBrief仅读取它以代表您向api.anthropic.com进行身份验证。它永远不会包含在任何发往MeetBrief端点的请求中。',
+    'priv.flow.row5.title': '分析或遥测 → 任何服务器（不会发生）',
+    'priv.flow.row5.desc': 'MeetBrief不包含任何分析SDK、崩溃报告器或使用遥测。没有后台ping、版本检查或心跳。除了您明确触发的调用外，应用不进行任何网络调用。',
+    'priv.tech.eyebrow': '技术细节',
+    'priv.tech.headline': '隔离如何实现',
+    'priv.tech.card1.h3': 'API密钥存储',
+    'priv.tech.card1.p': '您的API密钥存储在本地文件系统的Electron userData目录中。启动时从磁盘读取并直接用于API调用。它永远不会写入任何云同步位置。',
+    'priv.tech.card1.li1': '存储在本地userData配置中',
+    'priv.tech.card1.li2': '永不包含在发往meetbrief.io或任何第三方的请求中',
+    'priv.tech.card1.li3': '仅发送至api.anthropic.com（或Ollama的localhost:11434）',
+    'priv.tech.card2.h3': '音频管道',
+    'priv.tech.card2.p': '系统音频通过原生子进程（macOS）或操作系统环回API以原始PCM格式捕获。经过下采样、切分为100ms帧，完全在进程内由Silero VAD和Whisper处理。转录后原始音频缓冲区被丢弃。',
+    'priv.tech.card2.li1': '会话期间音频不写入磁盘',
+    'priv.tech.card2.li2': '音频不通过任何网络套接字发送',
+    'priv.tech.card2.li3': 'Whisper通过@huggingface/transformers在进程内运行',
+    'priv.tech.card3.h3': 'LLM API调用',
+    'priv.tech.card3.p': '每个API调用包含您的系统提示词（会议上下文）和当前转录窗口——没有超出HTTPS连接隐含内容的设备标识符。Anthropic的API隐私政策适用。',
+    'priv.tech.card3.li1': '调用直接从机器发往api.anthropic.com',
+    'priv.tech.card3.li2': '无代理、无中继、无MeetBrief服务器',
+    'priv.tech.card3.li3': '标准HTTPS——传输中TLS加密',
+    'priv.tech.card4.h3': '会话历史',
+    'priv.tech.card4.p': '如果您启用会话保存，转录和AI回复将写入本地userData目录。它们永远不会上传到任何地方。您可以从历史面板删除会话，或从设置中清除所有数据。',
+    'priv.tech.card4.li1': '本地保存在userData/sessions/中',
+    'priv.tech.card4.li2': '永不同步或上传',
+    'priv.tech.card4.li3': '可随时在应用内完全删除',
+    'priv.verify.eyebrow': '开源',
+    'priv.verify.headline': '不要只听我们说',
+    'priv.verify.sub': 'MeetBrief的每一行代码都可在GitHub上获取。网络调用位于src/utils/gemini.js和src/utils/cloud.js。音频管道位于src/audio/。存储层位于src/storage.js。',
+    'priv.verify.callout': '在源代码中搜索fetch(、axios(、https.request(或ws://即可看到所有出站网络调用。您只会发现三类：Anthropic API调用（可选，使用您的密钥）、Ollama本地调用（可选，本地）和Hugging Face模型下载（一次性，仅公开权重）。',
+    'priv.verify.btn1': '在GitHub上检查源代码',
+    'priv.verify.btn2': '隐私FAQ →',
+    'priv.cta.h2': '准备好私密地开始了吗？',
+    'priv.cta.p': '25天免费试用。无需账号。无服务器。无惊喜。',
+    'priv.cta.btn1': '安装MeetBrief',
+    'priv.cta.btn2': '阅读FAQ →',
+  },
+  fr: {
+    'priv.nav.getStarted': 'Commencer',
+    'priv.breadcrumb': 'Confidentialité',
+    'priv.hero.h1': 'Conçu pour ceux qui<br><span class="grad-text">prennent la confidentialité au sérieux</span>',
+    'priv.hero.sub': 'MeetBrief a été conçu avec une règle : vos données ne touchent jamais notre infrastructure. Il n\'y a pas d\'infrastructure MeetBrief. L\'audio reste sur votre machine, les clés API vont directement à votre fournisseur, et il n\'y a pas de backend pour recevoir quoi que ce soit.',
+    'priv.pill1': '✓ Pas de serveurs MeetBrief',
+    'priv.pill2': '✓ L\'audio reste sur l\'appareil',
+    'priv.pill3': '✓ Votre clé API, votre facturation',
+    'priv.pill4': '✓ Open source — inspectez le code',
+    'priv.card1.h3': 'Votre clé API, pour toujours à vous',
+    'priv.card1.p': 'Vous apportez votre propre clé API Anthropic ou d\'un autre fournisseur. Elle est stockée localement dans le répertoire de configuration de votre app et envoyée directement de votre machine au fournisseur.',
+    'priv.card2.h3': 'Audio traité sur l\'appareil',
+    'priv.card2.p': 'Toute la capture audio et la transcription s\'exécutent sur votre machine via Whisper local. Votre audio de microphone et de haut-parleur ne quitte jamais votre ordinateur. Le seul appel réseau est votre prompt envoyé à l\'API LLM choisie.',
+    'priv.card3.h3': 'Zéro enregistrement de notre part',
+    'priv.card3.p': 'MeetBrief n\'a pas de backend, pas d\'analytique, pas de télémétrie. Il n\'y a pas de serveur pour recevoir des données. L\'application est entièrement autonome. Vérifiez-le en inspectant le code source sur GitHub.',
+    'priv.flow.eyebrow': 'Flux de données',
+    'priv.flow.headline': 'Exactement ce qui va où',
+    'priv.flow.sub': 'Un tableau complet de chaque donnée que MeetBrief traite et où elle voyage.',
+    'priv.flow.h3': 'Ce que MeetBrief envoie — et n\'envoie pas',
+    'priv.flow.row1.title': 'Transcription de réunion → votre LLM choisi (Claude API ou Ollama local)',
+    'priv.flow.row1.desc': 'La transcription en direct de votre réunion est envoyée à votre fournisseur LLM. Pour Claude : directement de votre machine à api.anthropic.com via HTTPS. Pour Ollama : vers localhost — ne quitte jamais votre machine.',
+    'priv.flow.row2.title': 'Modèle Whisper téléchargé une fois depuis Hugging Face CDN',
+    'priv.flow.row2.desc': 'Au premier lancement, MeetBrief télécharge les poids du modèle Whisper (~250 Mo) depuis le CDN de Hugging Face. Après téléchargement, le modèle s\'exécute entièrement localement — plus d\'appels réseau pour la transcription.',
+    'priv.flow.row3.title': 'Données audio → serveurs MeetBrief (ne se produit pas)',
+    'priv.flow.row3.desc': 'L\'audio capturé de vos haut-parleurs ou microphone est traité entièrement sur l\'appareil par Whisper. Il n\'est jamais envoyé à aucun serveur. L\'audio brut ne quitte jamais votre machine.',
+    'priv.flow.row4.title': 'Clé API → serveurs MeetBrief (ne se produit pas)',
+    'priv.flow.row4.desc': 'Votre clé API Anthropic est stockée dans votre répertoire de données d\'application local. Elle est lue par MeetBrief uniquement pour authentifier les requêtes à api.anthropic.com en votre nom.',
+    'priv.flow.row5.title': 'Analyses ou télémétrie → n\'importe quel serveur (ne se produit pas)',
+    'priv.flow.row5.desc': 'MeetBrief ne contient aucun SDK d\'analyse, aucun rapporteur de plantage, aucune télémétrie d\'utilisation. Pas de pings en arrière-plan, de vérifications de version ou de heartbeats.',
+    'priv.tech.eyebrow': 'Détails techniques',
+    'priv.tech.headline': 'Comment l\'isolation est appliquée',
+    'priv.tech.card1.h3': 'Stockage de la clé API',
+    'priv.tech.card1.p': 'Votre clé API est stockée dans le répertoire userData d\'Electron sur votre système de fichiers local. Elle est lue depuis le disque au démarrage et utilisée directement pour les appels API. Elle n\'est jamais écrite dans un emplacement de synchronisation cloud.',
+    'priv.tech.card1.li1': 'Stockée dans la config userData locale',
+    'priv.tech.card1.li2': 'Jamais incluse dans une requête à meetbrief.io ou à des tiers',
+    'priv.tech.card1.li3': 'Envoyée uniquement à api.anthropic.com (ou localhost:11434 pour Ollama)',
+    'priv.tech.card2.h3': 'Pipeline audio',
+    'priv.tech.card2.p': 'L\'audio système est capturé en PCM brut via un sous-processus natif (macOS) ou l\'API de bouclage OS. Il est sous-échantillonné, découpé en trames de 100ms, et traité entièrement en cours de processus par Silero VAD et Whisper.',
+    'priv.tech.card2.li1': 'Pas d\'audio écrit sur disque pendant les sessions',
+    'priv.tech.card2.li2': 'Pas d\'audio envoyé via une socket réseau',
+    'priv.tech.card2.li3': 'Whisper fonctionne via @huggingface/transformers en cours de processus',
+    'priv.tech.card3.h3': 'Appels API LLM',
+    'priv.tech.card3.p': 'Chaque appel API contient votre prompt système (contexte de réunion) et la fenêtre de transcription courante — sans identifiants d\'appareil. La politique de confidentialité de l\'API d\'Anthropic s\'applique.',
+    'priv.tech.card3.li1': 'Les appels vont directement machine → api.anthropic.com',
+    'priv.tech.card3.li2': 'Pas de proxy, pas de relais, pas de serveur MeetBrief dans le chemin',
+    'priv.tech.card3.li3': 'HTTPS standard — chiffré TLS en transit',
+    'priv.tech.card4.h3': 'Historique de session',
+    'priv.tech.card4.p': 'Si vous activez la sauvegarde de session, les transcriptions et réponses IA sont écrites dans votre répertoire userData local. Elles ne sont jamais téléchargées. Vous pouvez supprimer les sessions depuis le panneau Historique.',
+    'priv.tech.card4.li1': 'Sauvegardé localement dans userData/sessions/',
+    'priv.tech.card4.li2': 'Jamais synchronisé ou téléchargé',
+    'priv.tech.card4.li3': 'Entièrement supprimable à tout moment depuis l\'application',
+    'priv.verify.eyebrow': 'Open source',
+    'priv.verify.headline': 'Ne nous croyez pas sur parole',
+    'priv.verify.sub': 'Chaque ligne de MeetBrief est disponible sur GitHub. Les appels réseau sont dans src/utils/gemini.js et src/utils/cloud.js. Le pipeline audio est dans src/audio/. La couche de stockage est dans src/storage.js.',
+    'priv.verify.callout': 'Grep pour fetch(, axios(, https.request(, ou ws:// dans la source pour voir chaque appel réseau sortant. Vous trouverez exactement trois catégories : l\'appel API Anthropic (optionnel), l\'appel localhost Ollama (optionnel, reste local), et le téléchargement du modèle Hugging Face (unique).',
+    'priv.verify.btn1': 'Inspecter le code source sur GitHub',
+    'priv.verify.btn2': 'FAQ Confidentialité →',
+    'priv.cta.h2': 'Prêt à commencer en toute confidentialité ?',
+    'priv.cta.p': 'Essai gratuit de 25 jours. Pas de compte. Pas de serveurs. Pas de surprises.',
+    'priv.cta.btn1': 'Installer MeetBrief',
+    'priv.cta.btn2': 'Lire la FAQ →',
+  },
+  de: {
+    'priv.nav.getStarted': 'Loslegen',
+    'priv.breadcrumb': 'Datenschutz',
+    'priv.hero.h1': 'Für Menschen gebaut, die<br><span class="grad-text">Datenschutz ernst nehmen</span>',
+    'priv.hero.sub': 'MeetBrief wurde nach einer Regel konzipiert: Ihre Daten berühren niemals unsere Infrastruktur. Es gibt keine MeetBrief-Infrastruktur. Audio bleibt auf Ihrem Gerät, API-Schlüssel gehen direkt zu Ihrem Anbieter, und es gibt kein Backend, das irgendetwas empfangen könnte.',
+    'priv.pill1': '✓ Keine MeetBrief-Server',
+    'priv.pill2': '✓ Audio bleibt auf dem Gerät',
+    'priv.pill3': '✓ Ihr API-Schlüssel, Ihre Abrechnung',
+    'priv.pill4': '✓ Open Source — prüfen Sie den Code',
+    'priv.card1.h3': 'Ihr API-Schlüssel, für immer Ihrer',
+    'priv.card1.p': 'Sie bringen Ihren eigenen Anthropic oder anderen Anbieter-API-Schlüssel mit. Er wird lokal im Konfigurationsverzeichnis Ihrer App gespeichert und direkt von Ihrem Gerät an den Anbieter gesendet. MeetBrief liest ihn, verwendet ihn und sendet ihn nirgendwo anders hin.',
+    'priv.card2.h3': 'Audio auf dem Gerät verarbeitet',
+    'priv.card2.p': 'Alle Audioaufnahmen und Transkriptionen laufen auf Ihrem Gerät über lokales Whisper. Ihr Mikrofon- und Lautsprecheraudio verlässt niemals Ihren Computer. Der einzige Netzwerkaufruf ist Ihr Prompt, der an Ihre gewählte LLM-API gesendet wird.',
+    'priv.card3.h3': 'Null Aufzeichnungen durch uns',
+    'priv.card3.p': 'MeetBrief hat kein Backend, keine Analytik, keine Telemetrie. Es gibt keinen Server, der Daten empfangen kann. Die App ist vollständig in sich geschlossen. Überprüfen Sie dies durch Inspektion des Quellcodes auf GitHub.',
+    'priv.flow.eyebrow': 'Datenfluss',
+    'priv.flow.headline': 'Genau was wohin geht',
+    'priv.flow.sub': 'Ein vollständiges Bild jedes Datenstücks, das MeetBrief verarbeitet, und wohin es reist.',
+    'priv.flow.h3': 'Was MeetBrief sendet — und nicht sendet',
+    'priv.flow.row1.title': 'Meeting-Transkript → Ihr gewähltes LLM (Claude API oder lokales Ollama)',
+    'priv.flow.row1.desc': 'Das Live-Transkript Ihres Meetings wird zur Verarbeitung an Ihren LLM-Anbieter gesendet. Für Claude: direkt von Ihrem Gerät an api.anthropic.com über HTTPS. Für Ollama: zu localhost — verlässt niemals Ihr Gerät.',
+    'priv.flow.row2.title': 'Whisper-Modell einmalig vom Hugging Face CDN heruntergeladen',
+    'priv.flow.row2.desc': 'Beim ersten Start lädt MeetBrief die Whisper-Modellgewichte (~250 MB) vom CDN von Hugging Face herunter. Nach dem Download läuft das Modell vollständig lokal — keine weiteren Netzwerkaufrufe für Transkription.',
+    'priv.flow.row3.title': 'Audiodaten → MeetBrief-Server (passiert nicht)',
+    'priv.flow.row3.desc': 'Vom Lautsprecher oder Mikrofon erfasstes Audio wird vollständig auf dem Gerät von Whisper verarbeitet. Es wird nie an einen Server gesendet. Das Rohaudio verlässt niemals Ihr Gerät.',
+    'priv.flow.row4.title': 'API-Schlüssel → MeetBrief-Server (passiert nicht)',
+    'priv.flow.row4.desc': 'Ihr Anthropic API-Schlüssel wird in Ihrem lokalen App-Datenverzeichnis gespeichert. Er wird von MeetBrief nur gelesen, um Anfragen an api.anthropic.com in Ihrem Namen zu authentifizieren.',
+    'priv.flow.row5.title': 'Analysen oder Telemetrie → irgendein Server (passiert nicht)',
+    'priv.flow.row5.desc': 'MeetBrief enthält kein Analyse-SDK, keinen Absturzmelder und keine Nutzungstelemetrie. Es gibt keine Hintergrund-Pings, Versionsprüfungen oder Heartbeats.',
+    'priv.tech.eyebrow': 'Technische Details',
+    'priv.tech.headline': 'Wie die Isolation durchgesetzt wird',
+    'priv.tech.card1.h3': 'API-Schlüssel-Speicherung',
+    'priv.tech.card1.p': 'Ihr API-Schlüssel wird im userData-Verzeichnis von Electron auf Ihrem lokalen Dateisystem gespeichert. Er wird beim Start von der Festplatte gelesen und direkt für API-Aufrufe verwendet.',
+    'priv.tech.card1.li1': 'In lokaler userData-Konfiguration gespeichert',
+    'priv.tech.card1.li2': 'Niemals in einer Anfrage an meetbrief.io oder Dritte enthalten',
+    'priv.tech.card1.li3': 'Nur an api.anthropic.com gesendet (oder localhost:11434 für Ollama)',
+    'priv.tech.card2.h3': 'Audio-Pipeline',
+    'priv.tech.card2.p': 'Systemton wird als rohes PCM über einen nativen Unterprozess (macOS) oder OS-Loopback-API erfasst. Er wird heruntergetastet, in 100ms-Frames aufgeteilt und vollständig in-process von Silero VAD und Whisper verarbeitet.',
+    'priv.tech.card2.li1': 'Kein Audio während Sitzungen auf Disk geschrieben',
+    'priv.tech.card2.li2': 'Kein Audio über einen Netzwerk-Socket gesendet',
+    'priv.tech.card2.li3': 'Whisper läuft via @huggingface/transformers in-process',
+    'priv.tech.card3.h3': 'LLM API-Aufrufe',
+    'priv.tech.card3.p': 'Jeder API-Aufruf enthält Ihren System-Prompt (Meeting-Kontext) und das aktuelle Transkriptionsfenster — keine Geräte-IDs. Anthropics API-Datenschutzrichtlinie gilt für diese Daten.',
+    'priv.tech.card3.li1': 'Aufrufe gehen direkt Gerät → api.anthropic.com',
+    'priv.tech.card3.li2': 'Kein Proxy, kein Relay, kein MeetBrief-Server im Pfad',
+    'priv.tech.card3.li3': 'Standard-HTTPS — TLS-verschlüsselt in Transit',
+    'priv.tech.card4.h3': 'Sitzungsverlauf',
+    'priv.tech.card4.p': 'Wenn Sie die Sitzungsspeicherung aktivieren, werden Transkripte und KI-Antworten in Ihr lokales userData-Verzeichnis geschrieben. Sie werden nirgendwo hochgeladen. Sie können Sitzungen aus dem Verlaufspanel löschen.',
+    'priv.tech.card4.li1': 'Lokal in userData/sessions/ gespeichert',
+    'priv.tech.card4.li2': 'Niemals synchronisiert oder hochgeladen',
+    'priv.tech.card4.li3': 'Jederzeit vollständig aus der App löschbar',
+    'priv.verify.eyebrow': 'Open Source',
+    'priv.verify.headline': 'Vertrauen Sie nicht nur unserem Wort',
+    'priv.verify.sub': 'Jede Zeile von MeetBrief ist auf GitHub verfügbar. Die Netzwerkaufrufe befinden sich in src/utils/gemini.js und src/utils/cloud.js. Die Audio-Pipeline ist in src/audio/. Die Speicherschicht ist in src/storage.js.',
+    'priv.verify.callout': 'Suchen Sie im Quellcode nach fetch(, axios(, https.request(, oder ws://, um jeden ausgehenden Netzwerkaufruf zu sehen. Sie finden genau drei Kategorien: den Anthropic-API-Aufruf (optional), den Ollama-Localhost-Aufruf (optional, bleibt lokal) und den Hugging-Face-Modell-Download (einmalig).',
+    'priv.verify.btn1': 'Quellcode auf GitHub prüfen',
+    'priv.verify.btn2': 'Datenschutz-FAQ →',
+    'priv.cta.h2': 'Bereit, privat zu starten?',
+    'priv.cta.p': '25 Tage kostenlose Testversion. Kein Konto. Keine Server. Keine Überraschungen.',
+    'priv.cta.btn1': 'MeetBrief installieren',
+    'priv.cta.btn2': 'FAQ lesen →',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  const card = overlay.querySelector('.lp-card');
+  if (card) { card.style.animation = 'none'; card.offsetHeight; card.style.animation = ''; }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>

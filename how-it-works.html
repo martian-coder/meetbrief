@@ -77,6 +77,23 @@
 </head>
 <body>
 
+<!-- Language picker -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo"><div class="nav-logo-mark">MB</div><span>MeetBrief</span></div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')"><span class="lp-flag">🇺🇸</span><span class="lp-name">English</span></button>
+      <button class="lp-opt" onclick="selectLang('ja')"><span class="lp-flag">🇯🇵</span><span class="lp-name">日本語</span></button>
+      <button class="lp-opt" onclick="selectLang('zh')"><span class="lp-flag">🇨🇳</span><span class="lp-name">中文</span></button>
+      <button class="lp-opt" onclick="selectLang('fr')"><span class="lp-flag">🇫🇷</span><span class="lp-name">Français</span></button>
+      <button class="lp-opt" onclick="selectLang('de')"><span class="lp-flag">🇩🇪</span><span class="lp-name">Deutsch</span></button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -96,82 +113,96 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         GitHub
       </a>
-      <a href="install.html" class="btn btn-primary">Get Started</a>
+      <a href="install.html" class="btn btn-primary" data-i18n="hiw2.nav.getStarted">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
+</div>
 
 <section class="page-hero">
   <div class="container">
-    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / How it works</div>
-    <h1 class="fade-up">From spoken word to<br><span class="grad-text">AI reply in under 2 seconds</span></h1>
-    <p class="page-sub fade-up fade-up-delay-1">A fully local pipeline: system audio captured on-device, transcribed by Whisper, turn-segmented by VAD, then sent to your chosen LLM. The response streams token-by-token to the overlay before you've finished listening.</p>
+    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / <span data-i18n="hiw2.breadcrumb">How it works</span></div>
+    <h1 class="fade-up" data-i18n-html="hiw2.hero.h1">From spoken word to<br><span class="grad-text">AI reply in under 2 seconds</span></h1>
+    <p class="page-sub fade-up fade-up-delay-1" data-i18n="hiw2.hero.sub">A fully local pipeline: system audio captured on-device, transcribed by Whisper, turn-segmented by VAD, then sent to your chosen LLM. The response streams token-by-token to the overlay before you've finished listening.</p>
   </div>
 </section>
 
 <!-- ARCHITECTURE FLOW -->
 <section style="padding-top:0; padding-bottom:64px;">
   <div class="container">
-    <div class="section-eyebrow fade-up">Architecture</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">The signal chain</h2>
-    <p class="section-sub fade-up fade-up-delay-2">Every step runs on your machine or goes directly to the API you configured. There are no intermediaries.</p>
+    <div class="section-eyebrow fade-up" data-i18n="hiw2.arch.eyebrow">Architecture</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="hiw2.arch.headline">The signal chain</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="hiw2.arch.sub">Every step runs on your machine or goes directly to the API you configured. There are no intermediaries.</p>
 
     <div class="arch-flow fade-up fade-up-delay-2">
       <div class="arch-node">
         <div class="arch-node-icon">🎙️</div>
-        <div class="arch-node-label">System Audio</div>
-        <div class="arch-node-sub">100ms chunks</div>
+        <div class="arch-node-label" data-i18n="hiw2.arch.node1">System Audio</div>
+        <div class="arch-node-sub" data-i18n="hiw2.arch.node1sub">100ms chunks</div>
       </div>
       <div class="arch-arrow"></div>
       <div class="arch-node">
         <div class="arch-node-icon">⚡</div>
-        <div class="arch-node-label">Silero VAD</div>
-        <div class="arch-node-sub">Turn detection</div>
+        <div class="arch-node-label" data-i18n="hiw2.arch.node2">Silero VAD</div>
+        <div class="arch-node-sub" data-i18n="hiw2.arch.node2sub">Turn detection</div>
       </div>
       <div class="arch-arrow"></div>
       <div class="arch-node">
         <div class="arch-node-icon">📝</div>
-        <div class="arch-node-label">Whisper STT</div>
-        <div class="arch-node-sub">On-device</div>
+        <div class="arch-node-label" data-i18n="hiw2.arch.node3">Whisper STT</div>
+        <div class="arch-node-sub" data-i18n="hiw2.arch.node3sub">On-device</div>
       </div>
       <div class="arch-arrow"></div>
       <div class="arch-node highlight">
         <div class="arch-node-icon">🤖</div>
-        <div class="arch-node-label">LLM (Claude / Ollama)</div>
-        <div class="arch-node-sub">Your API key</div>
+        <div class="arch-node-label" data-i18n="hiw2.arch.node4">LLM (Claude / Ollama)</div>
+        <div class="arch-node-sub" data-i18n="hiw2.arch.node4sub">Your API key</div>
       </div>
       <div class="arch-arrow"></div>
       <div class="arch-node">
         <div class="arch-node-icon">💬</div>
-        <div class="arch-node-label">Overlay</div>
-        <div class="arch-node-sub">Streamed reply</div>
+        <div class="arch-node-label" data-i18n="hiw2.arch.node5">Overlay</div>
+        <div class="arch-node-sub" data-i18n="hiw2.arch.node5sub">Streamed reply</div>
       </div>
     </div>
 
     <div class="latency-bar fade-up fade-up-delay-3">
-      <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:16px;">Typical latency breakdown (Claude + local Whisper)</div>
+      <div style="font-size:12px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:16px;" data-i18n="hiw2.latency.title">Typical latency breakdown (Claude + local Whisper)</div>
       <div class="latency-row">
-        <div class="latency-label">System audio capture</div>
+        <div class="latency-label" data-i18n="hiw2.latency.row1">System audio capture</div>
         <div class="latency-track"><div class="latency-fill blue" style="width:5%"></div></div>
         <div class="latency-value">~100ms</div>
       </div>
       <div class="latency-row">
-        <div class="latency-label">Silero VAD (silence detection)</div>
+        <div class="latency-label" data-i18n="hiw2.latency.row2">Silero VAD (silence detection)</div>
         <div class="latency-track"><div class="latency-fill green" style="width:50%"></div></div>
         <div class="latency-value">~1000ms</div>
       </div>
       <div class="latency-row">
-        <div class="latency-label">Whisper transcription (small)</div>
+        <div class="latency-label" data-i18n="hiw2.latency.row3">Whisper transcription (small)</div>
         <div class="latency-track"><div class="latency-fill green" style="width:20%"></div></div>
         <div class="latency-value">~300ms</div>
       </div>
       <div class="latency-row">
-        <div class="latency-label">LLM time-to-first-token (Claude)</div>
+        <div class="latency-label" data-i18n="hiw2.latency.row4">LLM time-to-first-token (Claude)</div>
         <div class="latency-track"><div class="latency-fill violet" style="width:40%"></div></div>
         <div class="latency-value">~800ms</div>
       </div>
       <div class="latency-row" style="border-top:1px solid var(--border2); margin-top:4px; padding-top:14px;">
-        <div class="latency-label"><strong style="color:var(--text);">First words visible</strong></div>
+        <div class="latency-label"><strong style="color:var(--text);" data-i18n="hiw2.latency.total">First words visible</strong></div>
         <div class="latency-track"><div class="latency-fill" style="width:100%; background: var(--grad);"></div></div>
         <div class="latency-value" style="color:var(--blue2); font-weight:600;">~2.2s</div>
       </div>
@@ -182,18 +213,18 @@
 <!-- DETAILED STEPS -->
 <section class="hiw-section">
   <div class="container">
-    <div class="section-eyebrow fade-up">Step by step</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">The complete workflow</h2>
+    <div class="section-eyebrow fade-up" data-i18n="hiw2.steps.eyebrow">Step by step</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="hiw2.steps.headline">The complete workflow</h2>
 
     <div style="margin-top:56px;">
 
       <div class="step-detail fade-up fade-up-delay-1">
         <div class="step-num-lg active">1</div>
         <div class="step-content">
-          <h3>Load your meeting context</h3>
-          <p>Before the meeting starts, paste your agenda, your role, the other participants, your key objectives, and any important background into the context panel. This text becomes the <strong>cached system prompt</strong> for every AI call during the session.</p>
-          <p>Thanks to Anthropic's prompt caching, this context is uploaded once and stored server-side for up to 5 minutes. Subsequent calls reuse the cached prefix, cutting input token cost by ~90% and reducing time-to-first-token significantly.</p>
-          <p>With Ollama, the system prompt is simply prepended to every request — no caching overhead, but no cost either.</p>
+          <h3 data-i18n="hiw2.step1.h3">Load your meeting context</h3>
+          <p data-i18n="hiw2.step1.p1">Before the meeting starts, paste your agenda, your role, the other participants, your key objectives, and any important background into the context panel. This text becomes the cached system prompt for every AI call during the session.</p>
+          <p data-i18n="hiw2.step1.p2">Thanks to Anthropic's prompt caching, this context is uploaded once and stored server-side for up to 5 minutes. Subsequent calls reuse the cached prefix, cutting input token cost by ~90% and reducing time-to-first-token significantly.</p>
+          <p data-i18n="hiw2.step1.p3">With Ollama, the system prompt is simply prepended to every request — no caching overhead, but no cost either.</p>
         </div>
         <div class="step-divider"></div>
       </div>
@@ -201,9 +232,9 @@
       <div class="step-detail fade-up fade-up-delay-1">
         <div class="step-num-lg">2</div>
         <div class="step-content">
-          <h3>Capture system audio</h3>
-          <p>When you click Start Session, MeetBrief begins capturing <strong>system audio</strong> — what's playing through your speakers or headphones. On macOS it uses a native subprocess that dumps PCM audio as a raw stream. On Windows, WASAPI loopback capture is used. Linux uses the microphone by default (with system audio possible via PulseAudio loopback).</p>
-          <p>Audio is captured as stereo PCM, mixed to mono, and chunked into ~100ms frames ready for the VAD pipeline.</p>
+          <h3 data-i18n="hiw2.step2.h3">Capture system audio</h3>
+          <p data-i18n="hiw2.step2.p1">When you click Start Session, MeetBrief begins capturing system audio — what's playing through your speakers or headphones. On macOS it uses a native subprocess that dumps PCM audio as a raw stream. On Windows, WASAPI loopback capture is used. Linux uses the microphone by default (with system audio possible via PulseAudio loopback).</p>
+          <p data-i18n="hiw2.step2.p2">Audio is captured as stereo PCM, mixed to mono, and chunked into ~100ms frames ready for the VAD pipeline.</p>
         </div>
         <div class="step-divider"></div>
       </div>
@@ -211,9 +242,9 @@
       <div class="step-detail fade-up fade-up-delay-1">
         <div class="step-num-lg">3</div>
         <div class="step-content">
-          <h3>Detect speech turns with Silero VAD</h3>
-          <p>Each audio chunk is passed through <strong>Silero VAD</strong> (Voice Activity Detector), a lightweight neural model that runs in-process. It outputs a confidence score indicating whether the chunk contains speech.</p>
-          <p>MeetBrief accumulates spoken chunks into a buffer. When VAD detects <strong>~1 second of sustained silence</strong> after a speech segment, it marks the end of a turn and triggers transcription. This prevents mid-sentence interruptions and avoids generating replies while someone is still talking.</p>
+          <h3 data-i18n="hiw2.step3.h3">Detect speech turns with Silero VAD</h3>
+          <p data-i18n="hiw2.step3.p1">Each audio chunk is passed through Silero VAD (Voice Activity Detector), a lightweight neural model that runs in-process. It outputs a confidence score indicating whether the chunk contains speech.</p>
+          <p data-i18n="hiw2.step3.p2">MeetBrief accumulates spoken chunks into a buffer. When VAD detects ~1 second of sustained silence after a speech segment, it marks the end of a turn and triggers transcription. This prevents mid-sentence interruptions and avoids generating replies while someone is still talking.</p>
         </div>
         <div class="step-divider"></div>
       </div>
@@ -221,9 +252,9 @@
       <div class="step-detail fade-up fade-up-delay-1">
         <div class="step-num-lg">4</div>
         <div class="step-content">
-          <h3>Transcribe with local Whisper</h3>
-          <p>The accumulated speech buffer is sent to <strong>Whisper</strong>, running entirely on your machine via <code>@huggingface/transformers</code>. The model converts the audio segment to text. With the <em>translate</em> task enabled (default), speech in any language is automatically output as English text — so the LLM always receives English regardless of the meeting's language.</p>
-          <p>MeetBrief maintains a <strong>rolling 30-second transcript window</strong>. Older turns are summarised and prepended as context rather than dropped entirely — ensuring the AI has the full narrative arc without exceeding the LLM's context window.</p>
+          <h3 data-i18n="hiw2.step4.h3">Transcribe with local Whisper</h3>
+          <p data-i18n="hiw2.step4.p1">The accumulated speech buffer is sent to Whisper, running entirely on your machine via @huggingface/transformers. The model converts the audio segment to text. With the translate task enabled (default), speech in any language is automatically output as English text — so the LLM always receives English regardless of the meeting's language.</p>
+          <p data-i18n="hiw2.step4.p2">MeetBrief maintains a rolling 30-second transcript window. Older turns are summarised and prepended as context rather than dropped entirely — ensuring the AI has the full narrative arc without exceeding the LLM's context window.</p>
         </div>
         <div class="step-divider"></div>
       </div>
@@ -231,10 +262,10 @@
       <div class="step-detail fade-up fade-up-delay-1">
         <div class="step-num-lg active">5</div>
         <div class="step-content">
-          <h3>Stream the AI reply to the overlay</h3>
-          <p>The transcript window is appended as the user message, combined with your pre-loaded system prompt, and sent to the LLM. The response is streamed <strong>token by token</strong> directly to the floating overlay window.</p>
-          <p>The overlay displays the reply as it streams — typically the first words appear within 800ms of the API call. You can read the beginning of the response while the rest is still generating.</p>
-          <p>The overlay is a frameless, always-on-top Electron <code>BrowserWindow</code> with <code>transparent: true</code> and <code>setIgnoreMouseEvents(true)</code> — it floats above any app (Zoom, Teams, Meet) without interfering with clicks.</p>
+          <h3 data-i18n="hiw2.step5.h3">Stream the AI reply to the overlay</h3>
+          <p data-i18n="hiw2.step5.p1">The transcript window is appended as the user message, combined with your pre-loaded system prompt, and sent to the LLM. The response is streamed token by token directly to the floating overlay window.</p>
+          <p data-i18n="hiw2.step5.p2">The overlay displays the reply as it streams — typically the first words appear within 800ms of the API call. You can read the beginning of the response while the rest is still generating.</p>
+          <p data-i18n="hiw2.step5.p3">The overlay is a frameless, always-on-top Electron BrowserWindow with transparent: true and setIgnoreMouseEvents(true) — it floats above any app (Zoom, Teams, Meet) without interfering with clicks.</p>
         </div>
       </div>
 
@@ -245,29 +276,29 @@
 <!-- PROMPT CACHING CALLOUT -->
 <section style="padding-top:64px; padding-bottom:64px;">
   <div class="container">
-    <div class="section-eyebrow fade-up">Cost efficiency</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Prompt caching keeps API costs low</h2>
+    <div class="section-eyebrow fade-up" data-i18n="hiw2.cache.eyebrow">Cost efficiency</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="hiw2.cache.headline">Prompt caching keeps API costs low</h2>
 
-    <div class="callout fade-up fade-up-delay-2">
-      <strong>Why this matters:</strong> In a 60-minute meeting, MeetBrief may make 30–50 API calls. Without caching, the large system prompt (your meeting context) is re-sent and re-billed on every call. With Anthropic's prompt caching, the static context is billed at 10% of the normal input cost after the first cache write — saving ~90% on input tokens for every subsequent call in the session.
+    <div class="callout fade-up fade-up-delay-2" data-i18n="hiw2.cache.callout">
+      Why this matters: In a 60-minute meeting, MeetBrief may make 30–50 API calls. Without caching, the large system prompt (your meeting context) is re-sent and re-billed on every call. With Anthropic's prompt caching, the static context is billed at 10% of the normal input cost after the first cache write — saving ~90% on input tokens for every subsequent call in the session.
     </div>
 
     <div class="info-grid fade-up fade-up-delay-2">
       <div class="info-card">
-        <h3>Static context → system prompt (cached)</h3>
-        <p>Your agenda, role, objectives, and background are stored in a <code>cache_control: ephemeral</code> content block. Once uploaded, Anthropic keeps it warm for up to 5 minutes and reuses it on subsequent requests.</p>
+        <h3 data-i18n="hiw2.card1.h3">Static context → system prompt (cached)</h3>
+        <p data-i18n="hiw2.card1.p">Your agenda, role, objectives, and background are stored in a cache_control: ephemeral content block. Once uploaded, Anthropic keeps it warm for up to 5 minutes and reuses it on subsequent requests.</p>
       </div>
       <div class="info-card">
-        <h3>Live transcript → user message (not cached)</h3>
-        <p>The rolling transcript window changes every turn, so it's sent fresh each time. Only the dynamic part pays full input token cost — which is typically much shorter than the static context.</p>
+        <h3 data-i18n="hiw2.card2.h3">Live transcript → user message (not cached)</h3>
+        <p data-i18n="hiw2.card2.p">The rolling transcript window changes every turn, so it's sent fresh each time. Only the dynamic part pays full input token cost — which is typically much shorter than the static context.</p>
       </div>
       <div class="info-card">
-        <h3>Typical cost per hour (Claude)</h3>
-        <p>With a 2,000-token context and prompt caching active, a one-hour meeting with 40 AI calls typically costs under <strong>$0.10</strong>. Without caching it would be ~$0.80.</p>
+        <h3 data-i18n="hiw2.card3.h3">Typical cost per hour (Claude)</h3>
+        <p data-i18n="hiw2.card3.p">With a 2,000-token context and prompt caching active, a one-hour meeting with 40 AI calls typically costs under $0.10. Without caching it would be ~$0.80.</p>
       </div>
       <div class="info-card">
-        <h3>Ollama — zero per-call cost</h3>
-        <p>Switching to <code>LLM_PROVIDER=ollama</code> uses your local hardware. No API key, no per-call billing. Latency depends on your GPU/CPU. A mid-range M2 MacBook handles small models comfortably.</p>
+        <h3 data-i18n="hiw2.card4.h3">Ollama — zero per-call cost</h3>
+        <p data-i18n="hiw2.card4.p">Switching to LLM_PROVIDER=ollama uses your local hardware. No API key, no per-call billing. Latency depends on your GPU/CPU. A mid-range M2 MacBook handles small models comfortably.</p>
       </div>
     </div>
   </div>
@@ -276,24 +307,24 @@
 <!-- PROVIDERS -->
 <section style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top:64px; padding-bottom:64px;">
   <div class="container">
-    <div class="section-eyebrow fade-up">Providers</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Choose your stack</h2>
+    <div class="section-eyebrow fade-up" data-i18n="hiw2.providers.eyebrow">Providers</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="hiw2.providers.headline">Choose your stack</h2>
 
     <div class="providers-grid">
       <div class="provider-card fade-up fade-up-delay-1">
         <div class="provider-logo anthropic">C</div>
-        <h3>Anthropic Claude</h3>
-        <p>Highest quality replies. Fastest time-to-first-token with prompt caching. Requires an Anthropic API key. Recommended for most users. Set <code>LLM_PROVIDER=anthropic</code>.</p>
+        <h3 data-i18n="hiw2.provider1.h3">Anthropic Claude</h3>
+        <p data-i18n="hiw2.provider1.p">Highest quality replies. Fastest time-to-first-token with prompt caching. Requires an Anthropic API key. Recommended for most users. Set LLM_PROVIDER=anthropic.</p>
       </div>
       <div class="provider-card fade-up fade-up-delay-2">
         <div class="provider-logo ollama">🦙</div>
-        <h3>Ollama (local)</h3>
-        <p>Runs on <code>localhost:11434</code>. Zero API cost, fully offline. Best for privacy-sensitive environments. Quality and latency depend on the model and your hardware. Set <code>LLM_PROVIDER=ollama</code>.</p>
+        <h3 data-i18n="hiw2.provider2.h3">Ollama (local)</h3>
+        <p data-i18n="hiw2.provider2.p">Runs on localhost:11434. Zero API cost, fully offline. Best for privacy-sensitive environments. Quality and latency depend on the model and your hardware. Set LLM_PROVIDER=ollama.</p>
       </div>
       <div class="provider-card fade-up fade-up-delay-3">
         <div class="provider-logo whisper">W</div>
-        <h3>Whisper STT</h3>
-        <p>Always runs locally — no external STT service. Choose between <code>whisper-tiny</code> (fast, lower accuracy) or <code>whisper-small</code> (recommended balance) via the <code>WHISPER_MODEL</code> env var.</p>
+        <h3 data-i18n="hiw2.provider3.h3">Whisper STT</h3>
+        <p data-i18n="hiw2.provider3.p">Always runs locally — no external STT service. Choose between whisper-tiny (fast, lower accuracy) or whisper-small (recommended balance) via the WHISPER_MODEL env var.</p>
       </div>
     </div>
   </div>
@@ -303,14 +334,14 @@
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">See it for yourself</h2>
-    <p class="fade-up fade-up-delay-1">The best way to understand the pipeline is to run it. 25-day free trial, no signup.</p>
+    <h2 class="fade-up" data-i18n="hiw2.cta.h2">See it for yourself</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="hiw2.cta.p">The best way to understand the pipeline is to run it. 25-day free trial, no signup.</p>
     <div class="cta-actions">
       <a href="install.html" class="btn btn-primary fade-up fade-up-delay-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
-        Install MeetBrief
+        <span data-i18n="hiw2.cta.btn1">Install MeetBrief</span>
       </a>
-      <a href="features.html" class="btn btn-ghost fade-up fade-up-delay-3">View all features →</a>
+      <a href="features.html" class="btn btn-ghost fade-up fade-up-delay-3" data-i18n="hiw2.cta.btn2">View all features →</a>
     </div>
   </div>
 </section>
@@ -340,6 +371,378 @@ const observer = new IntersectionObserver(
   { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Hamburger
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+
+// i18n
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+const i18n = {
+  en: {
+    'hiw2.nav.getStarted': 'Get Started',
+    'hiw2.breadcrumb': 'How it works',
+    'hiw2.hero.h1': 'From spoken word to<br><span class="grad-text">AI reply in under 2 seconds</span>',
+    'hiw2.hero.sub': 'A fully local pipeline: system audio captured on-device, transcribed by Whisper, turn-segmented by VAD, then sent to your chosen LLM. The response streams token-by-token to the overlay before you\'ve finished listening.',
+    'hiw2.arch.eyebrow': 'Architecture',
+    'hiw2.arch.headline': 'The signal chain',
+    'hiw2.arch.sub': 'Every step runs on your machine or goes directly to the API you configured. There are no intermediaries.',
+    'hiw2.arch.node1': 'System Audio', 'hiw2.arch.node1sub': '100ms chunks',
+    'hiw2.arch.node2': 'Silero VAD', 'hiw2.arch.node2sub': 'Turn detection',
+    'hiw2.arch.node3': 'Whisper STT', 'hiw2.arch.node3sub': 'On-device',
+    'hiw2.arch.node4': 'LLM (Claude / Ollama)', 'hiw2.arch.node4sub': 'Your API key',
+    'hiw2.arch.node5': 'Overlay', 'hiw2.arch.node5sub': 'Streamed reply',
+    'hiw2.latency.title': 'Typical latency breakdown (Claude + local Whisper)',
+    'hiw2.latency.row1': 'System audio capture',
+    'hiw2.latency.row2': 'Silero VAD (silence detection)',
+    'hiw2.latency.row3': 'Whisper transcription (small)',
+    'hiw2.latency.row4': 'LLM time-to-first-token (Claude)',
+    'hiw2.latency.total': 'First words visible',
+    'hiw2.steps.eyebrow': 'Step by step',
+    'hiw2.steps.headline': 'The complete workflow',
+    'hiw2.step1.h3': 'Load your meeting context',
+    'hiw2.step1.p1': 'Before the meeting starts, paste your agenda, your role, the other participants, your key objectives, and any important background into the context panel. This text becomes the cached system prompt for every AI call during the session.',
+    'hiw2.step1.p2': 'Thanks to Anthropic\'s prompt caching, this context is uploaded once and stored server-side for up to 5 minutes. Subsequent calls reuse the cached prefix, cutting input token cost by ~90% and reducing time-to-first-token significantly.',
+    'hiw2.step1.p3': 'With Ollama, the system prompt is simply prepended to every request — no caching overhead, but no cost either.',
+    'hiw2.step2.h3': 'Capture system audio',
+    'hiw2.step2.p1': 'When you click Start Session, MeetBrief begins capturing system audio — what\'s playing through your speakers or headphones. On macOS it uses a native subprocess that dumps PCM audio as a raw stream. On Windows, WASAPI loopback capture is used. Linux uses the microphone by default.',
+    'hiw2.step2.p2': 'Audio is captured as stereo PCM, mixed to mono, and chunked into ~100ms frames ready for the VAD pipeline.',
+    'hiw2.step3.h3': 'Detect speech turns with Silero VAD',
+    'hiw2.step3.p1': 'Each audio chunk is passed through Silero VAD (Voice Activity Detector), a lightweight neural model that runs in-process. It outputs a confidence score indicating whether the chunk contains speech.',
+    'hiw2.step3.p2': 'MeetBrief accumulates spoken chunks into a buffer. When VAD detects ~1 second of sustained silence after a speech segment, it marks the end of a turn and triggers transcription.',
+    'hiw2.step4.h3': 'Transcribe with local Whisper',
+    'hiw2.step4.p1': 'The accumulated speech buffer is sent to Whisper, running entirely on your machine via @huggingface/transformers. With the translate task enabled (default), speech in any language is automatically output as English text.',
+    'hiw2.step4.p2': 'MeetBrief maintains a rolling 30-second transcript window. Older turns are summarised and prepended as context rather than dropped entirely.',
+    'hiw2.step5.h3': 'Stream the AI reply to the overlay',
+    'hiw2.step5.p1': 'The transcript window is appended as the user message, combined with your pre-loaded system prompt, and sent to the LLM. The response is streamed token by token directly to the floating overlay window.',
+    'hiw2.step5.p2': 'The overlay displays the reply as it streams — typically the first words appear within 800ms of the API call.',
+    'hiw2.step5.p3': 'The overlay is a frameless, always-on-top Electron BrowserWindow — it floats above any app (Zoom, Teams, Meet) without interfering with clicks.',
+    'hiw2.cache.eyebrow': 'Cost efficiency',
+    'hiw2.cache.headline': 'Prompt caching keeps API costs low',
+    'hiw2.cache.callout': 'Why this matters: In a 60-minute meeting, MeetBrief may make 30–50 API calls. With Anthropic\'s prompt caching, the static context is billed at 10% of the normal input cost after the first cache write — saving ~90% on input tokens for every subsequent call.',
+    'hiw2.card1.h3': 'Static context → system prompt (cached)',
+    'hiw2.card1.p': 'Your agenda, role, objectives, and background are stored in a cache_control: ephemeral content block. Once uploaded, Anthropic keeps it warm for up to 5 minutes and reuses it on subsequent requests.',
+    'hiw2.card2.h3': 'Live transcript → user message (not cached)',
+    'hiw2.card2.p': 'The rolling transcript window changes every turn, so it\'s sent fresh each time. Only the dynamic part pays full input token cost.',
+    'hiw2.card3.h3': 'Typical cost per hour (Claude)',
+    'hiw2.card3.p': 'With a 2,000-token context and prompt caching active, a one-hour meeting with 40 AI calls typically costs under $0.10. Without caching it would be ~$0.80.',
+    'hiw2.card4.h3': 'Ollama — zero per-call cost',
+    'hiw2.card4.p': 'Switching to LLM_PROVIDER=ollama uses your local hardware. No API key, no per-call billing. Latency depends on your GPU/CPU.',
+    'hiw2.providers.eyebrow': 'Providers',
+    'hiw2.providers.headline': 'Choose your stack',
+    'hiw2.provider1.h3': 'Anthropic Claude',
+    'hiw2.provider1.p': 'Highest quality replies. Fastest time-to-first-token with prompt caching. Requires an Anthropic API key. Recommended for most users.',
+    'hiw2.provider2.h3': 'Ollama (local)',
+    'hiw2.provider2.p': 'Runs on localhost:11434. Zero API cost, fully offline. Best for privacy-sensitive environments.',
+    'hiw2.provider3.h3': 'Whisper STT',
+    'hiw2.provider3.p': 'Always runs locally — no external STT service. Choose between whisper-tiny or whisper-small via the WHISPER_MODEL env var.',
+    'hiw2.cta.h2': 'See it for yourself',
+    'hiw2.cta.p': 'The best way to understand the pipeline is to run it. 25-day free trial, no signup.',
+    'hiw2.cta.btn1': 'Install MeetBrief',
+    'hiw2.cta.btn2': 'View all features →',
+  },
+  ja: {
+    'hiw2.nav.getStarted': '今すぐ始める',
+    'hiw2.breadcrumb': '仕組み',
+    'hiw2.hero.h1': '発話から<br><span class="grad-text">2秒以内にAI返答</span>',
+    'hiw2.hero.sub': '完全ローカルパイプライン：音声をデバイス上でキャプチャし、Whisperで文字起こし、VADでターンを検出し、選択したLLMへ送信。返答はオーバーレイにトークン単位でストリーミングされます。',
+    'hiw2.arch.eyebrow': 'アーキテクチャ',
+    'hiw2.arch.headline': 'シグナルチェーン',
+    'hiw2.arch.sub': 'すべてのステップがあなたのマシン上で実行されるか、設定したAPIに直接送信されます。中間サーバーは存在しません。',
+    'hiw2.arch.node1': 'システム音声', 'hiw2.arch.node1sub': '100msチャンク',
+    'hiw2.arch.node2': 'Silero VAD', 'hiw2.arch.node2sub': 'ターン検出',
+    'hiw2.arch.node3': 'Whisper STT', 'hiw2.arch.node3sub': 'デバイス上で実行',
+    'hiw2.arch.node4': 'LLM（Claude / Ollama）', 'hiw2.arch.node4sub': 'あなたのAPIキー',
+    'hiw2.arch.node5': 'オーバーレイ', 'hiw2.arch.node5sub': 'ストリーミング返答',
+    'hiw2.latency.title': '一般的なレイテンシー内訳（Claude + ローカルWhisper）',
+    'hiw2.latency.row1': 'システム音声キャプチャ',
+    'hiw2.latency.row2': 'Silero VAD（無音検出）',
+    'hiw2.latency.row3': 'Whisper文字起こし（small）',
+    'hiw2.latency.row4': 'LLM最初のトークンまでの時間（Claude）',
+    'hiw2.latency.total': '最初の文字が表示されるまで',
+    'hiw2.steps.eyebrow': 'ステップ解説',
+    'hiw2.steps.headline': '完全なワークフロー',
+    'hiw2.step1.h3': '会議コンテキストを読み込む',
+    'hiw2.step1.p1': '会議開始前に、議題・役割・参加者・目標・背景情報をコンテキストパネルに貼り付けます。このテキストがセッション中すべてのAI呼び出しのシステムプロンプトになります。',
+    'hiw2.step1.p2': 'Anthropicのプロンプトキャッシュにより、このコンテキストは一度アップロードされ最大5分間サーバーに保存されます。以降の呼び出しはキャッシュを再利用し、入力トークンコストを約90%削減します。',
+    'hiw2.step1.p3': 'Ollamaの場合、システムプロンプトはリクエストごとに先頭に追加されます。キャッシュのオーバーヘッドはありませんが、コストもかかりません。',
+    'hiw2.step2.h3': 'システム音声をキャプチャ',
+    'hiw2.step2.p1': 'セッション開始ボタンを押すと、MeetBriefはスピーカーやヘッドフォンから再生されているシステム音声のキャプチャを開始します。macOSではネイティブサブプロセスを使用し、WindowsではWASAPIループバックキャプチャを使用します。',
+    'hiw2.step2.p2': '音声はステレオPCMとしてキャプチャされ、モノラルにミックスされ、VADパイプライン用に約100msのフレームに分割されます。',
+    'hiw2.step3.h3': 'Silero VADで発話ターンを検出',
+    'hiw2.step3.p1': '各音声チャンクはSilero VAD（音声活動検出器）に渡されます。これはインプロセスで動作する軽量ニューラルモデルで、チャンクに音声が含まれているかを示す信頼スコアを出力します。',
+    'hiw2.step3.p2': 'MeetBriefは発話チャンクをバッファに蓄積し、VADが発話後に約1秒の無音を検出するとターンの終了を記録して文字起こしをトリガーします。',
+    'hiw2.step4.h3': 'ローカルWhisperで文字起こし',
+    'hiw2.step4.p1': '蓄積された発話バッファが@huggingface/transformers経由でマシン上のWhisperに送られます。翻訳タスクが有効（デフォルト）の場合、あらゆる言語の音声が自動的に英語テキストに変換されます。',
+    'hiw2.step4.p2': 'MeetBriefは直近30秒のトランスクリプトウィンドウを保持します。古いターンは要約されてコンテキストに追加されます。',
+    'hiw2.step5.h3': 'AI返答をオーバーレイにストリーミング',
+    'hiw2.step5.p1': 'トランスクリプトウィンドウがユーザーメッセージとして追加され、事前読み込みしたシステムプロンプトと組み合わせてLLMに送信されます。返答はトークン単位で浮動オーバーレイウィンドウに直接ストリーミングされます。',
+    'hiw2.step5.p2': 'オーバーレイは返答をストリーミング表示します。通常、API呼び出しから800ms以内に最初の文字が表示されます。',
+    'hiw2.step5.p3': 'オーバーレイはフレームレスで常に最前面に表示されるElectron BrowserWindowです。Zoom・Teams・Meetなどのアプリの上に浮かび、クリックを妨げません。',
+    'hiw2.cache.eyebrow': 'コスト効率',
+    'hiw2.cache.headline': 'プロンプトキャッシュでAPIコストを抑制',
+    'hiw2.cache.callout': '重要な理由：60分の会議でMeetBriefは30〜50回のAPI呼び出しを行う場合があります。Anthropicのプロンプトキャッシュにより、静的コンテキストは最初のキャッシュ書き込み後、通常の入力コストの10%で請求されます。',
+    'hiw2.card1.h3': '静的コンテキスト → システムプロンプト（キャッシュ済み）',
+    'hiw2.card1.p': '議題・役割・目標・背景はcache_control: ephemeralコンテンツブロックに保存されます。一度アップロードされると、Anthropicは最大5分間保持して以降のリクエストに再利用します。',
+    'hiw2.card2.h3': 'ライブトランスクリプト → ユーザーメッセージ（非キャッシュ）',
+    'hiw2.card2.p': 'ローリングトランスクリプトウィンドウはターンごとに変化するため、毎回新鮮に送信されます。動的部分のみが全額のトークンコストを支払います。',
+    'hiw2.card3.h3': '1時間あたりの一般的なコスト（Claude）',
+    'hiw2.card3.p': '2,000トークンのコンテキストとプロンプトキャッシュを使用した場合、40回のAI呼び出しを行う1時間の会議のコストは通常$0.10未満です。',
+    'hiw2.card4.h3': 'Ollama — 呼び出しコストゼロ',
+    'hiw2.card4.p': 'LLM_PROVIDER=ollamaに切り替えるとローカルハードウェアを使用します。APIキー不要、呼び出し課金なし。',
+    'hiw2.providers.eyebrow': 'プロバイダー',
+    'hiw2.providers.headline': 'スタックを選択',
+    'hiw2.provider1.h3': 'Anthropic Claude',
+    'hiw2.provider1.p': '最高品質の返答。プロンプトキャッシュで最速の初回トークン時間。Anthropic APIキーが必要。ほとんどのユーザーに推奨。',
+    'hiw2.provider2.h3': 'Ollama（ローカル）',
+    'hiw2.provider2.p': 'localhost:11434で動作。APIコストゼロ、完全オフライン。プライバシー重視の環境に最適。',
+    'hiw2.provider3.h3': 'Whisper STT',
+    'hiw2.provider3.p': '常にローカルで実行。外部STTサービス不要。WHISPER_MODEL環境変数でwhisper-tinyかwhisper-smallを選択可能。',
+    'hiw2.cta.h2': '実際に体験してみてください',
+    'hiw2.cta.p': 'パイプラインを理解する最善の方法は実際に動かすことです。25日間の無料トライアル、サインアップ不要。',
+    'hiw2.cta.btn1': 'MeetBriefをインストール',
+    'hiw2.cta.btn2': '全機能を見る →',
+  },
+  zh: {
+    'hiw2.nav.getStarted': '立即开始',
+    'hiw2.breadcrumb': '工作原理',
+    'hiw2.hero.h1': '从发言到<br><span class="grad-text">AI回复不到2秒</span>',
+    'hiw2.hero.sub': '完全本地化流水线：在设备上捕获系统音频，Whisper进行转录，VAD检测发言轮次，再发送至您选择的LLM。回复以令牌流形式实时显示在悬浮窗中。',
+    'hiw2.arch.eyebrow': '架构',
+    'hiw2.arch.headline': '信号链路',
+    'hiw2.arch.sub': '每个步骤都在您的本地机器上运行，或直接发送至您配置的API，没有任何中间节点。',
+    'hiw2.arch.node1': '系统音频', 'hiw2.arch.node1sub': '100ms分块',
+    'hiw2.arch.node2': 'Silero VAD', 'hiw2.arch.node2sub': '轮次检测',
+    'hiw2.arch.node3': 'Whisper STT', 'hiw2.arch.node3sub': '本地运行',
+    'hiw2.arch.node4': 'LLM（Claude / Ollama）', 'hiw2.arch.node4sub': '您的API密钥',
+    'hiw2.arch.node5': '悬浮窗', 'hiw2.arch.node5sub': '流式回复',
+    'hiw2.latency.title': '典型延迟分解（Claude + 本地Whisper）',
+    'hiw2.latency.row1': '系统音频捕获',
+    'hiw2.latency.row2': 'Silero VAD（静音检测）',
+    'hiw2.latency.row3': 'Whisper转录（small模型）',
+    'hiw2.latency.row4': 'LLM首token时间（Claude）',
+    'hiw2.latency.total': '首字可见时间',
+    'hiw2.steps.eyebrow': '逐步说明',
+    'hiw2.steps.headline': '完整工作流程',
+    'hiw2.step1.h3': '加载会议上下文',
+    'hiw2.step1.p1': '会议开始前，将议程、角色、参会者、关键目标及背景信息粘贴到上下文面板。此文本将成为会话中每次AI调用的系统提示词。',
+    'hiw2.step1.p2': '得益于Anthropic的提示词缓存，上下文只需上传一次，在服务端保存最多5分钟。后续调用复用缓存前缀，将输入token成本降低约90%。',
+    'hiw2.step1.p3': '使用Ollama时，系统提示词直接追加到每个请求开头，无缓存开销，也无费用。',
+    'hiw2.step2.h3': '捕获系统音频',
+    'hiw2.step2.p1': '点击"开始会话"后，MeetBrief开始捕获系统音频（扬声器或耳机播放的内容）。macOS使用原生子进程输出PCM音频流，Windows使用WASAPI环回捕获，Linux默认使用麦克风。',
+    'hiw2.step2.p2': '音频以立体声PCM格式捕获，混合为单声道，并分割为约100ms的帧供VAD流水线处理。',
+    'hiw2.step3.h3': '用Silero VAD检测发言轮次',
+    'hiw2.step3.p1': '每个音频块通过Silero VAD（语音活动检测器）进行处理，这是一个在进程内运行的轻量级神经网络模型，输出音频块是否包含语音的置信分数。',
+    'hiw2.step3.p2': 'MeetBrief将发言块累积到缓冲区。当VAD检测到发言段后约1秒的持续静音时，标记轮次结束并触发转录。',
+    'hiw2.step4.h3': '本地Whisper转录',
+    'hiw2.step4.p1': '累积的语音缓冲区通过@huggingface/transformers发送至完全在本地运行的Whisper。启用翻译任务（默认）时，任何语言的语音自动输出为英文文本。',
+    'hiw2.step4.p2': 'MeetBrief维护30秒滚动转录窗口。较早的轮次被摘要后追加为上下文，而不是直接丢弃。',
+    'hiw2.step5.h3': '将AI回复流式传输到悬浮窗',
+    'hiw2.step5.p1': '转录窗口作为用户消息追加，与预加载的系统提示词组合后发送至LLM。回复以令牌流形式直接传输到浮动悬浮窗。',
+    'hiw2.step5.p2': '悬浮窗实时显示流式回复，通常在API调用800ms内显示第一个词。',
+    'hiw2.step5.p3': '悬浮窗是无边框、始终置顶的Electron BrowserWindow，悬浮于任何应用（Zoom、Teams、Meet）之上，不干扰点击操作。',
+    'hiw2.cache.eyebrow': '成本效益',
+    'hiw2.cache.headline': '提示词缓存大幅降低API成本',
+    'hiw2.cache.callout': '为何重要：60分钟的会议中，MeetBrief可能发起30-50次API调用。借助Anthropic的提示词缓存，静态上下文在首次缓存写入后仅按正常输入成本的10%计费，每次后续调用节省约90%的输入token费用。',
+    'hiw2.card1.h3': '静态上下文 → 系统提示词（已缓存）',
+    'hiw2.card1.p': '议程、角色、目标和背景存储在cache_control: ephemeral内容块中。上传后，Anthropic将其保存最多5分钟，并在后续请求中复用。',
+    'hiw2.card2.h3': '实时转录 → 用户消息（未缓存）',
+    'hiw2.card2.p': '滚动转录窗口每轮都会变化，因此每次都新鲜发送。只有动态部分需要支付完整的输入token费用。',
+    'hiw2.card3.h3': '每小时典型成本（Claude）',
+    'hiw2.card3.p': '使用2000token上下文并开启提示词缓存，含40次AI调用的1小时会议通常成本低于$0.10。',
+    'hiw2.card4.h3': 'Ollama — 零调用成本',
+    'hiw2.card4.p': '切换至LLM_PROVIDER=ollama即可使用本地硬件。无需API密钥，无调用计费。',
+    'hiw2.providers.eyebrow': '提供商',
+    'hiw2.providers.headline': '选择您的技术栈',
+    'hiw2.provider1.h3': 'Anthropic Claude',
+    'hiw2.provider1.p': '最高质量的回复。配合提示词缓存实现最快的首token时间。需要Anthropic API密钥，推荐大多数用户使用。',
+    'hiw2.provider2.h3': 'Ollama（本地）',
+    'hiw2.provider2.p': '运行在localhost:11434，零API费用，完全离线。最适合对隐私要求高的环境。',
+    'hiw2.provider3.h3': 'Whisper STT',
+    'hiw2.provider3.p': '始终在本地运行，无需外部STT服务。通过WHISPER_MODEL环境变量选择whisper-tiny或whisper-small。',
+    'hiw2.cta.h2': '亲自体验一下',
+    'hiw2.cta.p': '了解流水线最好的方式是亲自运行。25天免费试用，无需注册。',
+    'hiw2.cta.btn1': '安装MeetBrief',
+    'hiw2.cta.btn2': '查看全部功能 →',
+  },
+  fr: {
+    'hiw2.nav.getStarted': 'Commencer',
+    'hiw2.breadcrumb': 'Fonctionnement',
+    'hiw2.hero.h1': 'De la parole à<br><span class="grad-text">la réponse IA en moins de 2 secondes</span>',
+    'hiw2.hero.sub': 'Un pipeline entièrement local : audio système capturé sur l\'appareil, transcrit par Whisper, segmenté par VAD, puis envoyé au LLM de votre choix. La réponse est diffusée token par token dans l\'overlay.',
+    'hiw2.arch.eyebrow': 'Architecture',
+    'hiw2.arch.headline': 'La chaîne de signal',
+    'hiw2.arch.sub': 'Chaque étape s\'exécute sur votre machine ou va directement vers l\'API configurée. Aucun intermédiaire.',
+    'hiw2.arch.node1': 'Audio Système', 'hiw2.arch.node1sub': 'Blocs de 100ms',
+    'hiw2.arch.node2': 'Silero VAD', 'hiw2.arch.node2sub': 'Détection de tour',
+    'hiw2.arch.node3': 'Whisper STT', 'hiw2.arch.node3sub': 'Sur l\'appareil',
+    'hiw2.arch.node4': 'LLM (Claude / Ollama)', 'hiw2.arch.node4sub': 'Votre clé API',
+    'hiw2.arch.node5': 'Overlay', 'hiw2.arch.node5sub': 'Réponse en streaming',
+    'hiw2.latency.title': 'Répartition typique de la latence (Claude + Whisper local)',
+    'hiw2.latency.row1': 'Capture audio système',
+    'hiw2.latency.row2': 'Silero VAD (détection silence)',
+    'hiw2.latency.row3': 'Transcription Whisper (small)',
+    'hiw2.latency.row4': 'Temps au premier token LLM (Claude)',
+    'hiw2.latency.total': 'Premiers mots visibles',
+    'hiw2.steps.eyebrow': 'Étape par étape',
+    'hiw2.steps.headline': 'Le flux de travail complet',
+    'hiw2.step1.h3': 'Charger le contexte de la réunion',
+    'hiw2.step1.p1': 'Avant la réunion, collez votre ordre du jour, votre rôle, les participants, vos objectifs et les informations de fond dans le panneau de contexte. Ce texte devient le prompt système mis en cache pour chaque appel IA pendant la session.',
+    'hiw2.step1.p2': 'Grâce au cache de prompts d\'Anthropic, ce contexte est chargé une fois et stocké côté serveur jusqu\'à 5 minutes, réduisant le coût des tokens d\'entrée d\'environ 90%.',
+    'hiw2.step1.p3': 'Avec Ollama, le prompt système est simplement ajouté au début de chaque requête, sans surcharge de cache ni coût.',
+    'hiw2.step2.h3': 'Capturer l\'audio système',
+    'hiw2.step2.p1': 'Lorsque vous cliquez sur Démarrer la session, MeetBrief commence à capturer l\'audio système. Sur macOS, un sous-processus natif est utilisé. Sur Windows, c\'est la capture en boucle WASAPI. Sur Linux, le microphone est utilisé par défaut.',
+    'hiw2.step2.p2': 'L\'audio est capturé en PCM stéréo, mixé en mono, et découpé en trames de ~100ms pour le pipeline VAD.',
+    'hiw2.step3.h3': 'Détecter les tours de parole avec Silero VAD',
+    'hiw2.step3.p1': 'Chaque bloc audio est traité par Silero VAD, un modèle neuronal léger qui s\'exécute en cours de processus. Il produit un score de confiance indiquant si le bloc contient de la parole.',
+    'hiw2.step3.p2': 'MeetBrief accumule les blocs parlés dans un tampon. Quand le VAD détecte ~1 seconde de silence après un segment de parole, il marque la fin d\'un tour et déclenche la transcription.',
+    'hiw2.step4.h3': 'Transcrire avec Whisper local',
+    'hiw2.step4.p1': 'Le tampon vocal est envoyé à Whisper, fonctionnant entièrement sur votre machine via @huggingface/transformers. Avec la tâche de traduction activée (par défaut), la parole dans n\'importe quelle langue est convertie en anglais.',
+    'hiw2.step4.p2': 'MeetBrief maintient une fenêtre de transcription glissante de 30 secondes. Les tours plus anciens sont résumés et ajoutés en contexte.',
+    'hiw2.step5.h3': 'Diffuser la réponse IA dans l\'overlay',
+    'hiw2.step5.p1': 'La fenêtre de transcription est ajoutée comme message utilisateur, combinée avec votre prompt système, et envoyée au LLM. La réponse est diffusée token par token dans l\'overlay flottant.',
+    'hiw2.step5.p2': 'L\'overlay affiche la réponse en temps réel, les premiers mots apparaissant généralement dans les 800ms de l\'appel API.',
+    'hiw2.step5.p3': 'L\'overlay est une BrowserWindow Electron sans cadre, toujours au premier plan, flottant au-dessus de toute application sans interférer avec les clics.',
+    'hiw2.cache.eyebrow': 'Efficacité des coûts',
+    'hiw2.cache.headline': 'Le cache de prompts maintient les coûts API bas',
+    'hiw2.cache.callout': 'Pourquoi c\'est important : lors d\'une réunion de 60 minutes, MeetBrief peut effectuer 30 à 50 appels API. Avec le cache de prompts d\'Anthropic, le contexte statique est facturé à 10% du coût normal après la première écriture en cache.',
+    'hiw2.card1.h3': 'Contexte statique → prompt système (mis en cache)',
+    'hiw2.card1.p': 'Votre agenda, rôle, objectifs et fond sont stockés dans un bloc de contenu cache_control: ephemeral. Une fois chargé, Anthropic le conserve jusqu\'à 5 minutes et le réutilise.',
+    'hiw2.card2.h3': 'Transcription en direct → message utilisateur (non mis en cache)',
+    'hiw2.card2.p': 'La fenêtre de transcription change à chaque tour, donc elle est envoyée fraîche à chaque fois. Seule la partie dynamique paye le coût complet.',
+    'hiw2.card3.h3': 'Coût typique par heure (Claude)',
+    'hiw2.card3.p': 'Avec un contexte de 2 000 tokens et le cache actif, une réunion d\'une heure avec 40 appels IA coûte généralement moins de $0,10.',
+    'hiw2.card4.h3': 'Ollama — zéro coût par appel',
+    'hiw2.card4.p': 'Passer à LLM_PROVIDER=ollama utilise votre matériel local. Pas de clé API, pas de facturation par appel.',
+    'hiw2.providers.eyebrow': 'Fournisseurs',
+    'hiw2.providers.headline': 'Choisissez votre pile technologique',
+    'hiw2.provider1.h3': 'Anthropic Claude',
+    'hiw2.provider1.p': 'Réponses de la plus haute qualité. Premier token le plus rapide avec le cache de prompts. Clé API Anthropic requise. Recommandé pour la plupart des utilisateurs.',
+    'hiw2.provider2.h3': 'Ollama (local)',
+    'hiw2.provider2.p': 'Fonctionne sur localhost:11434. Zéro coût API, totalement hors ligne. Idéal pour les environnements sensibles à la confidentialité.',
+    'hiw2.provider3.h3': 'Whisper STT',
+    'hiw2.provider3.p': 'Toujours exécuté localement, sans service STT externe. Choisissez entre whisper-tiny et whisper-small via la variable WHISPER_MODEL.',
+    'hiw2.cta.h2': 'Voyez par vous-même',
+    'hiw2.cta.p': 'La meilleure façon de comprendre le pipeline est de l\'exécuter. Essai gratuit de 25 jours, sans inscription.',
+    'hiw2.cta.btn1': 'Installer MeetBrief',
+    'hiw2.cta.btn2': 'Voir toutes les fonctionnalités →',
+  },
+  de: {
+    'hiw2.nav.getStarted': 'Loslegen',
+    'hiw2.breadcrumb': 'So funktioniert es',
+    'hiw2.hero.h1': 'Von der Sprache zur<br><span class="grad-text">KI-Antwort in unter 2 Sekunden</span>',
+    'hiw2.hero.sub': 'Eine vollständig lokale Pipeline: Systemsound wird auf dem Gerät erfasst, von Whisper transkribiert, von VAD segmentiert und an das gewählte LLM gesendet. Die Antwort wird Token für Token ins Overlay gestreamt.',
+    'hiw2.arch.eyebrow': 'Architektur',
+    'hiw2.arch.headline': 'Die Signalkette',
+    'hiw2.arch.sub': 'Jeder Schritt läuft auf Ihrem Gerät oder geht direkt an die konfigurierte API. Keine Zwischenstationen.',
+    'hiw2.arch.node1': 'Systemsound', 'hiw2.arch.node1sub': '100ms-Blöcke',
+    'hiw2.arch.node2': 'Silero VAD', 'hiw2.arch.node2sub': 'Sprecherturnerkennung',
+    'hiw2.arch.node3': 'Whisper STT', 'hiw2.arch.node3sub': 'Lokal',
+    'hiw2.arch.node4': 'LLM (Claude / Ollama)', 'hiw2.arch.node4sub': 'Ihr API-Schlüssel',
+    'hiw2.arch.node5': 'Overlay', 'hiw2.arch.node5sub': 'Gestreamte Antwort',
+    'hiw2.latency.title': 'Typische Latenzverteilung (Claude + lokales Whisper)',
+    'hiw2.latency.row1': 'Systemsound-Erfassung',
+    'hiw2.latency.row2': 'Silero VAD (Stille-Erkennung)',
+    'hiw2.latency.row3': 'Whisper-Transkription (small)',
+    'hiw2.latency.row4': 'LLM Zeit bis erstes Token (Claude)',
+    'hiw2.latency.total': 'Erste Wörter sichtbar',
+    'hiw2.steps.eyebrow': 'Schritt für Schritt',
+    'hiw2.steps.headline': 'Der vollständige Arbeitsablauf',
+    'hiw2.step1.h3': 'Meeting-Kontext laden',
+    'hiw2.step1.p1': 'Fügen Sie vor dem Meeting Ihre Agenda, Rolle, Teilnehmer, Ziele und Hintergrundinformationen in das Kontextfeld ein. Dieser Text wird zum gecachten System-Prompt für jeden KI-Aufruf während der Sitzung.',
+    'hiw2.step1.p2': 'Dank Anthropics Prompt-Caching wird dieser Kontext einmal hochgeladen und bis zu 5 Minuten serverseitig gespeichert, was die Eingabe-Token-Kosten um ~90% reduziert.',
+    'hiw2.step1.p3': 'Mit Ollama wird der System-Prompt einfach jeder Anfrage vorangestellt — kein Caching-Overhead, aber auch keine Kosten.',
+    'hiw2.step2.h3': 'Systemsound erfassen',
+    'hiw2.step2.p1': 'Beim Klick auf „Sitzung starten" erfasst MeetBrief den Systemsound. Auf macOS wird ein nativer Unterprozess verwendet, auf Windows WASAPI-Loopback, auf Linux standardmäßig das Mikrofon.',
+    'hiw2.step2.p2': 'Audio wird als Stereo-PCM erfasst, zu Mono gemischt und in ~100ms-Frames für die VAD-Pipeline aufgeteilt.',
+    'hiw2.step3.h3': 'Sprechwechsel mit Silero VAD erkennen',
+    'hiw2.step3.p1': 'Jeder Audio-Block wird durch Silero VAD verarbeitet, ein leichtgewichtiges neuronales Modell, das im Prozess läuft und einen Konfidenzwert ausgibt, ob der Block Sprache enthält.',
+    'hiw2.step3.p2': 'MeetBrief sammelt Sprachblöcke in einem Puffer. Wenn VAD ~1 Sekunde anhaltende Stille nach einem Sprachsegment erkennt, markiert es das Ende eines Turns und löst die Transkription aus.',
+    'hiw2.step4.h3': 'Mit lokalem Whisper transkribieren',
+    'hiw2.step4.p1': 'Der gesammelte Sprachpuffer wird an Whisper gesendet, das vollständig auf Ihrem Gerät via @huggingface/transformers läuft. Mit aktivierter Übersetzen-Aufgabe (Standard) wird Sprache in jeder Sprache automatisch als englischer Text ausgegeben.',
+    'hiw2.step4.p2': 'MeetBrief pflegt ein 30-Sekunden-Transkriptionsfenster. Ältere Turns werden zusammengefasst und als Kontext vorangestellt.',
+    'hiw2.step5.h3': 'KI-Antwort ins Overlay streamen',
+    'hiw2.step5.p1': 'Das Transkriptionsfenster wird als Benutzernachricht angehängt, mit dem System-Prompt kombiniert und an das LLM gesendet. Die Antwort wird Token für Token direkt ins schwebende Overlay gestreamt.',
+    'hiw2.step5.p2': 'Das Overlay zeigt die Antwort während des Streamings an — die ersten Wörter erscheinen typischerweise innerhalb von 800ms nach dem API-Aufruf.',
+    'hiw2.step5.p3': 'Das Overlay ist ein rahmenloses, immer im Vordergrund befindliches Electron-BrowserWindow — es schwebt über jeder App (Zoom, Teams, Meet), ohne Klicks zu stören.',
+    'hiw2.cache.eyebrow': 'Kosteneffizienz',
+    'hiw2.cache.headline': 'Prompt-Caching hält API-Kosten niedrig',
+    'hiw2.cache.callout': 'Warum das wichtig ist: In einem 60-Minuten-Meeting kann MeetBrief 30–50 API-Aufrufe machen. Mit Anthropics Prompt-Caching wird der statische Kontext nach dem ersten Cache-Write nur zu 10% des normalen Eingabepreises berechnet.',
+    'hiw2.card1.h3': 'Statischer Kontext → System-Prompt (gecacht)',
+    'hiw2.card1.p': 'Agenda, Rolle, Ziele und Hintergrund werden in einem cache_control: ephemeral-Inhaltsblock gespeichert. Einmal hochgeladen, hält Anthropic es bis zu 5 Minuten warm.',
+    'hiw2.card2.h3': 'Live-Transkript → Benutzernachricht (nicht gecacht)',
+    'hiw2.card2.p': 'Das rollende Transkriptionsfenster ändert sich bei jedem Turn, daher wird es jedes Mal frisch gesendet. Nur der dynamische Teil zahlt den vollen Token-Preis.',
+    'hiw2.card3.h3': 'Typische Kosten pro Stunde (Claude)',
+    'hiw2.card3.p': 'Mit einem 2.000-Token-Kontext und aktivem Caching kostet ein einstündiges Meeting mit 40 KI-Aufrufen typischerweise unter $0,10.',
+    'hiw2.card4.h3': 'Ollama — null Kosten pro Aufruf',
+    'hiw2.card4.p': 'Der Wechsel zu LLM_PROVIDER=ollama nutzt Ihre lokale Hardware. Kein API-Schlüssel, keine Abrechnung pro Aufruf.',
+    'hiw2.providers.eyebrow': 'Anbieter',
+    'hiw2.providers.headline': 'Wählen Sie Ihren Stack',
+    'hiw2.provider1.h3': 'Anthropic Claude',
+    'hiw2.provider1.p': 'Höchste Qualität. Schnellstes erstes Token mit Prompt-Caching. Anthropic-API-Schlüssel erforderlich. Für die meisten Nutzer empfohlen.',
+    'hiw2.provider2.h3': 'Ollama (lokal)',
+    'hiw2.provider2.p': 'Läuft auf localhost:11434. Keine API-Kosten, vollständig offline. Ideal für datenschutzsensible Umgebungen.',
+    'hiw2.provider3.h3': 'Whisper STT',
+    'hiw2.provider3.p': 'Läuft immer lokal — kein externer STT-Dienst. Wählen Sie zwischen whisper-tiny und whisper-small über die WHISPER_MODEL-Variable.',
+    'hiw2.cta.h2': 'Überzeugen Sie sich selbst',
+    'hiw2.cta.p': 'Der beste Weg, die Pipeline zu verstehen, ist sie auszuprobieren. 25 Tage kostenlose Testversion, keine Anmeldung.',
+    'hiw2.cta.btn1': 'MeetBrief installieren',
+    'hiw2.cta.btn2': 'Alle Funktionen ansehen →',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  const card = overlay.querySelector('.lp-card');
+  if (card) { card.style.animation = 'none'; card.offsetHeight; card.style.animation = ''; }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>

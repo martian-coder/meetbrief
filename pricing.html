@@ -138,6 +138,23 @@
 </head>
 <body>
 
+<!-- Language picker -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo"><div class="nav-logo-mark">MB</div><span>MeetBrief</span></div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')"><span class="lp-flag">🇺🇸</span><span class="lp-name">English</span></button>
+      <button class="lp-opt" onclick="selectLang('ja')"><span class="lp-flag">🇯🇵</span><span class="lp-name">日本語</span></button>
+      <button class="lp-opt" onclick="selectLang('zh')"><span class="lp-flag">🇨🇳</span><span class="lp-name">中文</span></button>
+      <button class="lp-opt" onclick="selectLang('fr')"><span class="lp-flag">🇫🇷</span><span class="lp-name">Français</span></button>
+      <button class="lp-opt" onclick="selectLang('de')"><span class="lp-flag">🇩🇪</span><span class="lp-name">Deutsch</span></button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -157,8 +174,9 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         GitHub
       </a>
-      <a href="install.html" class="btn btn-primary">Get Started</a>
+      <a href="install.html" class="btn btn-primary" data-i18n="pric.nav.getStarted">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -172,13 +190,14 @@
   <a href="privacy.html">Privacy</a>
   <a href="faq.html">FAQ</a>
   <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
 </div>
 
 <section class="pricing-hero">
   <div class="container">
-    <div class="section-eyebrow">Pricing</div>
-    <h2 class="section-headline">Simple, honest pricing</h2>
-    <p class="pricing-sub">Start free for 25 days. No credit card. Bring your own API key — you control AI costs directly, billed by Anthropic or Ollama, not us.</p>
+    <div class="section-eyebrow" data-i18n="pric.hero.eyebrow">Pricing</div>
+    <h2 class="section-headline" data-i18n="pric.hero.headline">Simple, honest pricing</h2>
+    <p class="pricing-sub" data-i18n="pric.hero.sub">Start free for 25 days. No credit card. Bring your own API key — you control AI costs directly, billed by Anthropic or Ollama, not us.</p>
   </div>
 </section>
 
@@ -188,96 +207,96 @@
 
       <!-- Free Trial -->
       <div class="pricing-card fade-up fade-up-delay-1">
-        <div class="pricing-tier">Free Trial</div>
+        <div class="pricing-tier" data-i18n="pric.free.tier">Free Trial</div>
         <div class="pricing-price-row">
           <div class="pricing-price">$0</div>
         </div>
-        <div class="pricing-price-alt">25 days, full access</div>
-        <span class="pricing-no-card">No card required</span>
-        <p class="pricing-desc">Experience the full power of MeetBrief — no limits, no strings, no signup. Just clone and run.</p>
+        <div class="pricing-price-alt" data-i18n="pric.free.priceAlt">25 days, full access</div>
+        <span class="pricing-no-card" data-i18n="pric.free.noCard">No card required</span>
+        <p class="pricing-desc" data-i18n="pric.free.desc">Experience the full power of MeetBrief — no limits, no strings, no signup. Just clone and run.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All features unlocked</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All AI models (Claude, Ollama)</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Local Whisper transcription</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>99 languages supported</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Overlay &amp; hotkeys</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f1">All features unlocked</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f2">All AI models (Claude, Ollama)</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f3">Local Whisper transcription</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f4">99 languages supported</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f5">Overlay &amp; hotkeys</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.free.f6">Community support</span></li>
         </ul>
-        <a href="install.html" class="btn btn-ghost" style="width:100%;justify-content:center;">Start Free Trial →</a>
-        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">No credit card required</p>
+        <a href="install.html" class="btn btn-ghost" style="width:100%;justify-content:center;" data-i18n="pric.free.cta">Start Free Trial →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;" data-i18n="pric.free.ctaNote">No credit card required</p>
       </div>
 
       <!-- Personal (featured) -->
       <div class="pricing-card featured fade-up fade-up-delay-2">
-        <div class="pricing-badge">Most Popular</div>
-        <div class="pricing-tier orange">Personal</div>
+        <div class="pricing-badge" data-i18n="pric.personal.badge">Most Popular</div>
+        <div class="pricing-tier orange" data-i18n="pric.personal.tier">Personal</div>
         <div class="pricing-price-row">
           <div class="pricing-price">$7</div>
-          <div class="pricing-price-unit">/ month</div>
+          <div class="pricing-price-unit" data-i18n="pric.personal.unit">/ month</div>
         </div>
-        <div class="pricing-price-alt">or $59 / year — save 30%</div>
-        <span class="pricing-no-card" style="background:rgba(200,104,20,0.06);border-color:rgba(200,104,20,0.2);color:var(--orange);">Cancel anytime</span>
-        <p class="pricing-desc">For professionals who rely on MeetBrief daily. Unlimited use after your trial, with premium support and auto-updates.</p>
+        <div class="pricing-price-alt" data-i18n="pric.personal.priceAlt">or $59 / year — save 30%</div>
+        <span class="pricing-no-card" style="background:rgba(200,104,20,0.06);border-color:rgba(200,104,20,0.2);color:var(--orange);" data-i18n="pric.personal.cancelNote">Cancel anytime</span>
+        <p class="pricing-desc" data-i18n="pric.personal.desc">For professionals who rely on MeetBrief daily. Unlimited use after your trial, with premium support and auto-updates.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Free Trial</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited use beyond trial</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Auto-updates included</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Priority email support</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Meeting export (Markdown / PDF)</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom system prompt templates</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Early access to new features</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f1">Everything in Free Trial</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f2">Unlimited use beyond trial</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f3">Auto-updates included</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f4">Priority email support</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f5">Meeting export (Markdown / PDF)</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f6">Custom system prompt templates</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.personal.f7">Early access to new features</span></li>
         </ul>
-        <a href="install.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get Personal License →</a>
-        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">Cancel anytime · instant access</p>
+        <a href="install.html" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="pric.personal.cta">Get Personal License →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;" data-i18n="pric.personal.ctaNote">Cancel anytime · instant access</p>
       </div>
 
       <!-- Enterprise -->
       <div class="pricing-card fade-up fade-up-delay-3">
-        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-tier" data-i18n="pric.ent.tier">Enterprise</div>
         <div class="pricing-price-row">
-          <div class="pricing-price" style="font-size:36px;line-height:1.1;">Custom</div>
+          <div class="pricing-price" style="font-size:36px;line-height:1.1;" data-i18n="pric.ent.price">Custom</div>
         </div>
-        <div class="pricing-price-alt">Starting at 10 seats</div>
-        <span class="pricing-no-card">Volume discounts available</span>
-        <p class="pricing-desc">For teams that need centralised deployment, administration, compliance, and dedicated support.</p>
+        <div class="pricing-price-alt" data-i18n="pric.ent.priceAlt">Starting at 10 seats</div>
+        <span class="pricing-no-card" data-i18n="pric.ent.discount">Volume discounts available</span>
+        <p class="pricing-desc" data-i18n="pric.ent.desc">For teams that need centralised deployment, administration, compliance, and dedicated support.</p>
         <div class="pricing-divider"></div>
         <ul class="pricing-features">
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Personal</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Team seat management</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SSO / SAML</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Admin usage dashboard</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated Slack support channel</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom data-retention policy</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>On-premise deployment option</li>
-          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SLA guarantee</li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f1">Everything in Personal</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f2">Team seat management</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f3">SSO / SAML</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f4">Admin usage dashboard</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f5">Dedicated Slack support channel</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f6">Custom data-retention policy</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f7">On-premise deployment option</span></li>
+          <li><span class="pf-check green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="pric.ent.f8">SLA guarantee</span></li>
         </ul>
-        <a href="mailto:martian.coders.x@gmail.com" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact us →</a>
-        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;">Starting at 10 seats</p>
+        <a href="mailto:martian.coders.x@gmail.com" class="btn btn-ghost" style="width:100%;justify-content:center;" data-i18n="pric.ent.cta">Contact us →</a>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;" data-i18n="pric.ent.ctaNote">Starting at 10 seats</p>
       </div>
     </div>
 
     <!-- FAQ -->
     <div class="pricing-faq fade-up">
-      <div class="section-eyebrow">FAQ</div>
-      <h3 class="pricing-faq-headline">Frequently asked questions</h3>
+      <div class="section-eyebrow" data-i18n="pric.faq.eyebrow">FAQ</div>
+      <h3 class="pricing-faq-headline" data-i18n="pric.faq.headline">Frequently asked questions</h3>
       <div class="faq-grid">
         <div class="faq-item">
-          <div class="faq-q">Do I need to pay for the AI?</div>
-          <div class="faq-a">No — MeetBrief uses your own API key (Anthropic Claude or Ollama). The license fee is for the app only. AI costs are billed directly to you by the provider, typically a few cents per meeting.</div>
+          <div class="faq-q" data-i18n="pric.faq.q1">Do I need to pay for the AI?</div>
+          <div class="faq-a" data-i18n="pric.faq.a1">No — MeetBrief uses your own API key (Anthropic Claude or Ollama). The license fee is for the app only. AI costs are billed directly to you by the provider, typically a few cents per meeting.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">What happens after the 25-day trial?</div>
-          <div class="faq-a">The app stops processing new transcriptions until you enter a license key. Your data and settings are preserved. Purchase a Personal license at any time to continue without interruption.</div>
+          <div class="faq-q" data-i18n="pric.faq.q2">What happens after the 25-day trial?</div>
+          <div class="faq-a" data-i18n="pric.faq.a2">The app stops processing new transcriptions until you enter a license key. Your data and settings are preserved. Purchase a Personal license at any time to continue without interruption.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Is the source code available?</div>
-          <div class="faq-a">Yes — the core is open source on GitHub. The Personal and Enterprise licenses cover the compiled Electron app with auto-updates, support, and premium features not in the public repo.</div>
+          <div class="faq-q" data-i18n="pric.faq.q3">Is the source code available?</div>
+          <div class="faq-a" data-i18n="pric.faq.a3">Yes — the core is open source on GitHub. The Personal and Enterprise licenses cover the compiled Electron app with auto-updates, support, and premium features not in the public repo.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Can I switch plans?</div>
-          <div class="faq-a">Yes — upgrade, downgrade, or cancel any time. Unused days are prorated on annual plans. Switching from monthly to annual saves 30% and takes effect on your next billing date.</div>
+          <div class="faq-q" data-i18n="pric.faq.q4">Can I switch plans?</div>
+          <div class="faq-a" data-i18n="pric.faq.a4">Yes — upgrade, downgrade, or cancel any time. Unused days are prorated on annual plans. Switching from monthly to annual saves 30% and takes effect on your next billing date.</div>
         </div>
       </div>
     </div>
@@ -286,9 +305,9 @@
 
 <div class="pricing-cta-strip">
   <div class="container">
-    <h2>Still have questions?</h2>
-    <p>Email us at <strong>martian.coders.x@gmail.com</strong> — we reply within one business day.</p>
-    <a href="mailto:martian.coders.x@gmail.com" class="btn btn-primary">Get in touch</a>
+    <h2 data-i18n="pric.ctaStrip.h2">Still have questions?</h2>
+    <p data-i18n="pric.ctaStrip.p">Email us at <strong>martian.coders.x@gmail.com</strong> — we reply within one business day.</p>
+    <a href="mailto:martian.coders.x@gmail.com" class="btn btn-primary" data-i18n="pric.ctaStrip.btn">Get in touch</a>
   </div>
 </div>
 
@@ -318,6 +337,7 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+// Hamburger
 const hamburger = document.getElementById('navHamburger');
 const navMobile = document.getElementById('navMobile');
 if (hamburger && navMobile) {
@@ -332,6 +352,357 @@ if (hamburger && navMobile) {
     }
   });
 }
+
+// i18n
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+const i18n = {
+  en: {
+    'pric.nav.getStarted': 'Get Started',
+    'pric.hero.eyebrow': 'Pricing',
+    'pric.hero.headline': 'Simple, honest pricing',
+    'pric.hero.sub': 'Start free for 25 days. No credit card. Bring your own API key — you control AI costs directly, billed by Anthropic or Ollama, not us.',
+    'pric.free.tier': 'Free Trial',
+    'pric.free.priceAlt': '25 days, full access',
+    'pric.free.noCard': 'No card required',
+    'pric.free.desc': 'Experience the full power of MeetBrief — no limits, no strings, no signup. Just clone and run.',
+    'pric.free.f1': 'All features unlocked',
+    'pric.free.f2': 'All AI models (Claude, Ollama)',
+    'pric.free.f3': 'Local Whisper transcription',
+    'pric.free.f4': '99 languages supported',
+    'pric.free.f5': 'Overlay & hotkeys',
+    'pric.free.f6': 'Community support',
+    'pric.free.cta': 'Start Free Trial →',
+    'pric.free.ctaNote': 'No credit card required',
+    'pric.personal.badge': 'Most Popular',
+    'pric.personal.tier': 'Personal',
+    'pric.personal.unit': '/ month',
+    'pric.personal.priceAlt': 'or $59 / year — save 30%',
+    'pric.personal.cancelNote': 'Cancel anytime',
+    'pric.personal.desc': 'For professionals who rely on MeetBrief daily. Unlimited use after your trial, with premium support and auto-updates.',
+    'pric.personal.f1': 'Everything in Free Trial',
+    'pric.personal.f2': 'Unlimited use beyond trial',
+    'pric.personal.f3': 'Auto-updates included',
+    'pric.personal.f4': 'Priority email support',
+    'pric.personal.f5': 'Meeting export (Markdown / PDF)',
+    'pric.personal.f6': 'Custom system prompt templates',
+    'pric.personal.f7': 'Early access to new features',
+    'pric.personal.cta': 'Get Personal License →',
+    'pric.personal.ctaNote': 'Cancel anytime · instant access',
+    'pric.ent.tier': 'Enterprise',
+    'pric.ent.price': 'Custom',
+    'pric.ent.priceAlt': 'Starting at 10 seats',
+    'pric.ent.discount': 'Volume discounts available',
+    'pric.ent.desc': 'For teams that need centralised deployment, administration, compliance, and dedicated support.',
+    'pric.ent.f1': 'Everything in Personal',
+    'pric.ent.f2': 'Team seat management',
+    'pric.ent.f3': 'SSO / SAML',
+    'pric.ent.f4': 'Admin usage dashboard',
+    'pric.ent.f5': 'Dedicated Slack support channel',
+    'pric.ent.f6': 'Custom data-retention policy',
+    'pric.ent.f7': 'On-premise deployment option',
+    'pric.ent.f8': 'SLA guarantee',
+    'pric.ent.cta': 'Contact us →',
+    'pric.ent.ctaNote': 'Starting at 10 seats',
+    'pric.faq.eyebrow': 'FAQ',
+    'pric.faq.headline': 'Frequently asked questions',
+    'pric.faq.q1': 'Do I need to pay for the AI?',
+    'pric.faq.a1': 'No — MeetBrief uses your own API key (Anthropic Claude or Ollama). The license fee is for the app only. AI costs are billed directly to you by the provider, typically a few cents per meeting.',
+    'pric.faq.q2': 'What happens after the 25-day trial?',
+    'pric.faq.a2': 'The app stops processing new transcriptions until you enter a license key. Your data and settings are preserved. Purchase a Personal license at any time to continue without interruption.',
+    'pric.faq.q3': 'Is the source code available?',
+    'pric.faq.a3': 'Yes — the core is open source on GitHub. The Personal and Enterprise licenses cover the compiled Electron app with auto-updates, support, and premium features not in the public repo.',
+    'pric.faq.q4': 'Can I switch plans?',
+    'pric.faq.a4': 'Yes — upgrade, downgrade, or cancel any time. Unused days are prorated on annual plans. Switching from monthly to annual saves 30% and takes effect on your next billing date.',
+    'pric.ctaStrip.h2': 'Still have questions?',
+    'pric.ctaStrip.p': 'Email us at martian.coders.x@gmail.com — we reply within one business day.',
+    'pric.ctaStrip.btn': 'Get in touch',
+  },
+  ja: {
+    'pric.nav.getStarted': '今すぐ始める',
+    'pric.hero.eyebrow': '料金',
+    'pric.hero.headline': 'シンプルで誠実な料金体系',
+    'pric.hero.sub': '25日間無料でお試しください。クレジットカード不要。ご自身のAPIキーをご利用いただくため、AI利用料はAnthropicまたはOllamaから直接請求されます。',
+    'pric.free.tier': '無料トライアル',
+    'pric.free.priceAlt': '25日間、フルアクセス',
+    'pric.free.noCard': 'カード不要',
+    'pric.free.desc': 'MeetBriefのすべての機能を体験してください。制限なし、縛りなし、サインアップ不要。クローンして実行するだけです。',
+    'pric.free.f1': '全機能アンロック済み',
+    'pric.free.f2': '全AIモデル対応（Claude、Ollama）',
+    'pric.free.f3': 'ローカルWhisper文字起こし',
+    'pric.free.f4': '99言語対応',
+    'pric.free.f5': 'オーバーレイ＆ホットキー',
+    'pric.free.f6': 'コミュニティサポート',
+    'pric.free.cta': '無料トライアルを始める →',
+    'pric.free.ctaNote': 'クレジットカード不要',
+    'pric.personal.badge': '最も人気',
+    'pric.personal.tier': 'パーソナル',
+    'pric.personal.unit': '/ 月',
+    'pric.personal.priceAlt': '年間$59 — 30%お得',
+    'pric.personal.cancelNote': 'いつでもキャンセル可',
+    'pric.personal.desc': '毎日MeetBriefを使用するプロフェッショナル向け。トライアル終了後も無制限で使用可能。プレミアムサポートと自動アップデート付き。',
+    'pric.personal.f1': '無料トライアルのすべて',
+    'pric.personal.f2': 'トライアル後も無制限利用',
+    'pric.personal.f3': '自動アップデート付き',
+    'pric.personal.f4': '優先メールサポート',
+    'pric.personal.f5': '会議エクスポート（Markdown / PDF）',
+    'pric.personal.f6': 'カスタムシステムプロンプトテンプレート',
+    'pric.personal.f7': '新機能への早期アクセス',
+    'pric.personal.cta': 'パーソナルライセンスを取得 →',
+    'pric.personal.ctaNote': 'いつでもキャンセル可・即時アクセス',
+    'pric.ent.tier': 'エンタープライズ',
+    'pric.ent.price': 'カスタム',
+    'pric.ent.priceAlt': '10シートから',
+    'pric.ent.discount': 'ボリューム割引あり',
+    'pric.ent.desc': '集中展開、管理、コンプライアンス、専任サポートが必要なチーム向け。',
+    'pric.ent.f1': 'パーソナルのすべて',
+    'pric.ent.f2': 'チームシート管理',
+    'pric.ent.f3': 'SSO / SAML',
+    'pric.ent.f4': '管理者用ダッシュボード',
+    'pric.ent.f5': '専用Slackサポートチャンネル',
+    'pric.ent.f6': 'カスタムデータ保持ポリシー',
+    'pric.ent.f7': 'オンプレミス展開オプション',
+    'pric.ent.f8': 'SLA保証',
+    'pric.ent.cta': 'お問い合わせ →',
+    'pric.ent.ctaNote': '10シートから',
+    'pric.faq.eyebrow': 'よくある質問',
+    'pric.faq.headline': 'よくあるご質問',
+    'pric.faq.q1': 'AIの利用料は別途かかりますか？',
+    'pric.faq.a1': 'いいえ。MeetBriefはご自身のAPIキー（Anthropic ClaudeまたはOllama）を使用します。ライセンス料はアプリのみに対するものです。AI利用料はプロバイダーから直接請求されます。',
+    'pric.faq.q2': '25日間のトライアル後はどうなりますか？',
+    'pric.faq.a2': 'ライセンスキーを入力するまで新しい文字起こし処理が停止します。データと設定は保持されます。いつでもパーソナルライセンスを購入して継続できます。',
+    'pric.faq.q3': 'ソースコードは公開されていますか？',
+    'pric.faq.a3': 'はい。コアはGitHubでオープンソースです。パーソナル・エンタープライズライセンスはコンパイル済みElectronアプリと自動アップデート、サポートをカバーします。',
+    'pric.faq.q4': 'プランを変更できますか？',
+    'pric.faq.a4': 'はい。いつでもアップグレード、ダウングレード、またはキャンセルできます。年間プランの未使用日数は日割り計算されます。',
+    'pric.ctaStrip.h2': 'まだご質問がありますか？',
+    'pric.ctaStrip.p': 'martian.coders.x@gmail.comまでメールをお送りください。1営業日以内に返信いたします。',
+    'pric.ctaStrip.btn': 'お問い合わせ',
+  },
+  zh: {
+    'pric.nav.getStarted': '立即开始',
+    'pric.hero.eyebrow': '定价',
+    'pric.hero.headline': '简单透明的定价',
+    'pric.hero.sub': '免费试用25天，无需信用卡。使用您自己的API密钥——AI费用由Anthropic或Ollama直接向您收取，与我们无关。',
+    'pric.free.tier': '免费试用',
+    'pric.free.priceAlt': '25天，完整访问',
+    'pric.free.noCard': '无需信用卡',
+    'pric.free.desc': '体验MeetBrief的全部功能——无限制、无束缚、无需注册。克隆并运行即可。',
+    'pric.free.f1': '全部功能已解锁',
+    'pric.free.f2': '全部AI模型（Claude、Ollama）',
+    'pric.free.f3': '本地Whisper转录',
+    'pric.free.f4': '支持99种语言',
+    'pric.free.f5': '悬浮窗与快捷键',
+    'pric.free.f6': '社区支持',
+    'pric.free.cta': '开始免费试用 →',
+    'pric.free.ctaNote': '无需信用卡',
+    'pric.personal.badge': '最受欢迎',
+    'pric.personal.tier': '个人版',
+    'pric.personal.unit': '/ 月',
+    'pric.personal.priceAlt': '或$59/年——节省30%',
+    'pric.personal.cancelNote': '随时取消',
+    'pric.personal.desc': '面向每天使用MeetBrief的专业人士。试用期结束后无限使用，含优先支持和自动更新。',
+    'pric.personal.f1': '包含免费试用所有内容',
+    'pric.personal.f2': '试用期后无限使用',
+    'pric.personal.f3': '包含自动更新',
+    'pric.personal.f4': '优先邮件支持',
+    'pric.personal.f5': '会议导出（Markdown / PDF）',
+    'pric.personal.f6': '自定义系统提示词模板',
+    'pric.personal.f7': '新功能抢先体验',
+    'pric.personal.cta': '获取个人许可证 →',
+    'pric.personal.ctaNote': '随时取消·立即访问',
+    'pric.ent.tier': '企业版',
+    'pric.ent.price': '定制方案',
+    'pric.ent.priceAlt': '起步10个席位',
+    'pric.ent.discount': '提供批量折扣',
+    'pric.ent.desc': '面向需要集中部署、管理、合规及专属支持的团队。',
+    'pric.ent.f1': '包含个人版所有内容',
+    'pric.ent.f2': '团队席位管理',
+    'pric.ent.f3': 'SSO / SAML',
+    'pric.ent.f4': '管理员使用仪表盘',
+    'pric.ent.f5': '专属Slack支持频道',
+    'pric.ent.f6': '自定义数据保留策略',
+    'pric.ent.f7': '本地部署选项',
+    'pric.ent.f8': 'SLA保障',
+    'pric.ent.cta': '联系我们 →',
+    'pric.ent.ctaNote': '起步10个席位',
+    'pric.faq.eyebrow': '常见问题',
+    'pric.faq.headline': '常见问题解答',
+    'pric.faq.q1': '我需要为AI单独付费吗？',
+    'pric.faq.a1': '不需要。MeetBrief使用您自己的API密钥（Anthropic Claude或Ollama）。许可证费用仅针对应用本身。AI费用由提供商直接向您收取，通常每次会议只需几分钱。',
+    'pric.faq.q2': '25天试用期结束后会怎样？',
+    'pric.faq.a2': '在您输入许可证密钥之前，应用将停止处理新的转录。您的数据和设置会被保留。随时购买个人许可证即可继续使用，不会中断。',
+    'pric.faq.q3': '源代码是否公开？',
+    'pric.faq.a3': '是的——核心代码在GitHub上开源。个人版和企业版许可证涵盖编译好的Electron应用、自动更新、支持及公开仓库中没有的高级功能。',
+    'pric.faq.q4': '我可以切换套餐吗？',
+    'pric.faq.a4': '可以——随时升级、降级或取消。年度套餐的未使用天数按比例退款。从月付切换为年付可节省30%，在下一个账单日生效。',
+    'pric.ctaStrip.h2': '还有问题？',
+    'pric.ctaStrip.p': '发送邮件至martian.coders.x@gmail.com——我们在一个工作日内回复。',
+    'pric.ctaStrip.btn': '联系我们',
+  },
+  fr: {
+    'pric.nav.getStarted': 'Commencer',
+    'pric.hero.eyebrow': 'Tarifs',
+    'pric.hero.headline': 'Tarification simple et honnête',
+    'pric.hero.sub': 'Commencez gratuitement pendant 25 jours. Pas de carte bancaire. Apportez votre propre clé API — vous contrôlez directement les coûts IA, facturés par Anthropic ou Ollama, pas nous.',
+    'pric.free.tier': 'Essai gratuit',
+    'pric.free.priceAlt': '25 jours, accès complet',
+    'pric.free.noCard': 'Pas de carte requise',
+    'pric.free.desc': 'Découvrez toute la puissance de MeetBrief — sans limites, sans engagement, sans inscription. Clonez et lancez.',
+    'pric.free.f1': 'Toutes les fonctionnalités débloquées',
+    'pric.free.f2': 'Tous les modèles IA (Claude, Ollama)',
+    'pric.free.f3': 'Transcription Whisper locale',
+    'pric.free.f4': '99 langues supportées',
+    'pric.free.f5': 'Overlay et raccourcis clavier',
+    'pric.free.f6': 'Support communautaire',
+    'pric.free.cta': 'Commencer l\'essai gratuit →',
+    'pric.free.ctaNote': 'Pas de carte bancaire requise',
+    'pric.personal.badge': 'Plus populaire',
+    'pric.personal.tier': 'Personnel',
+    'pric.personal.unit': '/ mois',
+    'pric.personal.priceAlt': 'ou 59$ / an — économisez 30%',
+    'pric.personal.cancelNote': 'Annulez à tout moment',
+    'pric.personal.desc': 'Pour les professionnels qui utilisent MeetBrief quotidiennement. Utilisation illimitée après l\'essai, avec support premium et mises à jour automatiques.',
+    'pric.personal.f1': 'Tout de l\'essai gratuit',
+    'pric.personal.f2': 'Utilisation illimitée après l\'essai',
+    'pric.personal.f3': 'Mises à jour automatiques incluses',
+    'pric.personal.f4': 'Support e-mail prioritaire',
+    'pric.personal.f5': 'Export de réunion (Markdown / PDF)',
+    'pric.personal.f6': 'Modèles de prompt système personnalisés',
+    'pric.personal.f7': 'Accès anticipé aux nouvelles fonctionnalités',
+    'pric.personal.cta': 'Obtenir la licence personnelle →',
+    'pric.personal.ctaNote': 'Annulez n\'importe quand · accès immédiat',
+    'pric.ent.tier': 'Entreprise',
+    'pric.ent.price': 'Sur mesure',
+    'pric.ent.priceAlt': 'À partir de 10 postes',
+    'pric.ent.discount': 'Remises sur volume disponibles',
+    'pric.ent.desc': 'Pour les équipes qui ont besoin d\'un déploiement centralisé, d\'administration, de conformité et d\'un support dédié.',
+    'pric.ent.f1': 'Tout du plan Personnel',
+    'pric.ent.f2': 'Gestion des postes d\'équipe',
+    'pric.ent.f3': 'SSO / SAML',
+    'pric.ent.f4': 'Tableau de bord d\'utilisation admin',
+    'pric.ent.f5': 'Canal de support Slack dédié',
+    'pric.ent.f6': 'Politique de rétention de données personnalisée',
+    'pric.ent.f7': 'Option de déploiement sur site',
+    'pric.ent.f8': 'Garantie SLA',
+    'pric.ent.cta': 'Nous contacter →',
+    'pric.ent.ctaNote': 'À partir de 10 postes',
+    'pric.faq.eyebrow': 'FAQ',
+    'pric.faq.headline': 'Questions fréquentes',
+    'pric.faq.q1': 'Dois-je payer pour l\'IA ?',
+    'pric.faq.a1': 'Non — MeetBrief utilise votre propre clé API (Anthropic Claude ou Ollama). Les frais de licence concernent uniquement l\'application. Les coûts IA vous sont facturés directement par le fournisseur, généralement quelques centimes par réunion.',
+    'pric.faq.q2': 'Que se passe-t-il après les 25 jours d\'essai ?',
+    'pric.faq.a2': 'L\'application cesse de traiter de nouvelles transcriptions jusqu\'à ce que vous saisissiez une clé de licence. Vos données et paramètres sont conservés. Achetez une licence personnelle à tout moment pour continuer sans interruption.',
+    'pric.faq.q3': 'Le code source est-il disponible ?',
+    'pric.faq.a3': 'Oui — le noyau est open source sur GitHub. Les licences Personnelle et Entreprise couvrent l\'application Electron compilée avec les mises à jour automatiques, le support et les fonctionnalités premium.',
+    'pric.faq.q4': 'Puis-je changer de plan ?',
+    'pric.faq.a4': 'Oui — améliorez, rétrogradez ou annulez à tout moment. Les jours non utilisés sont proratisés sur les plans annuels. Passer du mensuel à l\'annuel économise 30%.',
+    'pric.ctaStrip.h2': 'Vous avez encore des questions ?',
+    'pric.ctaStrip.p': 'Écrivez-nous à martian.coders.x@gmail.com — nous répondons dans un jour ouvrable.',
+    'pric.ctaStrip.btn': 'Nous contacter',
+  },
+  de: {
+    'pric.nav.getStarted': 'Loslegen',
+    'pric.hero.eyebrow': 'Preise',
+    'pric.hero.headline': 'Einfache, ehrliche Preise',
+    'pric.hero.sub': 'Starten Sie kostenlos für 25 Tage. Keine Kreditkarte. Bringen Sie Ihren eigenen API-Schlüssel mit — Sie steuern die KI-Kosten direkt, abgerechnet von Anthropic oder Ollama, nicht von uns.',
+    'pric.free.tier': 'Kostenlose Testversion',
+    'pric.free.priceAlt': '25 Tage, volles Zugang',
+    'pric.free.noCard': 'Keine Karte erforderlich',
+    'pric.free.desc': 'Erleben Sie die volle Leistung von MeetBrief — ohne Einschränkungen, ohne Bindung, ohne Anmeldung. Einfach klonen und starten.',
+    'pric.free.f1': 'Alle Funktionen freigeschaltet',
+    'pric.free.f2': 'Alle KI-Modelle (Claude, Ollama)',
+    'pric.free.f3': 'Lokale Whisper-Transkription',
+    'pric.free.f4': '99 Sprachen unterstützt',
+    'pric.free.f5': 'Overlay & Hotkeys',
+    'pric.free.f6': 'Community-Support',
+    'pric.free.cta': 'Kostenlose Testversion starten →',
+    'pric.free.ctaNote': 'Keine Kreditkarte erforderlich',
+    'pric.personal.badge': 'Beliebteste Wahl',
+    'pric.personal.tier': 'Persönlich',
+    'pric.personal.unit': '/ Monat',
+    'pric.personal.priceAlt': 'oder 59$ / Jahr — 30% sparen',
+    'pric.personal.cancelNote': 'Jederzeit kündbar',
+    'pric.personal.desc': 'Für Profis, die MeetBrief täglich nutzen. Unbegrenzte Nutzung nach dem Test, mit Premium-Support und automatischen Updates.',
+    'pric.personal.f1': 'Alles aus der kostenlosen Testversion',
+    'pric.personal.f2': 'Unbegrenzte Nutzung nach dem Test',
+    'pric.personal.f3': 'Automatische Updates enthalten',
+    'pric.personal.f4': 'Prioritäts-E-Mail-Support',
+    'pric.personal.f5': 'Meeting-Export (Markdown / PDF)',
+    'pric.personal.f6': 'Benutzerdefinierte System-Prompt-Vorlagen',
+    'pric.personal.f7': 'Frühzeitiger Zugang zu neuen Funktionen',
+    'pric.personal.cta': 'Persönliche Lizenz erhalten →',
+    'pric.personal.ctaNote': 'Jederzeit kündbar · sofortiger Zugang',
+    'pric.ent.tier': 'Enterprise',
+    'pric.ent.price': 'Individuell',
+    'pric.ent.priceAlt': 'Ab 10 Plätzen',
+    'pric.ent.discount': 'Mengenrabatte verfügbar',
+    'pric.ent.desc': 'Für Teams, die zentrale Bereitstellung, Verwaltung, Compliance und dedizierten Support benötigen.',
+    'pric.ent.f1': 'Alles aus dem persönlichen Plan',
+    'pric.ent.f2': 'Team-Sitz-Management',
+    'pric.ent.f3': 'SSO / SAML',
+    'pric.ent.f4': 'Admin-Nutzungs-Dashboard',
+    'pric.ent.f5': 'Dedizierter Slack-Supportkanal',
+    'pric.ent.f6': 'Benutzerdefinierte Datenhaltungsrichtlinie',
+    'pric.ent.f7': 'On-Premise-Bereitstellungsoption',
+    'pric.ent.f8': 'SLA-Garantie',
+    'pric.ent.cta': 'Kontaktieren Sie uns →',
+    'pric.ent.ctaNote': 'Ab 10 Plätzen',
+    'pric.faq.eyebrow': 'FAQ',
+    'pric.faq.headline': 'Häufig gestellte Fragen',
+    'pric.faq.q1': 'Muss ich für die KI bezahlen?',
+    'pric.faq.a1': 'Nein — MeetBrief verwendet Ihren eigenen API-Schlüssel (Anthropic Claude oder Ollama). Die Lizenzgebühr gilt nur für die App. KI-Kosten werden direkt vom Anbieter abgerechnet, typischerweise wenige Cent pro Meeting.',
+    'pric.faq.q2': 'Was passiert nach der 25-tägigen Testversion?',
+    'pric.faq.a2': 'Die App hört auf, neue Transkriptionen zu verarbeiten, bis Sie einen Lizenzschlüssel eingeben. Ihre Daten und Einstellungen bleiben erhalten. Kaufen Sie jederzeit eine persönliche Lizenz, um ohne Unterbrechung fortzufahren.',
+    'pric.faq.q3': 'Ist der Quellcode verfügbar?',
+    'pric.faq.a3': 'Ja — der Kern ist auf GitHub Open Source. Die persönlichen und Enterprise-Lizenzen umfassen die kompilierte Electron-App mit automatischen Updates, Support und Premium-Funktionen.',
+    'pric.faq.q4': 'Kann ich zwischen Plänen wechseln?',
+    'pric.faq.a4': 'Ja — jederzeit upgraden, downgraden oder kündigen. Ungenutzte Tage werden bei Jahresplänen anteilig erstattet. Der Wechsel von monatlich auf jährlich spart 30%.',
+    'pric.ctaStrip.h2': 'Noch Fragen?',
+    'pric.ctaStrip.p': 'Schreiben Sie uns an martian.coders.x@gmail.com — wir antworten innerhalb eines Werktages.',
+    'pric.ctaStrip.btn': 'Kontakt aufnehmen',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  const card = overlay.querySelector('.lp-card');
+  if (card) { card.style.animation = 'none'; card.offsetHeight; card.style.animation = ''; }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>

@@ -59,6 +59,23 @@
 </head>
 <body>
 
+<!-- Language picker -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo"><div class="nav-logo-mark">MB</div><span>MeetBrief</span></div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')"><span class="lp-flag">🇺🇸</span><span class="lp-name">English</span></button>
+      <button class="lp-opt" onclick="selectLang('ja')"><span class="lp-flag">🇯🇵</span><span class="lp-name">日本語</span></button>
+      <button class="lp-opt" onclick="selectLang('zh')"><span class="lp-flag">🇨🇳</span><span class="lp-name">中文</span></button>
+      <button class="lp-opt" onclick="selectLang('fr')"><span class="lp-flag">🇫🇷</span><span class="lp-name">Français</span></button>
+      <button class="lp-opt" onclick="selectLang('de')"><span class="lp-flag">🇩🇪</span><span class="lp-name">Deutsch</span></button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -78,16 +95,30 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         GitHub
       </a>
-      <a href="install.html" class="btn btn-primary">Get Started</a>
+      <a href="install.html" class="btn btn-primary" data-i18n="inst.nav.getStarted">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
+</div>
 
 <section class="page-hero">
   <div class="container">
-    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / Setup</div>
-    <h1 class="fade-up">Up and running<br><span class="grad-text">in under 5 minutes</span></h1>
-    <p class="page-sub fade-up fade-up-delay-1">MeetBrief is an Electron app. If you have Node.js and an API key, you're ready. No installers, no accounts, no signup — just clone and run.</p>
+    <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / <span data-i18n="inst.breadcrumb">Setup</span></div>
+    <h1 class="fade-up" data-i18n-html="inst.hero.h1">Up and running<br><span class="grad-text">in under 5 minutes</span></h1>
+    <p class="page-sub fade-up fade-up-delay-1" data-i18n="inst.hero.sub">MeetBrief is an Electron app. If you have Node.js and an API key, you're ready. No installers, no accounts, no signup — just clone and run.</p>
     <div class="fade-up fade-up-delay-2" style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
       <span style="padding:5px 12px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.2); border-radius:99px; font-size:12px; color:var(--green);">🍎 macOS</span>
       <span style="padding:5px 12px; background:rgba(79,121,245,0.1); border:1px solid rgba(79,121,245,0.2); border-radius:99px; font-size:12px; color:var(--blue2);">🪟 Windows</span>
@@ -100,67 +131,67 @@
   <div class="container">
 
     <!-- PREREQUISITES -->
-    <div class="section-eyebrow fade-up">Step 1</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Prerequisites</h2>
+    <div class="section-eyebrow fade-up" data-i18n="inst.prereq.eyebrow">Step 1</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="inst.prereq.headline">Prerequisites</h2>
 
     <div class="prereq-list fade-up fade-up-delay-2">
       <div class="prereq-item">
         <div class="pi-icon">⬢</div>
         <div>
-          <strong>Node.js 18 or newer</strong>
-          <span>Download from <a href="https://nodejs.org" target="_blank">nodejs.org</a> or install via <code>nvm</code>. Run <code>node --version</code> to check.</span>
+          <strong data-i18n="inst.prereq1.title">Node.js 18 or newer</strong>
+          <span data-i18n="inst.prereq1.desc">Download from nodejs.org or install via nvm. Run node --version to check.</span>
         </div>
       </div>
       <div class="prereq-item">
         <div class="pi-icon">📦</div>
         <div>
-          <strong>npm (comes with Node)</strong>
-          <span>No separate installation needed — npm is bundled with every Node.js release.</span>
+          <strong data-i18n="inst.prereq2.title">npm (comes with Node)</strong>
+          <span data-i18n="inst.prereq2.desc">No separate installation needed — npm is bundled with every Node.js release.</span>
         </div>
       </div>
       <div class="prereq-item">
         <div class="pi-icon">🔑</div>
         <div>
-          <strong>API key (Anthropic or Ollama)</strong>
-          <span>For Claude: get an API key at console.anthropic.com. For fully local use, install <a href="https://ollama.ai" target="_blank">Ollama</a> and pull a model. No key needed for Ollama.</span>
+          <strong data-i18n="inst.prereq3.title">API key (Anthropic or Ollama)</strong>
+          <span data-i18n="inst.prereq3.desc">For Claude: get an API key at console.anthropic.com. For fully local use, install Ollama and pull a model. No key needed for Ollama.</span>
         </div>
       </div>
       <div class="prereq-item">
         <div class="pi-icon">🍎</div>
         <div>
-          <strong>macOS: Screen Recording permission</strong>
-          <span>System audio capture requires Screen Recording access. On first launch, MeetBrief will prompt for it automatically via System Preferences → Privacy & Security.</span>
+          <strong data-i18n="inst.prereq4.title">macOS: Screen Recording permission</strong>
+          <span data-i18n="inst.prereq4.desc">System audio capture requires Screen Recording access. On first launch, MeetBrief will prompt for it automatically via System Preferences → Privacy & Security.</span>
         </div>
       </div>
     </div>
 
     <!-- CLONE -->
     <div style="margin-top:64px;">
-      <div class="section-eyebrow fade-up">Step 2</div>
-      <h2 class="section-headline fade-up fade-up-delay-1">Clone and install</h2>
-      <p class="section-sub fade-up fade-up-delay-2">MeetBrief lives in the <code>MeetingCopilot/</code> directory of the TinyTools repository.</p>
+      <div class="section-eyebrow fade-up" data-i18n="inst.clone.eyebrow">Step 2</div>
+      <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="inst.clone.headline">Clone and install</h2>
+      <p class="section-sub fade-up fade-up-delay-2" data-i18n="inst.clone.sub">MeetBrief lives in the MeetingCopilot/ directory of the TinyTools repository.</p>
 
       <div class="setup-grid fade-up fade-up-delay-2">
         <div class="setup-steps">
           <div class="setup-step">
             <div class="setup-step-num">1</div>
             <div class="setup-step-content">
-              <h4>Clone the repository</h4>
-              <p>The <code>MeetingCopilot/</code> subfolder contains the full Electron app. You only need this subfolder.</p>
+              <h4 data-i18n="inst.clone.step1.h4">Clone the repository</h4>
+              <p data-i18n="inst.clone.step1.p">The MeetingCopilot/ subfolder contains the full Electron app. You only need this subfolder.</p>
             </div>
           </div>
           <div class="setup-step">
             <div class="setup-step-num">2</div>
             <div class="setup-step-content">
-              <h4>Enter the directory</h4>
-              <p>Navigate into <code>MeetingCopilot/</code> — this is where <code>package.json</code> and the Electron entry point live.</p>
+              <h4 data-i18n="inst.clone.step2.h4">Enter the directory</h4>
+              <p data-i18n="inst.clone.step2.p">Navigate into MeetingCopilot/ — this is where package.json and the Electron entry point live.</p>
             </div>
           </div>
           <div class="setup-step">
             <div class="setup-step-num">3</div>
             <div class="setup-step-content">
-              <h4>Install dependencies</h4>
-              <p>npm will fetch Electron, <code>@huggingface/transformers</code>, and other runtime dependencies.</p>
+              <h4 data-i18n="inst.clone.step3.h4">Install dependencies</h4>
+              <p data-i18n="inst.clone.step3.p">npm will fetch Electron, @huggingface/transformers, and other runtime dependencies.</p>
             </div>
           </div>
         </div>
@@ -185,20 +216,20 @@
 
     <!-- ENV CONFIG -->
     <div style="margin-top:64px;">
-      <div class="section-eyebrow fade-up">Step 3</div>
-      <h2 class="section-headline fade-up fade-up-delay-1">Configure your provider</h2>
-      <p class="section-sub fade-up fade-up-delay-2">Create a <code>.env</code> file in <code>MeetingCopilot/</code> and set your provider and API key. Your key stays on your machine — it is never sent to MeetBrief.</p>
+      <div class="section-eyebrow fade-up" data-i18n="inst.env.eyebrow">Step 3</div>
+      <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="inst.env.headline">Configure your provider</h2>
+      <p class="section-sub fade-up fade-up-delay-2" data-i18n="inst.env.sub">Create a .env file in MeetingCopilot/ and set your provider and API key. Your key stays on your machine — it is never sent to MeetBrief.</p>
 
       <div class="platform-tabs fade-up fade-up-delay-1">
-        <button class="ptab active" onclick="showPlatform('anthropic',this)">Using Claude (Anthropic)</button>
-        <button class="ptab" onclick="showPlatform('ollama',this)">Using Ollama (local)</button>
+        <button class="ptab active" onclick="showPlatform('anthropic',this)" data-i18n="inst.env.tab1">Using Claude (Anthropic)</button>
+        <button class="ptab" onclick="showPlatform('ollama',this)" data-i18n="inst.env.tab2">Using Ollama (local)</button>
       </div>
 
       <div id="anthropic-note" class="platform-note macos visible fade-up fade-up-delay-2">
-        <strong style="color:var(--green);">Claude setup:</strong> Get your API key at <strong>console.anthropic.com</strong> → API Keys. Paste it below. Your key is billed per-token directly by Anthropic — typically under $0.10/hour of meeting time with prompt caching enabled.
+        <strong style="color:var(--green);" data-i18n="inst.env.note1.label">Claude setup:</strong> <span data-i18n="inst.env.note1.text">Get your API key at console.anthropic.com → API Keys. Paste it below. Your key is billed per-token directly by Anthropic — typically under $0.10/hour of meeting time with prompt caching enabled.</span>
       </div>
       <div id="ollama-note" class="platform-note linux fade-up fade-up-delay-2">
-        <strong style="color:var(--amber);">Ollama setup:</strong> Install Ollama from <strong>ollama.ai</strong>, then run <code>ollama pull llama3.1</code> (or any model). No API key needed. Latency depends on your hardware — a mid-range GPU gives good results.
+        <strong style="color:var(--amber);" data-i18n="inst.env.note2.label">Ollama setup:</strong> <span data-i18n="inst.env.note2.text">Install Ollama from ollama.ai, then run ollama pull llama3.1 (or any model). No API key needed. Latency depends on your hardware — a mid-range GPU gives good results.</span>
       </div>
 
       <div class="code-block fade-up fade-up-delay-2" id="env-anthropic">
@@ -232,39 +263,39 @@
 <span class="v">WHISPER_MODEL</span>=<span class="s">Xenova/whisper-small</span></pre>
       </div>
 
-      <div class="env-note fade-up fade-up-delay-3">
-        <strong>Your API key stays on your machine.</strong> It is sent directly from your machine to Anthropic (or your local Ollama instance). It never passes through MeetBrief infrastructure — there is none.
+      <div class="env-note fade-up fade-up-delay-3" data-i18n="inst.env.keyNote">
+        Your API key stays on your machine. It is sent directly from your machine to Anthropic (or your local Ollama instance). It never passes through MeetBrief infrastructure — there is none.
       </div>
     </div>
 
     <!-- FULL ENV REFERENCE -->
     <div style="margin-top:48px;" class="fade-up">
-      <h3 style="font-size:1rem; margin-bottom:16px; color:var(--text);">Full .env reference</h3>
+      <h3 style="font-size:1rem; margin-bottom:16px; color:var(--text);" data-i18n="inst.envref.title">Full .env reference</h3>
       <div class="code-block">
         <table class="env-table">
           <thead>
-            <tr><th>Variable</th><th>Values</th><th>Description</th></tr>
+            <tr><th data-i18n="inst.envref.col1">Variable</th><th data-i18n="inst.envref.col2">Values</th><th data-i18n="inst.envref.col3">Description</th></tr>
           </thead>
           <tbody>
             <tr>
               <td class="key">LLM_PROVIDER</td>
               <td class="val"><code>anthropic</code> | <code>ollama</code></td>
-              <td class="desc">Which LLM backend to use</td>
+              <td class="desc" data-i18n="inst.envref.row1">Which LLM backend to use</td>
             </tr>
             <tr>
               <td class="key">ANTHROPIC_API_KEY</td>
               <td class="val"><code>sk-ant-...</code></td>
-              <td class="desc">Anthropic API key (required when using Claude)</td>
+              <td class="desc" data-i18n="inst.envref.row2">Anthropic API key (required when using Claude)</td>
             </tr>
             <tr>
               <td class="key">OLLAMA_MODEL</td>
               <td class="val"><code>llama3.1</code>, <code>mistral</code>, …</td>
-              <td class="desc">Model name to use with Ollama</td>
+              <td class="desc" data-i18n="inst.envref.row3">Model name to use with Ollama</td>
             </tr>
             <tr>
               <td class="key">WHISPER_MODEL</td>
               <td class="val"><code>Xenova/whisper-tiny</code><br><code>Xenova/whisper-small</code><br><code>Xenova/whisper-medium</code></td>
-              <td class="desc">Whisper model size. Small is recommended. Larger = more accurate but slower.</td>
+              <td class="desc" data-i18n="inst.envref.row4">Whisper model size. Small is recommended. Larger = more accurate but slower.</td>
             </tr>
           </tbody>
         </table>
@@ -273,31 +304,31 @@
 
     <!-- LAUNCH -->
     <div style="margin-top:64px;">
-      <div class="section-eyebrow fade-up">Step 4</div>
-      <h2 class="section-headline fade-up fade-up-delay-1">Launch MeetBrief</h2>
-      <p class="section-sub fade-up fade-up-delay-2">Once dependencies are installed and <code>.env</code> is configured, you're ready to start.</p>
+      <div class="section-eyebrow fade-up" data-i18n="inst.launch.eyebrow">Step 4</div>
+      <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="inst.launch.headline">Launch MeetBrief</h2>
+      <p class="section-sub fade-up fade-up-delay-2" data-i18n="inst.launch.sub">Once dependencies are installed and .env is configured, you're ready to start.</p>
 
       <div class="setup-grid fade-up fade-up-delay-2">
         <div class="setup-steps">
           <div class="setup-step">
             <div class="setup-step-num">1</div>
             <div class="setup-step-content">
-              <h4>First run — Whisper download</h4>
-              <p>On the very first launch, MeetBrief will download the Whisper model (~250MB for small) and cache it locally. This is a one-time operation.</p>
+              <h4 data-i18n="inst.launch.step1.h4">First run — Whisper download</h4>
+              <p data-i18n="inst.launch.step1.p">On the very first launch, MeetBrief will download the Whisper model (~250MB for small) and cache it locally. This is a one-time operation.</p>
             </div>
           </div>
           <div class="setup-step">
             <div class="setup-step-num">2</div>
             <div class="setup-step-content">
-              <h4>Grant permissions (macOS)</h4>
-              <p>macOS will prompt for Screen Recording permission. Grant it — this is required for system audio capture to work. You can verify it in System Settings → Privacy & Security → Screen Recording.</p>
+              <h4 data-i18n="inst.launch.step2.h4">Grant permissions (macOS)</h4>
+              <p data-i18n="inst.launch.step2.p">macOS will prompt for Screen Recording permission. Grant it — this is required for system audio capture to work. Verify in System Settings → Privacy & Security → Screen Recording.</p>
             </div>
           </div>
           <div class="setup-step">
             <div class="setup-step-num">3</div>
             <div class="setup-step-content">
-              <h4>Load context, start session</h4>
-              <p>Paste your meeting context into the text area, choose your provider, and click Start Session. Join your meeting — MeetBrief will begin listening.</p>
+              <h4 data-i18n="inst.launch.step3.h4">Load context, start session</h4>
+              <p data-i18n="inst.launch.step3.p">Paste your meeting context into the text area, choose your provider, and click Start Session. Join your meeting — MeetBrief will begin listening.</p>
             </div>
           </div>
         </div>
@@ -315,8 +346,8 @@
 <span class="h"># Accept the Screen Recording prompt on macOS.</span></pre>
           </div>
 
-          <div class="env-note" style="margin-top:16px;">
-            <strong>25-day free trial.</strong> No account or signup required. After the trial period, email <a href="mailto:martian.coders.x@gmail.com" style="color:var(--amber);">martian.coders.x@gmail.com</a> for a license key. Enter it directly in the app.
+          <div class="env-note" style="margin-top:16px;" data-i18n="inst.launch.trialNote">
+            25-day free trial. No account or signup required. After the trial period, email martian.coders.x@gmail.com for a license key. Enter it directly in the app.
           </div>
         </div>
       </div>
@@ -328,38 +359,38 @@
 <!-- TROUBLESHOOTING -->
 <section style="background:var(--bg2); border-top:1px solid var(--border);">
   <div class="container">
-    <div class="section-eyebrow fade-up">Troubleshooting</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Common issues</h2>
+    <div class="section-eyebrow fade-up" data-i18n="inst.trouble.eyebrow">Troubleshooting</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="inst.trouble.headline">Common issues</h2>
 
     <div class="faq-wrap">
       <div class="faq-list fade-up fade-up-delay-2">
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q" onclick="toggleFaq(this)" data-i18n="inst.trouble.q1">
             No system audio is being captured
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <div class="faq-a"><strong>macOS:</strong> Check System Settings → Privacy & Security → Screen Recording and ensure MeetBrief is listed and enabled. You may need to restart the app after granting permission. <strong>Windows:</strong> Ensure the default playback device is set correctly. <strong>Linux:</strong> System audio requires a PulseAudio loopback module. Run <code>pactl load-module module-loopback</code> to test.</div>
+          <div class="faq-a" data-i18n="inst.trouble.a1">macOS: Check System Settings → Privacy & Security → Screen Recording and ensure MeetBrief is listed and enabled. Windows: Ensure the default playback device is set correctly. Linux: System audio requires a PulseAudio loopback module.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q" onclick="toggleFaq(this)" data-i18n="inst.trouble.q2">
             API calls fail with an authentication error
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <div class="faq-a">Check that your <code>ANTHROPIC_API_KEY</code> in <code>.env</code> is correct and starts with <code>sk-ant-</code>. Make sure you're in the <code>MeetingCopilot/</code> directory when running <code>npm start</code> (the <code>.env</code> file must be in that directory).</div>
+          <div class="faq-a" data-i18n="inst.trouble.a2">Check that your ANTHROPIC_API_KEY in .env is correct and starts with sk-ant-. Make sure you're in the MeetingCopilot/ directory when running npm start.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q" onclick="toggleFaq(this)" data-i18n="inst.trouble.q3">
             Whisper download fails or hangs
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <div class="faq-a">The model downloads from Hugging Face CDN (~250MB for whisper-small). If it fails, check your internet connection and try again. The model is cached in <code>~/.cache/meetbrief/</code> after the first successful download. Switching to <code>WHISPER_MODEL=Xenova/whisper-tiny</code> in your <code>.env</code> downloads a smaller model (~75MB).</div>
+          <div class="faq-a" data-i18n="inst.trouble.a3">The model downloads from Hugging Face CDN (~250MB for whisper-small). If it fails, check your internet connection and try again. The model is cached in ~/.cache/meetbrief/ after the first successful download.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q" onclick="toggleFaq(this)" data-i18n="inst.trouble.q4">
             Ollama not connecting
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <div class="faq-a">Ensure Ollama is running (<code>ollama serve</code>) and accessible at <code>http://localhost:11434</code>. Verify your model is pulled: <code>ollama list</code>. The model name in <code>OLLAMA_MODEL</code> must exactly match the name shown by <code>ollama list</code>.</div>
+          <div class="faq-a" data-i18n="inst.trouble.a4">Ensure Ollama is running (ollama serve) and accessible at http://localhost:11434. Verify your model is pulled: ollama list. The model name in OLLAMA_MODEL must exactly match the name shown by ollama list.</div>
         </div>
       </div>
     </div>
@@ -370,13 +401,13 @@
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">Questions before you install?</h2>
-    <p class="fade-up fade-up-delay-1">Check the FAQ or reach out — happy to help you get set up.</p>
+    <h2 class="fade-up" data-i18n="inst.cta.h2">Questions before you install?</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="inst.cta.p">Check the FAQ or reach out — happy to help you get set up.</p>
     <div class="cta-actions">
-      <a href="faq.html" class="btn btn-primary fade-up fade-up-delay-2">View FAQ</a>
+      <a href="faq.html" class="btn btn-primary fade-up fade-up-delay-2" data-i18n="inst.cta.btn1">View FAQ</a>
       <a href="mailto:martian.coders.x@gmail.com" class="btn btn-ghost fade-up fade-up-delay-3">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email support
+        <span data-i18n="inst.cta.btn2">Email support</span>
       </a>
     </div>
   </div>
@@ -432,6 +463,393 @@ function showPlatform(platform, btn) {
   document.getElementById('env-anthropic').style.display = platform === 'anthropic' ? 'block' : 'none';
   document.getElementById('env-ollama').style.display = platform === 'ollama' ? 'block' : 'none';
 }
+
+// Hamburger
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+
+// i18n
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+const i18n = {
+  en: {
+    'inst.nav.getStarted': 'Get Started',
+    'inst.breadcrumb': 'Setup',
+    'inst.hero.h1': 'Up and running<br><span class="grad-text">in under 5 minutes</span>',
+    'inst.hero.sub': 'MeetBrief is an Electron app. If you have Node.js and an API key, you\'re ready. No installers, no accounts, no signup — just clone and run.',
+    'inst.prereq.eyebrow': 'Step 1',
+    'inst.prereq.headline': 'Prerequisites',
+    'inst.prereq1.title': 'Node.js 18 or newer',
+    'inst.prereq1.desc': 'Download from nodejs.org or install via nvm. Run node --version to check.',
+    'inst.prereq2.title': 'npm (comes with Node)',
+    'inst.prereq2.desc': 'No separate installation needed — npm is bundled with every Node.js release.',
+    'inst.prereq3.title': 'API key (Anthropic or Ollama)',
+    'inst.prereq3.desc': 'For Claude: get an API key at console.anthropic.com. For fully local use, install Ollama and pull a model. No key needed for Ollama.',
+    'inst.prereq4.title': 'macOS: Screen Recording permission',
+    'inst.prereq4.desc': 'System audio capture requires Screen Recording access. On first launch, MeetBrief will prompt for it automatically via System Preferences → Privacy & Security.',
+    'inst.clone.eyebrow': 'Step 2',
+    'inst.clone.headline': 'Clone and install',
+    'inst.clone.sub': 'MeetBrief lives in the MeetingCopilot/ directory of the TinyTools repository.',
+    'inst.clone.step1.h4': 'Clone the repository',
+    'inst.clone.step1.p': 'The MeetingCopilot/ subfolder contains the full Electron app. You only need this subfolder.',
+    'inst.clone.step2.h4': 'Enter the directory',
+    'inst.clone.step2.p': 'Navigate into MeetingCopilot/ — this is where package.json and the Electron entry point live.',
+    'inst.clone.step3.h4': 'Install dependencies',
+    'inst.clone.step3.p': 'npm will fetch Electron, @huggingface/transformers, and other runtime dependencies.',
+    'inst.env.eyebrow': 'Step 3',
+    'inst.env.headline': 'Configure your provider',
+    'inst.env.sub': 'Create a .env file in MeetingCopilot/ and set your provider and API key. Your key stays on your machine — it is never sent to MeetBrief.',
+    'inst.env.tab1': 'Using Claude (Anthropic)',
+    'inst.env.tab2': 'Using Ollama (local)',
+    'inst.env.note1.label': 'Claude setup:',
+    'inst.env.note1.text': 'Get your API key at console.anthropic.com → API Keys. Paste it below. Typically under $0.10/hour of meeting time with prompt caching.',
+    'inst.env.note2.label': 'Ollama setup:',
+    'inst.env.note2.text': 'Install Ollama from ollama.ai, then run ollama pull llama3.1. No API key needed.',
+    'inst.env.keyNote': 'Your API key stays on your machine. It is sent directly from your machine to Anthropic (or your local Ollama instance). It never passes through MeetBrief infrastructure — there is none.',
+    'inst.envref.title': 'Full .env reference',
+    'inst.envref.col1': 'Variable', 'inst.envref.col2': 'Values', 'inst.envref.col3': 'Description',
+    'inst.envref.row1': 'Which LLM backend to use',
+    'inst.envref.row2': 'Anthropic API key (required when using Claude)',
+    'inst.envref.row3': 'Model name to use with Ollama',
+    'inst.envref.row4': 'Whisper model size. Small is recommended. Larger = more accurate but slower.',
+    'inst.launch.eyebrow': 'Step 4',
+    'inst.launch.headline': 'Launch MeetBrief',
+    'inst.launch.sub': 'Once dependencies are installed and .env is configured, you\'re ready to start.',
+    'inst.launch.step1.h4': 'First run — Whisper download',
+    'inst.launch.step1.p': 'On the very first launch, MeetBrief will download the Whisper model (~250MB for small) and cache it locally. This is a one-time operation.',
+    'inst.launch.step2.h4': 'Grant permissions (macOS)',
+    'inst.launch.step2.p': 'macOS will prompt for Screen Recording permission. Grant it — this is required for system audio capture to work.',
+    'inst.launch.step3.h4': 'Load context, start session',
+    'inst.launch.step3.p': 'Paste your meeting context into the text area, choose your provider, and click Start Session. Join your meeting — MeetBrief will begin listening.',
+    'inst.launch.trialNote': '25-day free trial. No account or signup required. After the trial period, email martian.coders.x@gmail.com for a license key. Enter it directly in the app.',
+    'inst.trouble.eyebrow': 'Troubleshooting',
+    'inst.trouble.headline': 'Common issues',
+    'inst.trouble.q1': 'No system audio is being captured',
+    'inst.trouble.a1': 'macOS: Check System Settings → Privacy & Security → Screen Recording and ensure MeetBrief is listed and enabled. Windows: Ensure the default playback device is set correctly. Linux: System audio requires a PulseAudio loopback module.',
+    'inst.trouble.q2': 'API calls fail with an authentication error',
+    'inst.trouble.a2': 'Check that your ANTHROPIC_API_KEY in .env is correct and starts with sk-ant-. Make sure you\'re in the MeetingCopilot/ directory when running npm start.',
+    'inst.trouble.q3': 'Whisper download fails or hangs',
+    'inst.trouble.a3': 'The model downloads from Hugging Face CDN (~250MB for whisper-small). If it fails, check your internet connection and try again.',
+    'inst.trouble.q4': 'Ollama not connecting',
+    'inst.trouble.a4': 'Ensure Ollama is running (ollama serve) and accessible at http://localhost:11434. Verify your model is pulled: ollama list.',
+    'inst.cta.h2': 'Questions before you install?',
+    'inst.cta.p': 'Check the FAQ or reach out — happy to help you get set up.',
+    'inst.cta.btn1': 'View FAQ',
+    'inst.cta.btn2': 'Email support',
+  },
+  ja: {
+    'inst.nav.getStarted': '今すぐ始める',
+    'inst.breadcrumb': 'セットアップ',
+    'inst.hero.h1': '5分以内に<br><span class="grad-text">起動完了</span>',
+    'inst.hero.sub': 'MeetBriefはElectronアプリです。Node.jsとAPIキーがあればすぐに使えます。インストーラー不要、アカウント不要、サインアップ不要。クローンして実行するだけです。',
+    'inst.prereq.eyebrow': 'ステップ1',
+    'inst.prereq.headline': '前提条件',
+    'inst.prereq1.title': 'Node.js 18以上',
+    'inst.prereq1.desc': 'nodejs.orgからダウンロードするか、nvmでインストールします。node --versionで確認できます。',
+    'inst.prereq2.title': 'npm（Nodeに付属）',
+    'inst.prereq2.desc': 'Node.jsリリースにバンドルされているため、別途インストール不要です。',
+    'inst.prereq3.title': 'APIキー（AnthropicまたはOllama）',
+    'inst.prereq3.desc': 'Claude用：console.anthropic.comでAPIキーを取得。ローカル使用の場合はOllamaをインストールしてモデルをプルします。Ollamaはキー不要です。',
+    'inst.prereq4.title': 'macOS：画面収録の権限',
+    'inst.prereq4.desc': 'システム音声のキャプチャには画面収録のアクセスが必要です。初回起動時に自動的にシステム設定→プライバシーとセキュリティで促されます。',
+    'inst.clone.eyebrow': 'ステップ2',
+    'inst.clone.headline': 'クローンとインストール',
+    'inst.clone.sub': 'MeetBriefはTinyToolsリポジトリのMeetingCopilot/ディレクトリにあります。',
+    'inst.clone.step1.h4': 'リポジトリをクローン',
+    'inst.clone.step1.p': 'MeetingCopilot/サブフォルダに完全なElectronアプリが含まれています。',
+    'inst.clone.step2.h4': 'ディレクトリに移動',
+    'inst.clone.step2.p': 'MeetingCopilot/に移動します。ここにpackage.jsonとElectronエントリポイントがあります。',
+    'inst.clone.step3.h4': '依存関係をインストール',
+    'inst.clone.step3.p': 'npmがElectron、@huggingface/transformers、その他の依存関係を取得します。',
+    'inst.env.eyebrow': 'ステップ3',
+    'inst.env.headline': 'プロバイダーを設定',
+    'inst.env.sub': 'MeetingCopilot/に.envファイルを作成し、プロバイダーとAPIキーを設定します。キーはあなたのマシンに留まり、MeetBriefに送信されることはありません。',
+    'inst.env.tab1': 'Claude（Anthropic）を使用',
+    'inst.env.tab2': 'Ollama（ローカル）を使用',
+    'inst.env.note1.label': 'Claudeのセットアップ：',
+    'inst.env.note1.text': 'console.anthropic.com → APIキーでキーを取得して貼り付けます。プロンプトキャッシュ有効で通常1時間あたり$0.10未満です。',
+    'inst.env.note2.label': 'Ollamaのセットアップ：',
+    'inst.env.note2.text': 'ollama.aiからOllamaをインストールし、ollama pull llama3.1を実行します。APIキー不要です。',
+    'inst.env.keyNote': 'APIキーはあなたのマシンに保管されます。Anthropic（またはローカルOllamaインスタンス）に直接送信されます。MeetBriefのインフラを経由することはありません。',
+    'inst.envref.title': '完全な.envリファレンス',
+    'inst.envref.col1': '変数', 'inst.envref.col2': '値', 'inst.envref.col3': '説明',
+    'inst.envref.row1': '使用するLLMバックエンド',
+    'inst.envref.row2': 'Anthropic APIキー（Claude使用時に必須）',
+    'inst.envref.row3': 'Ollamaで使用するモデル名',
+    'inst.envref.row4': 'Whisperモデルサイズ。smallを推奨。大きいほど精度は上がりますが遅くなります。',
+    'inst.launch.eyebrow': 'ステップ4',
+    'inst.launch.headline': 'MeetBriefを起動',
+    'inst.launch.sub': '依存関係がインストールされ、.envが設定されたら、起動する準備ができています。',
+    'inst.launch.step1.h4': '初回起動 — Whisperのダウンロード',
+    'inst.launch.step1.p': '初回起動時、MeetBriefはWhisperモデル（smallで約250MB）をダウンロードしてローカルにキャッシュします。これは一度限りの操作です。',
+    'inst.launch.step2.h4': '権限の付与（macOS）',
+    'inst.launch.step2.p': 'macOSが画面収録の権限を求めます。これはシステム音声キャプチャに必要です。システム設定→プライバシーとセキュリティ→画面収録で確認できます。',
+    'inst.launch.step3.h4': 'コンテキストを読み込み、セッション開始',
+    'inst.launch.step3.p': 'テキストエリアに会議コンテキストを貼り付け、プロバイダーを選択し、セッション開始をクリックします。会議に参加するとMeetBriefが聴き始めます。',
+    'inst.launch.trialNote': '25日間無料トライアル。アカウントやサインアップ不要。トライアル終了後はmartian.coders.x@gmail.comにメールしてライセンスキーを取得し、アプリに入力してください。',
+    'inst.trouble.eyebrow': 'トラブルシューティング',
+    'inst.trouble.headline': 'よくある問題',
+    'inst.trouble.q1': 'システム音声がキャプチャされない',
+    'inst.trouble.a1': 'macOS：システム設定→プライバシーとセキュリティ→画面収録を確認してください。Windows：デフォルト再生デバイスを確認。Linux：PulseAudioループバックモジュールが必要です。',
+    'inst.trouble.q2': 'API呼び出しが認証エラーで失敗する',
+    'inst.trouble.a2': '.envのANTHROPIC_API_KEYがsk-ant-で始まる正しい値であることを確認してください。npm startはMeetingCopilot/ディレクトリで実行してください。',
+    'inst.trouble.q3': 'Whisperのダウンロードが失敗するか止まる',
+    'inst.trouble.a3': 'モデルはHugging Face CDNからダウンロードされます（whisper-smallで約250MB）。失敗した場合はインターネット接続を確認して再試行してください。',
+    'inst.trouble.q4': 'Ollamaに接続できない',
+    'inst.trouble.a4': 'Ollamaが起動中（ollama serve）でhttp://localhost:11434にアクセスできることを確認してください。ollama listでモデルがプルされているか確認してください。',
+    'inst.cta.h2': 'インストール前に質問がありますか？',
+    'inst.cta.p': 'FAQを確認するかお問い合わせください。セットアップのサポートをいたします。',
+    'inst.cta.btn1': 'FAQを見る',
+    'inst.cta.btn2': 'メールでサポート',
+  },
+  zh: {
+    'inst.nav.getStarted': '立即开始',
+    'inst.breadcrumb': '安装配置',
+    'inst.hero.h1': '5分钟内<br><span class="grad-text">启动运行</span>',
+    'inst.hero.sub': 'MeetBrief是一个Electron应用。只需Node.js和API密钥即可就绪。无需安装程序、无需账号、无需注册——克隆并运行即可。',
+    'inst.prereq.eyebrow': '第一步',
+    'inst.prereq.headline': '前置要求',
+    'inst.prereq1.title': 'Node.js 18或更新版本',
+    'inst.prereq1.desc': '从nodejs.org下载或通过nvm安装。运行node --version检查版本。',
+    'inst.prereq2.title': 'npm（随Node.js附带）',
+    'inst.prereq2.desc': '无需单独安装——npm已包含在每个Node.js版本中。',
+    'inst.prereq3.title': 'API密钥（Anthropic或Ollama）',
+    'inst.prereq3.desc': 'Claude：在console.anthropic.com获取API密钥。完全本地使用时，安装Ollama并拉取模型，Ollama无需密钥。',
+    'inst.prereq4.title': 'macOS：屏幕录制权限',
+    'inst.prereq4.desc': '系统音频捕获需要屏幕录制权限。首次启动时，MeetBrief会通过系统偏好设置→隐私与安全性自动提示。',
+    'inst.clone.eyebrow': '第二步',
+    'inst.clone.headline': '克隆与安装',
+    'inst.clone.sub': 'MeetBrief位于TinyTools仓库的MeetingCopilot/目录中。',
+    'inst.clone.step1.h4': '克隆仓库',
+    'inst.clone.step1.p': 'MeetingCopilot/子目录包含完整的Electron应用，只需此子目录。',
+    'inst.clone.step2.h4': '进入目录',
+    'inst.clone.step2.p': '导航至MeetingCopilot/——package.json和Electron入口文件在此处。',
+    'inst.clone.step3.h4': '安装依赖',
+    'inst.clone.step3.p': 'npm将获取Electron、@huggingface/transformers及其他运行时依赖。',
+    'inst.env.eyebrow': '第三步',
+    'inst.env.headline': '配置您的提供商',
+    'inst.env.sub': '在MeetingCopilot/中创建.env文件并设置提供商和API密钥。密钥保留在您的机器上，永远不会发送给MeetBrief。',
+    'inst.env.tab1': '使用Claude（Anthropic）',
+    'inst.env.tab2': '使用Ollama（本地）',
+    'inst.env.note1.label': 'Claude配置：',
+    'inst.env.note1.text': '在console.anthropic.com → API密钥获取密钥并粘贴。开启提示词缓存后，通常每小时会议费用低于$0.10。',
+    'inst.env.note2.label': 'Ollama配置：',
+    'inst.env.note2.text': '从ollama.ai安装Ollama，然后运行ollama pull llama3.1。无需API密钥。',
+    'inst.env.keyNote': 'API密钥保留在您的机器上。直接从您的机器发送至Anthropic（或本地Ollama实例），永不经过MeetBrief基础设施——因为根本没有。',
+    'inst.envref.title': '完整.env参考',
+    'inst.envref.col1': '变量', 'inst.envref.col2': '值', 'inst.envref.col3': '描述',
+    'inst.envref.row1': '使用的LLM后端',
+    'inst.envref.row2': 'Anthropic API密钥（使用Claude时必填）',
+    'inst.envref.row3': 'Ollama使用的模型名称',
+    'inst.envref.row4': 'Whisper模型大小。推荐small。越大越准确但越慢。',
+    'inst.launch.eyebrow': '第四步',
+    'inst.launch.headline': '启动MeetBrief',
+    'inst.launch.sub': '安装依赖并配置好.env后，即可启动。',
+    'inst.launch.step1.h4': '首次运行——下载Whisper',
+    'inst.launch.step1.p': '首次启动时，MeetBrief将下载Whisper模型（small约250MB）并本地缓存。这是一次性操作。',
+    'inst.launch.step2.h4': '授予权限（macOS）',
+    'inst.launch.step2.p': 'macOS会提示屏幕录制权限。请授予——这是系统音频捕获所必需的。在系统设置→隐私与安全性→屏幕录制中验证。',
+    'inst.launch.step3.h4': '加载上下文，开始会话',
+    'inst.launch.step3.p': '将会议上下文粘贴到文本区域，选择提供商，点击开始会话。加入会议后MeetBrief将开始监听。',
+    'inst.launch.trialNote': '25天免费试用。无需账号或注册。试用期结束后，发送邮件至martian.coders.x@gmail.com获取许可证密钥，直接在应用中输入即可。',
+    'inst.trouble.eyebrow': '故障排除',
+    'inst.trouble.headline': '常见问题',
+    'inst.trouble.q1': '没有捕获到系统音频',
+    'inst.trouble.a1': 'macOS：检查系统设置→隐私与安全性→屏幕录制，确保MeetBrief已列出并启用。Windows：确保默认播放设备设置正确。Linux：系统音频需要PulseAudio环回模块。',
+    'inst.trouble.q2': 'API调用因认证错误失败',
+    'inst.trouble.a2': '检查.env中的ANTHROPIC_API_KEY是否正确且以sk-ant-开头。确保在MeetingCopilot/目录下运行npm start。',
+    'inst.trouble.q3': 'Whisper下载失败或卡住',
+    'inst.trouble.a3': '模型从Hugging Face CDN下载（whisper-small约250MB）。失败时检查网络连接并重试。',
+    'inst.trouble.q4': 'Ollama无法连接',
+    'inst.trouble.a4': '确保Ollama正在运行（ollama serve）且可在http://localhost:11434访问。用ollama list确认模型已拉取。',
+    'inst.cta.h2': '安装前有问题？',
+    'inst.cta.p': '查看FAQ或联系我们——很乐意帮助您完成配置。',
+    'inst.cta.btn1': '查看FAQ',
+    'inst.cta.btn2': '发送邮件支持',
+  },
+  fr: {
+    'inst.nav.getStarted': 'Commencer',
+    'inst.breadcrumb': 'Configuration',
+    'inst.hero.h1': 'Opérationnel<br><span class="grad-text">en moins de 5 minutes</span>',
+    'inst.hero.sub': 'MeetBrief est une application Electron. Si vous avez Node.js et une clé API, vous êtes prêt. Pas d\'installateur, pas de compte, pas d\'inscription — clonez et lancez.',
+    'inst.prereq.eyebrow': 'Étape 1',
+    'inst.prereq.headline': 'Prérequis',
+    'inst.prereq1.title': 'Node.js 18 ou plus récent',
+    'inst.prereq1.desc': 'Téléchargez depuis nodejs.org ou installez via nvm. Exécutez node --version pour vérifier.',
+    'inst.prereq2.title': 'npm (inclus avec Node)',
+    'inst.prereq2.desc': 'Pas d\'installation séparée nécessaire — npm est fourni avec chaque version de Node.js.',
+    'inst.prereq3.title': 'Clé API (Anthropic ou Ollama)',
+    'inst.prereq3.desc': 'Pour Claude : obtenez une clé API sur console.anthropic.com. Pour une utilisation locale, installez Ollama et tirez un modèle. Pas de clé nécessaire pour Ollama.',
+    'inst.prereq4.title': 'macOS : Permission d\'enregistrement d\'écran',
+    'inst.prereq4.desc': 'La capture audio système nécessite l\'accès à l\'enregistrement d\'écran. Au premier lancement, MeetBrief le demandera automatiquement via Préférences Système → Confidentialité.',
+    'inst.clone.eyebrow': 'Étape 2',
+    'inst.clone.headline': 'Cloner et installer',
+    'inst.clone.sub': 'MeetBrief se trouve dans le répertoire MeetingCopilot/ du dépôt TinyTools.',
+    'inst.clone.step1.h4': 'Cloner le dépôt',
+    'inst.clone.step1.p': 'Le sous-dossier MeetingCopilot/ contient l\'application Electron complète.',
+    'inst.clone.step2.h4': 'Entrer dans le répertoire',
+    'inst.clone.step2.p': 'Naviguez vers MeetingCopilot/ — c\'est là que se trouvent package.json et le point d\'entrée Electron.',
+    'inst.clone.step3.h4': 'Installer les dépendances',
+    'inst.clone.step3.p': 'npm récupérera Electron, @huggingface/transformers et les autres dépendances d\'exécution.',
+    'inst.env.eyebrow': 'Étape 3',
+    'inst.env.headline': 'Configurer votre fournisseur',
+    'inst.env.sub': 'Créez un fichier .env dans MeetingCopilot/ et définissez votre fournisseur et votre clé API. Votre clé reste sur votre machine — elle n\'est jamais envoyée à MeetBrief.',
+    'inst.env.tab1': 'Utiliser Claude (Anthropic)',
+    'inst.env.tab2': 'Utiliser Ollama (local)',
+    'inst.env.note1.label': 'Configuration Claude :',
+    'inst.env.note1.text': 'Obtenez votre clé API sur console.anthropic.com → Clés API. Généralement moins de $0,10/heure avec le cache de prompts.',
+    'inst.env.note2.label': 'Configuration Ollama :',
+    'inst.env.note2.text': 'Installez Ollama depuis ollama.ai, puis exécutez ollama pull llama3.1. Pas de clé API nécessaire.',
+    'inst.env.keyNote': 'Votre clé API reste sur votre machine. Elle est envoyée directement à Anthropic (ou à votre instance Ollama locale). Elle ne transite jamais par l\'infrastructure MeetBrief — il n\'y en a pas.',
+    'inst.envref.title': 'Référence complète .env',
+    'inst.envref.col1': 'Variable', 'inst.envref.col2': 'Valeurs', 'inst.envref.col3': 'Description',
+    'inst.envref.row1': 'Quel backend LLM utiliser',
+    'inst.envref.row2': 'Clé API Anthropic (requise pour Claude)',
+    'inst.envref.row3': 'Nom du modèle à utiliser avec Ollama',
+    'inst.envref.row4': 'Taille du modèle Whisper. Small est recommandé. Plus grand = plus précis mais plus lent.',
+    'inst.launch.eyebrow': 'Étape 4',
+    'inst.launch.headline': 'Lancer MeetBrief',
+    'inst.launch.sub': 'Une fois les dépendances installées et .env configuré, vous êtes prêt à démarrer.',
+    'inst.launch.step1.h4': 'Premier lancement — Téléchargement de Whisper',
+    'inst.launch.step1.p': 'Au tout premier lancement, MeetBrief téléchargera le modèle Whisper (~250 Mo pour small) et le mettra en cache localement. C\'est une opération unique.',
+    'inst.launch.step2.h4': 'Accorder les permissions (macOS)',
+    'inst.launch.step2.p': 'macOS demandera la permission d\'enregistrement d\'écran. Accordez-la — c\'est requis pour la capture audio système.',
+    'inst.launch.step3.h4': 'Charger le contexte, démarrer la session',
+    'inst.launch.step3.p': 'Collez votre contexte de réunion dans la zone de texte, choisissez votre fournisseur et cliquez sur Démarrer la session.',
+    'inst.launch.trialNote': 'Essai gratuit de 25 jours. Pas de compte ni d\'inscription requis. Après la période d\'essai, envoyez un e-mail à martian.coders.x@gmail.com pour une clé de licence.',
+    'inst.trouble.eyebrow': 'Dépannage',
+    'inst.trouble.headline': 'Problèmes courants',
+    'inst.trouble.q1': 'Aucun audio système n\'est capturé',
+    'inst.trouble.a1': 'macOS : Vérifiez Réglages Système → Confidentialité & Sécurité → Enregistrement d\'écran. Windows : Vérifiez le périphérique de lecture par défaut. Linux : L\'audio système nécessite un module de bouclage PulseAudio.',
+    'inst.trouble.q2': 'Les appels API échouent avec une erreur d\'authentification',
+    'inst.trouble.a2': 'Vérifiez que votre ANTHROPIC_API_KEY dans .env est correct et commence par sk-ant-. Assurez-vous d\'être dans le répertoire MeetingCopilot/ lors de l\'exécution de npm start.',
+    'inst.trouble.q3': 'Le téléchargement de Whisper échoue ou est bloqué',
+    'inst.trouble.a3': 'Le modèle se télécharge depuis le CDN Hugging Face (~250 Mo pour whisper-small). Si ça échoue, vérifiez votre connexion internet et réessayez.',
+    'inst.trouble.q4': 'Ollama ne se connecte pas',
+    'inst.trouble.a4': 'Assurez-vous qu\'Ollama est en cours d\'exécution (ollama serve) et accessible sur http://localhost:11434. Vérifiez que votre modèle est tiré : ollama list.',
+    'inst.cta.h2': 'Des questions avant d\'installer ?',
+    'inst.cta.p': 'Consultez la FAQ ou contactez-nous — heureux de vous aider à vous configurer.',
+    'inst.cta.btn1': 'Voir la FAQ',
+    'inst.cta.btn2': 'Support par e-mail',
+  },
+  de: {
+    'inst.nav.getStarted': 'Loslegen',
+    'inst.breadcrumb': 'Einrichtung',
+    'inst.hero.h1': 'In unter 5 Minuten<br><span class="grad-text">einsatzbereit</span>',
+    'inst.hero.sub': 'MeetBrief ist eine Electron-App. Mit Node.js und einem API-Schlüssel sind Sie startklar. Kein Installer, kein Konto, keine Anmeldung — einfach klonen und starten.',
+    'inst.prereq.eyebrow': 'Schritt 1',
+    'inst.prereq.headline': 'Voraussetzungen',
+    'inst.prereq1.title': 'Node.js 18 oder neuer',
+    'inst.prereq1.desc': 'Von nodejs.org herunterladen oder über nvm installieren. Mit node --version prüfen.',
+    'inst.prereq2.title': 'npm (mit Node enthalten)',
+    'inst.prereq2.desc': 'Keine separate Installation nötig — npm ist in jedem Node.js-Release enthalten.',
+    'inst.prereq3.title': 'API-Schlüssel (Anthropic oder Ollama)',
+    'inst.prereq3.desc': 'Für Claude: API-Schlüssel auf console.anthropic.com holen. Für voll lokale Nutzung Ollama installieren und ein Modell pullen. Ollama benötigt keinen Schlüssel.',
+    'inst.prereq4.title': 'macOS: Bildschirmaufnahme-Berechtigung',
+    'inst.prereq4.desc': 'Systemton-Erfassung erfordert Bildschirmaufnahme-Zugriff. Beim ersten Start fragt MeetBrief automatisch über Systemeinstellungen → Datenschutz & Sicherheit.',
+    'inst.clone.eyebrow': 'Schritt 2',
+    'inst.clone.headline': 'Klonen und installieren',
+    'inst.clone.sub': 'MeetBrief befindet sich im MeetingCopilot/-Verzeichnis des TinyTools-Repositorys.',
+    'inst.clone.step1.h4': 'Repository klonen',
+    'inst.clone.step1.p': 'Der Unterordner MeetingCopilot/ enthält die vollständige Electron-App.',
+    'inst.clone.step2.h4': 'In das Verzeichnis wechseln',
+    'inst.clone.step2.p': 'In MeetingCopilot/ navigieren — hier befinden sich package.json und der Electron-Einstiegspunkt.',
+    'inst.clone.step3.h4': 'Abhängigkeiten installieren',
+    'inst.clone.step3.p': 'npm lädt Electron, @huggingface/transformers und andere Laufzeit-Abhängigkeiten herunter.',
+    'inst.env.eyebrow': 'Schritt 3',
+    'inst.env.headline': 'Anbieter konfigurieren',
+    'inst.env.sub': 'Erstellen Sie eine .env-Datei in MeetingCopilot/ und legen Sie Ihren Anbieter und API-Schlüssel fest. Ihr Schlüssel verbleibt auf Ihrem Gerät — er wird nie an MeetBrief gesendet.',
+    'inst.env.tab1': 'Claude (Anthropic) verwenden',
+    'inst.env.tab2': 'Ollama (lokal) verwenden',
+    'inst.env.note1.label': 'Claude-Setup:',
+    'inst.env.note1.text': 'API-Schlüssel auf console.anthropic.com → API Keys holen. Typischerweise unter $0,10/Stunde Meeting mit Prompt-Caching.',
+    'inst.env.note2.label': 'Ollama-Setup:',
+    'inst.env.note2.text': 'Ollama von ollama.ai installieren, dann ollama pull llama3.1 ausführen. Kein API-Schlüssel nötig.',
+    'inst.env.keyNote': 'Ihr API-Schlüssel verbleibt auf Ihrem Gerät. Er wird direkt von Ihrem Gerät an Anthropic (oder Ihre lokale Ollama-Instanz) gesendet, nie über MeetBrief-Infrastruktur — die es nicht gibt.',
+    'inst.envref.title': 'Vollständige .env-Referenz',
+    'inst.envref.col1': 'Variable', 'inst.envref.col2': 'Werte', 'inst.envref.col3': 'Beschreibung',
+    'inst.envref.row1': 'Welches LLM-Backend verwendet werden soll',
+    'inst.envref.row2': 'Anthropic API-Schlüssel (erforderlich für Claude)',
+    'inst.envref.row3': 'Modellname für Ollama',
+    'inst.envref.row4': 'Whisper-Modellgröße. Small empfohlen. Größer = genauer aber langsamer.',
+    'inst.launch.eyebrow': 'Schritt 4',
+    'inst.launch.headline': 'MeetBrief starten',
+    'inst.launch.sub': 'Sobald Abhängigkeiten installiert und .env konfiguriert ist, sind Sie startklar.',
+    'inst.launch.step1.h4': 'Erster Start — Whisper-Download',
+    'inst.launch.step1.p': 'Beim allerersten Start lädt MeetBrief das Whisper-Modell (~250 MB für small) herunter und speichert es lokal. Das ist ein einmaliger Vorgang.',
+    'inst.launch.step2.h4': 'Berechtigungen erteilen (macOS)',
+    'inst.launch.step2.p': 'macOS fragt nach der Bildschirmaufnahme-Berechtigung. Erteilen Sie sie — sie ist für die Systemton-Erfassung erforderlich.',
+    'inst.launch.step3.h4': 'Kontext laden, Sitzung starten',
+    'inst.launch.step3.p': 'Fügen Sie Ihren Meeting-Kontext in das Textfeld ein, wählen Sie Ihren Anbieter und klicken Sie auf Sitzung starten.',
+    'inst.launch.trialNote': '25 Tage kostenlose Testversion. Kein Konto oder Anmeldung erforderlich. Nach der Testphase eine E-Mail an martian.coders.x@gmail.com für einen Lizenzschlüssel senden.',
+    'inst.trouble.eyebrow': 'Fehlerbehebung',
+    'inst.trouble.headline': 'Häufige Probleme',
+    'inst.trouble.q1': 'Kein Systemton wird erfasst',
+    'inst.trouble.a1': 'macOS: Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme prüfen. Windows: Standardwiedergabegerät prüfen. Linux: Systemton erfordert ein PulseAudio-Loopback-Modul.',
+    'inst.trouble.q2': 'API-Aufrufe scheitern mit Authentifizierungsfehler',
+    'inst.trouble.a2': 'Prüfen Sie, dass ANTHROPIC_API_KEY in .env korrekt ist und mit sk-ant- beginnt. Stellen Sie sicher, dass npm start im MeetingCopilot/-Verzeichnis ausgeführt wird.',
+    'inst.trouble.q3': 'Whisper-Download schlägt fehl oder hängt',
+    'inst.trouble.a3': 'Das Modell wird vom Hugging Face CDN heruntergeladen (~250 MB für whisper-small). Bei Fehlern Internetverbindung prüfen und erneut versuchen.',
+    'inst.trouble.q4': 'Ollama stellt keine Verbindung her',
+    'inst.trouble.a4': 'Sicherstellen, dass Ollama läuft (ollama serve) und unter http://localhost:11434 erreichbar ist. Mit ollama list prüfen, dass das Modell gepullt ist.',
+    'inst.cta.h2': 'Fragen vor der Installation?',
+    'inst.cta.p': 'FAQ ansehen oder uns kontaktieren — wir helfen Ihnen gerne beim Einrichten.',
+    'inst.cta.btn1': 'FAQ ansehen',
+    'inst.cta.btn2': 'E-Mail-Support',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  const card = overlay.querySelector('.lp-card');
+  if (card) { card.style.animation = 'none'; card.offsetHeight; card.style.animation = ''; }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>

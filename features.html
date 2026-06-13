@@ -15,6 +15,23 @@
 </head>
 <body>
 
+<!-- Language picker -->
+<div class="lp-overlay" id="lpOverlay">
+  <div class="lp-card">
+    <div class="lp-logo"><div class="nav-logo-mark">MB</div><span>MeetBrief</span></div>
+    <h2 class="lp-title">Choose your language</h2>
+    <p class="lp-sub">言語を選択 &nbsp;·&nbsp; 选择语言 &nbsp;·&nbsp; Choisissez &nbsp;·&nbsp; Sprache wählen</p>
+    <div class="lp-options">
+      <button class="lp-opt" onclick="selectLang('en')"><span class="lp-flag">🇺🇸</span><span class="lp-name">English</span></button>
+      <button class="lp-opt" onclick="selectLang('ja')"><span class="lp-flag">🇯🇵</span><span class="lp-name">日本語</span></button>
+      <button class="lp-opt" onclick="selectLang('zh')"><span class="lp-flag">🇨🇳</span><span class="lp-name">中文</span></button>
+      <button class="lp-opt" onclick="selectLang('fr')"><span class="lp-flag">🇫🇷</span><span class="lp-name">Français</span></button>
+      <button class="lp-opt" onclick="selectLang('de')"><span class="lp-flag">🇩🇪</span><span class="lp-name">Deutsch</span></button>
+    </div>
+    <button class="lp-skip" onclick="selectLang('en')">Continue in English →</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -36,16 +53,30 @@
       </a>
       <a href="install.html" class="btn btn-primary">Get Started</a>
     </div>
+    <button class="nav-lang-btn" id="navLangBtn" onclick="showLangPicker()" title="Change language" aria-label="Change language">🌐</button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="features.html">Features</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="install.html">Setup</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="faq.html">FAQ</a>
+  <a href="install.html" class="btn btn-primary" style="margin-top:8px;">Get Started</a>
+  <button onclick="showLangPicker()" style="margin-top:4px;background:rgba(0,0,0,0.04);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;width:100%;font-family:inherit;">🌐 Change Language</button>
+</div>
 
 <section class="page-hero">
   <div class="container">
     <div class="page-breadcrumb"><a href="index.html">MeetBrief</a> / Features</div>
-    <h1 class="fade-up">Every feature you need to<br><span class="grad-text">never be caught off guard</span></h1>
-    <p class="page-sub fade-up fade-up-delay-1">MeetBrief combines local speech recognition, streaming AI responses, and an unobtrusive overlay into a single tool that works with any meeting platform.</p>
+    <h1 class="fade-up" data-i18n-html="feat.hero.h1">Every feature you need to<br><span class="grad-text">never be caught off guard</span></h1>
+    <p class="page-sub fade-up fade-up-delay-1" data-i18n="feat.hero.sub">MeetBrief combines local speech recognition, streaming AI responses, and an unobtrusive overlay into a single tool that works with any meeting platform.</p>
     <div class="fade-up fade-up-delay-2">
-      <a href="install.html" class="btn btn-primary">Start your free trial</a>
+      <a href="install.html" class="btn btn-primary" data-i18n="feat.hero.cta">Start your free trial</a>
     </div>
   </div>
 </section>
@@ -58,48 +89,48 @@
         <div class="bento-icon blue">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </div>
-        <h3>Real-time transcription — hands free</h3>
-        <p>Whisper runs locally on your machine, capturing the other person's audio the moment they speak. A rolling 30-second transcript window is built and maintained automatically — no cloud API required, no latency waiting on a server round-trip. The model detects end-of-turn boundaries using Silero VAD, so it knows exactly when to generate a reply.</p>
+        <h3 data-i18n="feat.b1.h">Real-time transcription — hands free</h3>
+        <p data-i18n="feat.b1.p">Whisper runs locally on your machine, capturing the other person's audio the moment they speak. A rolling 30-second transcript window is built and maintained automatically — no cloud API required, no latency waiting on a server round-trip.</p>
       </div>
 
       <div class="bento-card fade-up fade-up-delay-2">
         <div class="bento-icon violet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>AI-suggested replies, streamed instantly</h3>
-        <p>The moment the speaker pauses (~1 second of silence), the LLM is fired. Responses stream token-by-token to the overlay so the first words appear in under a second. Context-aware and grounded in your pre-loaded meeting notes.</p>
+        <h3 data-i18n="feat.b2.h">AI-suggested replies, streamed instantly</h3>
+        <p data-i18n="feat.b2.p">The moment the speaker pauses (~1 second of silence), the LLM is fired. Responses stream token-by-token to the overlay so the first words appear in under a second. Context-aware and grounded in your pre-loaded meeting notes.</p>
       </div>
 
       <div class="bento-card fade-up fade-up-delay-1">
         <div class="bento-icon green">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <h3>Transparent always-on-top overlay</h3>
-        <p>A frameless, click-through window floats above every app. Glance at it while you speak. Toggle visibility, click-through mode, or force-generate with keyboard shortcuts at any time.</p>
+        <h3 data-i18n="feat.b3.h">Transparent always-on-top overlay</h3>
+        <p data-i18n="feat.b3.p">A frameless, click-through window floats above every app. Glance at it while you speak. Toggle visibility, click-through mode, or force-generate with keyboard shortcuts at any time.</p>
       </div>
 
       <div class="bento-card fade-up fade-up-delay-2">
         <div class="bento-icon amber">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
         </div>
-        <h3>Pluggable LLM & STT providers</h3>
-        <p>Switch between Claude API, Ollama, or other providers with a single config change. Prompt caching keeps costs low on Anthropic's API by caching your static context. Use Ollama for fully offline operation.</p>
+        <h3 data-i18n="feat.b4.h">Pluggable LLM & STT providers</h3>
+        <p data-i18n="feat.b4.p">Switch between Claude API, Ollama, or other providers with a single config change. Prompt caching keeps costs low on Anthropic's API. Use Ollama for fully offline operation.</p>
       </div>
 
       <div class="bento-card fade-up fade-up-delay-3">
         <div class="bento-icon blue">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3>100% local. Zero cloud dependency</h3>
-        <p>Audio never leaves your machine. Transcription runs on-device via Whisper. AI calls go directly from your machine to the API provider you choose — MeetBrief has no relay servers, no analytics, no telemetry.</p>
+        <h3 data-i18n="feat.b5.h">100% local. Zero cloud dependency</h3>
+        <p data-i18n="feat.b5.p">Audio never leaves your machine. Transcription runs on-device via Whisper. AI calls go directly from your machine to the API provider you choose — MeetBrief has no relay servers, no analytics, no telemetry.</p>
       </div>
 
       <div class="bento-card fade-up fade-up-delay-4">
         <div class="bento-icon violet">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
         </div>
-        <h3>Multilingual — any language, English output</h3>
-        <p>Whisper's translate task converts speech in any of 99 supported languages to English text automatically. Works for multilingual meetings with Mandarin, French, Spanish, Arabic, and more speakers at once — the AI always works in English regardless of what's spoken.</p>
+        <h3 data-i18n="feat.b6.h">Multilingual — any language, English output</h3>
+        <p data-i18n="feat.b6.p">Whisper's translate task converts speech in any of 99 supported languages to English text automatically. Works for multilingual meetings with Mandarin, French, Spanish, Arabic, and more speakers at once.</p>
       </div>
     </div>
   </div>
@@ -108,9 +139,9 @@
 <!-- DEMO -->
 <section class="demo-section" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="container">
-    <div class="section-eyebrow fade-up">Live preview</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">See it in action</h2>
-    <p class="section-sub fade-up fade-up-delay-2" style="margin:0 auto 48px; text-align:center;">The overlay floats above your meeting app. Here's what it looks like during a sales call.</p>
+    <div class="section-eyebrow fade-up" data-i18n="feat.demo.eyebrow">Live preview</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="feat.demo.h2">See it in action</h2>
+    <p class="section-sub fade-up fade-up-delay-2" style="margin:0 auto 48px; text-align:center;" data-i18n="feat.demo.sub">The overlay floats above your meeting app. Here's what it looks like during a sales call.</p>
 
     <div class="demo-browser fade-up fade-up-delay-2">
       <div class="demo-browser-bar">
@@ -148,25 +179,25 @@
 <!-- PROVIDERS -->
 <section>
   <div class="container">
-    <div class="section-eyebrow fade-up">Integrations</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Your providers, your choice</h2>
-    <p class="section-sub fade-up fade-up-delay-2">MeetBrief is provider-agnostic. Switch between cloud and local with a single config value.</p>
+    <div class="section-eyebrow fade-up" data-i18n="feat.prov.eyebrow">Integrations</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="feat.prov.h2">Your providers, your choice</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="feat.prov.sub">MeetBrief is provider-agnostic. Switch between cloud and local with a single config value.</p>
 
     <div class="providers-grid">
       <div class="provider-card fade-up fade-up-delay-1">
         <div class="provider-logo anthropic">C</div>
-        <h3>Anthropic Claude</h3>
-        <p>claude-opus-4-8 via the Messages API with <strong>prompt caching</strong> on your static context. Fastest time-to-first-token, highest quality responses for nuanced conversations.</p>
+        <h3 data-i18n="feat.prov.c1.h">Anthropic Claude</h3>
+        <p data-i18n="feat.prov.c1.p">claude-opus-4-8 via the Messages API with prompt caching on your static context. Fastest time-to-first-token, highest quality responses for nuanced conversations.</p>
       </div>
       <div class="provider-card fade-up fade-up-delay-2">
         <div class="provider-logo ollama">🦙</div>
-        <h3>Ollama (local)</h3>
-        <p>Any model running on <code>localhost:11434</code> via the OpenAI-compatible endpoint. Works completely offline — no API key, no cost per call. Good for air-gapped or privacy-sensitive environments.</p>
+        <h3 data-i18n="feat.prov.c2.h">Ollama (local)</h3>
+        <p data-i18n="feat.prov.c2.p">Any model running on <code>localhost:11434</code> via the OpenAI-compatible endpoint. Works completely offline — no API key, no cost per call. Good for air-gapped or privacy-sensitive environments.</p>
       </div>
       <div class="provider-card fade-up fade-up-delay-3">
         <div class="provider-logo whisper">W</div>
-        <h3>Whisper (local STT)</h3>
-        <p>Runs entirely on-device via <code>@huggingface/transformers</code>. Silero VAD handles turn detection. Translate mode converts any of 99 languages to English automatically.</p>
+        <h3 data-i18n="feat.prov.c3.h">Whisper (local STT)</h3>
+        <p data-i18n="feat.prov.c3.p">Runs entirely on-device via <code>@huggingface/transformers</code>. Silero VAD handles turn detection. Translate mode converts any of 99 languages to English automatically.</p>
       </div>
     </div>
   </div>
@@ -175,30 +206,30 @@
 <!-- HOTKEYS -->
 <section style="background:var(--bg2); border-top:1px solid var(--border);">
   <div class="container">
-    <div class="section-eyebrow fade-up">Keyboard shortcuts</div>
-    <h2 class="section-headline fade-up fade-up-delay-1">Stay in flow with hotkeys</h2>
-    <p class="section-sub fade-up fade-up-delay-2">Every action has a keybind. Glance, trigger, dismiss — all without touching your mouse.</p>
+    <div class="section-eyebrow fade-up" data-i18n="feat.hot.eyebrow">Keyboard shortcuts</div>
+    <h2 class="section-headline fade-up fade-up-delay-1" data-i18n="feat.hot.h2">Stay in flow with hotkeys</h2>
+    <p class="section-sub fade-up fade-up-delay-2" data-i18n="feat.hot.sub">Every action has a keybind. Glance, trigger, dismiss — all without touching your mouse.</p>
 
     <div class="info-grid fade-up fade-up-delay-2">
       <div class="info-card">
         <div class="info-icon">⌨️</div>
-        <h3>Toggle overlay visibility</h3>
-        <p>Show or hide the floating suggestion panel instantly. The overlay is always rendered but can be toggled invisible so it never distracts when you don't need it.</p>
+        <h3 data-i18n="feat.hot.c1.h">Toggle overlay visibility</h3>
+        <p data-i18n="feat.hot.c1.p">Show or hide the floating suggestion panel instantly. The overlay is always rendered but can be toggled invisible so it never distracts when you don't need it.</p>
       </div>
       <div class="info-card">
         <div class="info-icon">⚡</div>
-        <h3>Force-generate on demand</h3>
-        <p>Don't wait for a silence trigger. Press the hotkey at any moment to send the current transcript window to the LLM and get a fresh suggestion immediately.</p>
+        <h3 data-i18n="feat.hot.c2.h">Force-generate on demand</h3>
+        <p data-i18n="feat.hot.c2.p">Don't wait for a silence trigger. Press the hotkey at any moment to send the current transcript window to the LLM and get a fresh suggestion immediately.</p>
       </div>
       <div class="info-card">
         <div class="info-icon">🖱️</div>
-        <h3>Click-through mode</h3>
-        <p>Toggle mouse events on the overlay so clicks pass through to the app behind it. When you want to interact with the overlay (scroll, select text), toggle it back.</p>
+        <h3 data-i18n="feat.hot.c3.h">Click-through mode</h3>
+        <p data-i18n="feat.hot.c3.p">Toggle mouse events on the overlay so clicks pass through to the app behind it. When you want to interact with the overlay, toggle it back.</p>
       </div>
       <div class="info-card">
         <div class="info-icon">🔧</div>
-        <h3>Fully customizable</h3>
-        <p>All keybinds are configurable in the Settings panel. Change any shortcut to avoid conflicts with your meeting app or OS-level shortcuts.</p>
+        <h3 data-i18n="feat.hot.c4.h">Fully customizable</h3>
+        <p data-i18n="feat.hot.c4.p">All keybinds are configurable in the Settings panel. Change any shortcut to avoid conflicts with your meeting app or OS-level shortcuts.</p>
       </div>
     </div>
   </div>
@@ -208,14 +239,14 @@
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="container">
-    <h2 class="fade-up">Ready to experience it?</h2>
-    <p class="fade-up fade-up-delay-1">25-day free trial. No account needed. Clone and run in minutes.</p>
+    <h2 class="fade-up" data-i18n="feat.cta.h2">Ready to experience it?</h2>
+    <p class="fade-up fade-up-delay-1" data-i18n="feat.cta.sub">25-day free trial. No account needed. Clone and run in minutes.</p>
     <div class="cta-actions">
       <a href="install.html" class="btn btn-primary fade-up fade-up-delay-2">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5m-5-7v12"/></svg>
-        Install MeetBrief
+        <span data-i18n="feat.cta.btn1">Install MeetBrief</span>
       </a>
-      <a href="how-it-works.html" class="btn btn-ghost fade-up fade-up-delay-3">How it works →</a>
+      <a href="how-it-works.html" class="btn btn-ghost fade-up fade-up-delay-3" data-i18n="feat.cta.btn2">How it works →</a>
     </div>
   </div>
 </section>
@@ -275,6 +306,288 @@ function rotate() {
   }, 400);
 }
 setInterval(rotate, 7000);
+
+// Hamburger
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    const open = navMobile.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  });
+}
+
+// ── i18n ──
+const langFlags = { en: '🇺🇸', ja: '🇯🇵', zh: '🇨🇳', fr: '🇫🇷', de: '🇩🇪' };
+const i18n = {
+  en: {
+    'feat.hero.h1': 'Every feature you need to<br><span class="grad-text">never be caught off guard</span>',
+    'feat.hero.sub': 'MeetBrief combines local speech recognition, streaming AI responses, and an unobtrusive overlay into a single tool that works with any meeting platform.',
+    'feat.hero.cta': 'Start your free trial',
+    'feat.b1.h': 'Real-time transcription — hands free',
+    'feat.b1.p': "Whisper runs locally on your machine, capturing the other person's audio the moment they speak. A rolling 30-second transcript window is maintained automatically — no cloud API required.",
+    'feat.b2.h': 'AI-suggested replies, streamed instantly',
+    'feat.b2.p': 'The moment the speaker pauses (~1 second of silence), the LLM is fired. Responses stream token-by-token so the first words appear in under a second.',
+    'feat.b3.h': 'Transparent always-on-top overlay',
+    'feat.b3.p': 'A frameless, click-through window floats above every app. Toggle visibility, click-through mode, or force-generate with keyboard shortcuts at any time.',
+    'feat.b4.h': 'Pluggable LLM & STT providers',
+    'feat.b4.p': 'Switch between Claude API, Ollama, or other providers with a single config change. Use Ollama for fully offline operation.',
+    'feat.b5.h': '100% local. Zero cloud dependency',
+    'feat.b5.p': 'Audio never leaves your machine. Transcription runs on-device via Whisper. AI calls go directly from your machine to the API provider you choose.',
+    'feat.b6.h': 'Multilingual — any language, English output',
+    'feat.b6.p': "Whisper's translate task converts speech in any of 99 supported languages to English text automatically. Works for multilingual meetings.",
+    'feat.demo.eyebrow': 'Live preview',
+    'feat.demo.h2': 'See it in action',
+    'feat.demo.sub': "The overlay floats above your meeting app. Here's what it looks like during a sales call.",
+    'feat.prov.eyebrow': 'Integrations',
+    'feat.prov.h2': 'Your providers, your choice',
+    'feat.prov.sub': 'MeetBrief is provider-agnostic. Switch between cloud and local with a single config value.',
+    'feat.prov.c1.h': 'Anthropic Claude',
+    'feat.prov.c1.p': 'claude-opus-4-8 via the Messages API with prompt caching on your static context. Fastest time-to-first-token, highest quality responses.',
+    'feat.prov.c2.h': 'Ollama (local)',
+    'feat.prov.c2.p': 'Any model running on localhost:11434. Works completely offline — no API key, no cost per call. Good for privacy-sensitive environments.',
+    'feat.prov.c3.h': 'Whisper (local STT)',
+    'feat.prov.c3.p': 'Runs entirely on-device. Silero VAD handles turn detection. Translate mode converts any of 99 languages to English automatically.',
+    'feat.hot.eyebrow': 'Keyboard shortcuts',
+    'feat.hot.h2': 'Stay in flow with hotkeys',
+    'feat.hot.sub': 'Every action has a keybind. Glance, trigger, dismiss — all without touching your mouse.',
+    'feat.hot.c1.h': 'Toggle overlay visibility',
+    'feat.hot.c1.p': "Show or hide the floating suggestion panel instantly. The overlay is always rendered but can be toggled invisible so it never distracts when you don't need it.",
+    'feat.hot.c2.h': 'Force-generate on demand',
+    'feat.hot.c2.p': "Don't wait for a silence trigger. Press the hotkey at any moment to send the current transcript window to the LLM and get a fresh suggestion immediately.",
+    'feat.hot.c3.h': 'Click-through mode',
+    'feat.hot.c3.p': 'Toggle mouse events on the overlay so clicks pass through to the app behind it. When you want to interact with the overlay, toggle it back.',
+    'feat.hot.c4.h': 'Fully customizable',
+    'feat.hot.c4.p': 'All keybinds are configurable in the Settings panel. Change any shortcut to avoid conflicts with your meeting app or OS-level shortcuts.',
+    'feat.cta.h2': 'Ready to experience it?',
+    'feat.cta.sub': '25-day free trial. No account needed. Clone and run in minutes.',
+    'feat.cta.btn1': 'Install MeetBrief',
+    'feat.cta.btn2': 'How it works →',
+  },
+  ja: {
+    'feat.hero.h1': '不意を突かれないために<br><span class="grad-text">必要な全機能</span>',
+    'feat.hero.sub': 'MeetBriefはローカル音声認識、AIリプライのストリーミング、邪魔にならないオーバーレイを一つのツールに統合し、あらゆる会議プラットフォームで動作します。',
+    'feat.hero.cta': '無料トライアルを始める',
+    'feat.b1.h': 'リアルタイム文字起こし — ハンズフリー',
+    'feat.b1.p': 'Whisperがローカルで動作し、相手の音声をリアルタイムでキャプチャ。クラウドAPI不要で30秒のローリングウィンドウを自動管理します。',
+    'feat.b2.h': 'AIの返答が即座にストリーミング',
+    'feat.b2.p': '話者が一時停止するとLLMが起動。応答はトークンごとにストリーミングされ、最初の言葉が1秒未満で表示されます。',
+    'feat.b3.h': '透明な常時最前面オーバーレイ',
+    'feat.b3.p': 'フレームレスのクリックスルーウィンドウがすべてのアプリの上に浮かびます。ホットキーで表示・非表示・クリックスルーモードを切り替えられます。',
+    'feat.b4.h': 'LLM・STTプロバイダーを柔軟に切替',
+    'feat.b4.p': 'Claude API、Ollamaなどをconfig一つで切り替え。Ollamaを使えば完全オフラインで動作します。',
+    'feat.b5.h': '100%ローカル。クラウド依存ゼロ',
+    'feat.b5.p': '音声はマシン外に出ません。Whisperがオンデバイスで文字起こし。AI呼び出しはあなたのマシンから直接APIプロバイダーへ。',
+    'feat.b6.h': '多言語対応 — どの言語も英語で出力',
+    'feat.b6.p': 'Whisperの翻訳機能が99言語の音声を自動的に英語テキストに変換。多言語会議にも対応します。',
+    'feat.demo.eyebrow': 'ライブプレビュー',
+    'feat.demo.h2': '実際の動作を見る',
+    'feat.demo.sub': 'オーバーレイが会議アプリの上に浮かびます。セールスコール中の見た目です。',
+    'feat.prov.eyebrow': '連携',
+    'feat.prov.h2': 'プロバイダーはあなたが選ぶ',
+    'feat.prov.sub': 'MeetBriefはプロバイダー非依存。設定値一つでクラウドとローカルを切り替えられます。',
+    'feat.prov.c1.h': 'Anthropic Claude',
+    'feat.prov.c1.p': 'Messages APIとプロンプトキャッシングで最速のtime-to-first-token。高品質な応答を提供します。',
+    'feat.prov.c2.h': 'Ollama（ローカル）',
+    'feat.prov.c2.p': 'localhost:11434で動作。APIキー不要、完全オフライン。プライバシーを重視する環境に最適。',
+    'feat.prov.c3.h': 'Whisper（ローカルSTT）',
+    'feat.prov.c3.p': '完全オンデバイスで動作。Silero VADがターン検出。翻訳モードで99言語を自動英語変換。',
+    'feat.hot.eyebrow': 'キーボードショートカット',
+    'feat.hot.h2': 'ホットキーでフローを維持',
+    'feat.hot.sub': 'すべての操作にキーバインドがあります。マウスを触らずにちらっと見て、起動して、消す。',
+    'feat.hot.c1.h': 'オーバーレイの表示切替',
+    'feat.hot.c1.p': '浮動パネルを瞬時に表示・非表示。必要ないときに邪魔にならないよう非表示にできます。',
+    'feat.hot.c2.h': 'オンデマンドで強制生成',
+    'feat.hot.c2.p': '沈黙トリガーを待たずに、任意のタイミングでホットキーを押して新しい提案を即座に取得。',
+    'feat.hot.c3.h': 'クリックスルーモード',
+    'feat.hot.c3.p': 'オーバーレイへのマウスイベントを切り替えて、背後のアプリにクリックを通過させます。',
+    'feat.hot.c4.h': '完全カスタマイズ可能',
+    'feat.hot.c4.p': 'すべてのキーバインドはSettingsパネルで設定可能。会議アプリやOSとの競合を避けられます。',
+    'feat.cta.h2': '体験してみませんか？',
+    'feat.cta.sub': '25日間無料トライアル。アカウント不要。クローンして数分で起動。',
+    'feat.cta.btn1': 'MeetBriefをインストール',
+    'feat.cta.btn2': '仕組みを見る →',
+  },
+  zh: {
+    'feat.hero.h1': '您需要的一切功能，<br><span class="grad-text">永不措手不及</span>',
+    'feat.hero.sub': 'MeetBrief将本地语音识别、流式AI回复和不干扰的叠加层整合为一个工具，适用于任何会议平台。',
+    'feat.hero.cta': '开始免费试用',
+    'feat.b1.h': '实时转录 — 解放双手',
+    'feat.b1.p': 'Whisper在本地运行，实时捕获对方音频。无需云API，自动维护30秒滚动窗口。',
+    'feat.b2.h': 'AI回复即时流式传输',
+    'feat.b2.p': '说话者停顿时LLM立即启动。响应逐词流式传输，第一个词在不到一秒内出现。',
+    'feat.b3.h': '透明的始终置顶叠加层',
+    'feat.b3.p': '无框架的可穿透点击窗口悬浮在所有应用之上。用热键随时切换可见性和穿透模式。',
+    'feat.b4.h': '可插拔的LLM和STT提供商',
+    'feat.b4.p': '一个配置值即可切换Claude API、Ollama等提供商。使用Ollama实现完全离线操作。',
+    'feat.b5.h': '100%本地。零云端依赖',
+    'feat.b5.p': '音频永不离开您的设备。Whisper在设备上转录。AI调用直接从您的设备到您选择的API提供商。',
+    'feat.b6.h': '多语言 — 任何语言，中文输出',
+    'feat.b6.p': 'Whisper的翻译功能自动将99种语言的语音转换为文本。支持多语言会议。',
+    'feat.demo.eyebrow': '实时预览',
+    'feat.demo.h2': '查看实际效果',
+    'feat.demo.sub': '叠加层悬浮在会议应用上方。这是销售通话中的实际样子。',
+    'feat.prov.eyebrow': '集成',
+    'feat.prov.h2': '您的提供商，您来选',
+    'feat.prov.sub': 'MeetBrief与提供商无关。一个配置值即可在云端和本地之间切换。',
+    'feat.prov.c1.h': 'Anthropic Claude',
+    'feat.prov.c1.p': '通过Messages API和提示缓存实现最快的首词响应时间，提供最高质量的回复。',
+    'feat.prov.c2.h': 'Ollama（本地）',
+    'feat.prov.c2.p': '在localhost:11434运行。完全离线，无需API密钥，无调用费用。适合注重隐私的环境。',
+    'feat.prov.c3.h': 'Whisper（本地STT）',
+    'feat.prov.c3.p': '完全在设备上运行。Silero VAD处理轮次检测。翻译模式自动将99种语言转换为中文。',
+    'feat.hot.eyebrow': '键盘快捷键',
+    'feat.hot.h2': '用热键保持专注',
+    'feat.hot.sub': '每个操作都有快捷键。瞥一眼、触发、关闭——全程不用碰鼠标。',
+    'feat.hot.c1.h': '切换叠加层可见性',
+    'feat.hot.c1.p': '即时显示或隐藏浮动建议面板。叠加层始终渲染，但可切换为不可见以避免干扰。',
+    'feat.hot.c2.h': '按需强制生成',
+    'feat.hot.c2.p': '无需等待沉默触发。随时按热键将当前转录窗口发送给LLM，立即获得新建议。',
+    'feat.hot.c3.h': '穿透点击模式',
+    'feat.hot.c3.p': '切换叠加层的鼠标事件，让点击穿透到后面的应用。需要与叠加层交互时再切换回来。',
+    'feat.hot.c4.h': '完全可自定义',
+    'feat.hot.c4.p': '所有快捷键均可在设置面板中配置，避免与会议应用或系统快捷键冲突。',
+    'feat.cta.h2': '准备好体验了吗？',
+    'feat.cta.sub': '25天免费试用。无需账号。克隆并在几分钟内运行。',
+    'feat.cta.btn1': '安装MeetBrief',
+    'feat.cta.btn2': '了解工作原理 →',
+  },
+  fr: {
+    'feat.hero.h1': 'Toutes les fonctionnalités pour<br><span class="grad-text">ne jamais être pris au dépourvu</span>',
+    'feat.hero.sub': "MeetBrief combine la reconnaissance vocale locale, les réponses IA en streaming et un overlay discret en un seul outil compatible avec toutes les plateformes de réunion.",
+    'feat.hero.cta': 'Commencer l\'essai gratuit',
+    'feat.b1.h': 'Transcription en temps réel — mains libres',
+    'feat.b1.p': "Whisper fonctionne localement, capturant l'audio de l'interlocuteur dès qu'il parle. Une fenêtre glissante de 30 secondes est maintenue automatiquement — sans appel API cloud.",
+    'feat.b2.h': 'Réponses IA diffusées instantanément',
+    'feat.b2.p': "Dès que l'orateur fait une pause, le LLM s'active. Les réponses se diffusent mot par mot, les premiers mots apparaissant en moins d'une seconde.",
+    'feat.b3.h': 'Overlay transparent toujours au premier plan',
+    'feat.b3.p': "Une fenêtre sans cadre et cliquable flotte au-dessus de toutes les apps. Basculez la visibilité ou le mode click-through avec un raccourci clavier.",
+    'feat.b4.h': 'Fournisseurs LLM et STT interchangeables',
+    'feat.b4.p': "Basculez entre Claude API, Ollama ou d'autres fournisseurs avec une seule valeur de config. Utilisez Ollama pour un fonctionnement entièrement hors ligne.",
+    'feat.b5.h': '100% local. Zéro dépendance cloud',
+    'feat.b5.p': "L'audio ne quitte jamais votre machine. La transcription s'effectue sur l'appareil via Whisper. Les appels IA vont directement de votre machine au fournisseur API.",
+    'feat.b6.h': 'Multilingue — toute langue, sortie en français',
+    'feat.b6.p': "La tâche de traduction de Whisper convertit automatiquement 99 langues en texte. Idéal pour les réunions multilingues.",
+    'feat.demo.eyebrow': 'Aperçu en direct',
+    'feat.demo.h2': 'Voyez-le en action',
+    'feat.demo.sub': "L'overlay flotte au-dessus de votre app de réunion. Voici à quoi ça ressemble lors d'un appel commercial.",
+    'feat.prov.eyebrow': 'Intégrations',
+    'feat.prov.h2': 'Vos fournisseurs, votre choix',
+    'feat.prov.sub': "MeetBrief est agnostique en termes de fournisseurs. Basculez entre cloud et local avec une seule valeur de config.",
+    'feat.prov.c1.h': 'Anthropic Claude',
+    'feat.prov.c1.p': "claude-opus-4-8 via l'API Messages avec mise en cache du prompt. Le meilleur time-to-first-token et la meilleure qualité de réponse.",
+    'feat.prov.c2.h': 'Ollama (local)',
+    'feat.prov.c2.p': "N'importe quel modèle sur localhost:11434. Fonctionne entièrement hors ligne — sans clé API, sans coût par appel.",
+    'feat.prov.c3.h': 'Whisper (STT local)',
+    'feat.prov.c3.p': "Fonctionne entièrement sur l'appareil. Silero VAD gère la détection de tour. Le mode traduction convertit 99 langues en français automatiquement.",
+    'feat.hot.eyebrow': 'Raccourcis clavier',
+    'feat.hot.h2': 'Restez dans le flux avec les hotkeys',
+    'feat.hot.sub': "Chaque action a un raccourci. Jetez un coup d'œil, déclenchez, masquez — sans toucher la souris.",
+    'feat.hot.c1.h': "Basculer la visibilité de l'overlay",
+    'feat.hot.c1.p': "Affichez ou masquez instantanément le panneau de suggestions flottant. L'overlay est toujours rendu mais peut être rendu invisible.",
+    'feat.hot.c2.h': 'Génération forcée à la demande',
+    'feat.hot.c2.p': "N'attendez pas le déclencheur de silence. Appuyez sur le hotkey à tout moment pour envoyer la fenêtre de transcription au LLM.",
+    'feat.hot.c3.h': 'Mode click-through',
+    'feat.hot.c3.p': "Basculez les événements souris de l'overlay pour que les clics passent à travers vers l'application derrière.",
+    'feat.hot.c4.h': 'Entièrement personnalisable',
+    'feat.hot.c4.p': "Tous les raccourcis sont configurables dans le panneau Paramètres pour éviter les conflits avec votre app de réunion.",
+    'feat.cta.h2': 'Prêt à l\'essayer ?',
+    'feat.cta.sub': "25 jours d'essai gratuit. Sans compte. Clonez et lancez en quelques minutes.",
+    'feat.cta.btn1': 'Installer MeetBrief',
+    'feat.cta.btn2': 'Comment ça marche →',
+  },
+  de: {
+    'feat.hero.h1': 'Alle Funktionen, die Sie brauchen,<br><span class="grad-text">um nie unvorbereitet zu sein</span>',
+    'feat.hero.sub': 'MeetBrief kombiniert lokale Spracherkennung, gestreamte KI-Antworten und ein unauffälliges Overlay in einem Tool, das mit jeder Meeting-Plattform funktioniert.',
+    'feat.hero.cta': 'Kostenlose Testversion starten',
+    'feat.b1.h': 'Echtzeit-Transkription — Freihändig',
+    'feat.b1.p': 'Whisper läuft lokal und erfasst das Audio des Gesprächspartners sofort. Ein rollierendes 30-Sekunden-Fenster wird automatisch gepflegt — kein Cloud-API erforderlich.',
+    'feat.b2.h': 'KI-Antworten sofort gestreamt',
+    'feat.b2.p': 'Sobald der Sprecher pausiert, feuert das LLM. Antworten werden Token für Token gestreamt, sodass die ersten Wörter in unter einer Sekunde erscheinen.',
+    'feat.b3.h': 'Transparentes immer-im-Vordergrund-Overlay',
+    'feat.b3.p': 'Ein rahmenloses, klickdurchlässiges Fenster schwebt über jeder App. Schalten Sie Sichtbarkeit oder Klickdurchmodus jederzeit mit einem Hotkey um.',
+    'feat.b4.h': 'Austauschbare LLM- und STT-Anbieter',
+    'feat.b4.p': 'Wechseln Sie mit einem einzigen Config-Wert zwischen Claude API, Ollama und anderen. Verwenden Sie Ollama für vollständig offline Betrieb.',
+    'feat.b5.h': '100% lokal. Null Cloud-Abhängigkeit',
+    'feat.b5.p': 'Audio verlässt nie Ihr Gerät. Transkription läuft auf dem Gerät via Whisper. KI-Aufrufe gehen direkt von Ihrem Gerät zum gewählten API-Anbieter.',
+    'feat.b6.h': 'Mehrsprachig — jede Sprache, Ausgabe auf Deutsch',
+    'feat.b6.p': 'Whispers Übersetzungsfunktion wandelt Sprache in 99 Sprachen automatisch in Text um. Ideal für mehrsprachige Meetings.',
+    'feat.demo.eyebrow': 'Live-Vorschau',
+    'feat.demo.h2': 'In Aktion sehen',
+    'feat.demo.sub': 'Das Overlay schwebt über Ihrer Meeting-App. So sieht es während eines Verkaufsgesprächs aus.',
+    'feat.prov.eyebrow': 'Integrationen',
+    'feat.prov.h2': 'Ihre Anbieter, Ihre Wahl',
+    'feat.prov.sub': 'MeetBrief ist anbieterunabhängig. Wechseln Sie mit einem einzigen Config-Wert zwischen Cloud und lokal.',
+    'feat.prov.c1.h': 'Anthropic Claude',
+    'feat.prov.c1.p': 'claude-opus-4-8 über die Messages API mit Prompt-Caching. Schnellste Time-to-First-Token, höchste Antwortqualität.',
+    'feat.prov.c2.h': 'Ollama (lokal)',
+    'feat.prov.c2.p': 'Jedes Modell auf localhost:11434. Vollständig offline — kein API-Schlüssel, keine Kosten pro Aufruf.',
+    'feat.prov.c3.h': 'Whisper (lokales STT)',
+    'feat.prov.c3.p': 'Läuft vollständig auf dem Gerät. Silero VAD erkennt Gesprächswechsel. Übersetzungsmodus wandelt 99 Sprachen automatisch um.',
+    'feat.hot.eyebrow': 'Tastaturkürzel',
+    'feat.hot.h2': 'Mit Hotkeys im Fluss bleiben',
+    'feat.hot.sub': 'Jede Aktion hat einen Shortcut. Kurz schauen, auslösen, ausblenden — alles ohne Maus.',
+    'feat.hot.c1.h': 'Overlay-Sichtbarkeit umschalten',
+    'feat.hot.c1.p': 'Zeigen oder verstecken Sie das schwebende Panel sofort. Das Overlay wird immer gerendert, kann aber unsichtbar geschaltet werden.',
+    'feat.hot.c2.h': 'Auf Abruf generieren',
+    'feat.hot.c2.p': 'Warten Sie nicht auf den Stille-Trigger. Drücken Sie jederzeit den Hotkey, um das aktuelle Transkriptfenster ans LLM zu senden.',
+    'feat.hot.c3.h': 'Klickdurch-Modus',
+    'feat.hot.c3.p': 'Schalten Sie Mausereignisse am Overlay um, sodass Klicks zur App dahinter durchgehen.',
+    'feat.hot.c4.h': 'Vollständig anpassbar',
+    'feat.hot.c4.p': 'Alle Shortcuts sind im Einstellungsbereich konfigurierbar, um Konflikte mit Ihrer Meeting-App zu vermeiden.',
+    'feat.cta.h2': 'Bereit zum Ausprobieren?',
+    'feat.cta.sub': '25 Tage kostenlose Testversion. Kein Konto. Klonen und in Minuten starten.',
+    'feat.cta.btn1': 'MeetBrief installieren',
+    'feat.cta.btn2': 'Wie es funktioniert →',
+  }
+};
+
+function applyTranslations(lang) {
+  const t = i18n[lang] || i18n.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+}
+
+function selectLang(lang) {
+  localStorage.setItem('mb_lang', lang);
+  const overlay = document.getElementById('lpOverlay');
+  if (overlay) overlay.style.display = 'none';
+  applyTranslations(lang);
+  const btn = document.getElementById('navLangBtn');
+  if (btn) btn.textContent = (langFlags[lang] || '🌐') + ' ' + lang.toUpperCase();
+}
+
+function showLangPicker() {
+  const overlay = document.getElementById('lpOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  const card = overlay.querySelector('.lp-card');
+  if (card) { card.style.animation = 'none'; card.offsetHeight; card.style.animation = ''; }
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('mb_lang');
+  if (saved) {
+    const overlay = document.getElementById('lpOverlay');
+    if (overlay) overlay.style.display = 'none';
+    applyTranslations(saved);
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.textContent = (langFlags[saved] || '🌐') + ' ' + saved.toUpperCase();
+  }
+})();
 </script>
 </body>
 </html>
