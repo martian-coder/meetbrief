@@ -388,16 +388,15 @@ function zTypewrite(el, text, onTick) {
 }
 
 // Track whether user has manually scrolled up so we don't fight them
+// Script is at bottom of body — DOM is already ready, no DOMContentLoaded needed
 let mbUserScrolled = false;
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.getElementById('mbBody');
-  if (body) {
-    body.addEventListener('scroll', () => {
-      const distFromBottom = body.scrollHeight - body.scrollTop - body.clientHeight;
-      mbUserScrolled = distFromBottom > 40;
-    });
-  }
-});
+const mbBody = document.getElementById('mbBody');
+if (mbBody) {
+  mbBody.addEventListener('scroll', () => {
+    const dist = mbBody.scrollHeight - mbBody.scrollTop - mbBody.clientHeight;
+    mbUserScrolled = dist > 40;
+  }, { passive: true });
+}
 
 function mbAutoScroll() {
   if (mbUserScrolled) return;
@@ -434,7 +433,8 @@ function showZConvo(idx) {
   // 600ms: show English translation
   setTimeout(() => {
     langEl.textContent = d.flag + ' ' + d.lang + ' → English';
-    entry.querySelector('.mb-trans').textContent = d.trans;
+    const transEl = entry.querySelector('.mb-trans');
+    if (transEl) transEl.textContent = d.trans;
     mbAutoScroll();
   }, 600);
 
